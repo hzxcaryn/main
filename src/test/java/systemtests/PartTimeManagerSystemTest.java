@@ -294,7 +294,9 @@ public abstract class PartTimeManagerSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         try {
             assertEquals("", getCommandBox().getInput());
-            assertEquals("", getResultDisplay().getText());
+            assertEquals("Welcome to PTMan. Type a command in the search bar above to get started. " +
+                    "If you need somewhere to start, search “help” to view the user guide.",
+                    getResultDisplay().getText());
             assertListMatching(getEmployeeListPanel(), getModel().getFilteredEmployeeList());
             assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
             assertEquals("./" + testApp.getStorageSaveLocation(), getStatusBarFooter().getSaveLocation());

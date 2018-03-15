@@ -23,13 +23,16 @@ public class ResultDisplay extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(ResultDisplay.class);
     private static final String FXML = "ResultDisplay.fxml";
 
-    private final StringProperty displayed = new SimpleStringProperty("");
+    private final StringProperty displayed = new SimpleStringProperty("Welcome to PTMan. "
+            + "Type a command in the search bar above to get started. "
+            + "If you need somewhere to start, search “help” to view the user guide.");
 
     @FXML
     private TextArea resultDisplay;
 
     public ResultDisplay() {
         super(FXML);
+        resultDisplay.setWrapText(true);
         resultDisplay.textProperty().bind(displayed);
         registerAsAnEventHandler(this);
     }
