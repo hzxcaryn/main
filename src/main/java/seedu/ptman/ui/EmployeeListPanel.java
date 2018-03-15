@@ -9,6 +9,7 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -22,13 +23,18 @@ import seedu.ptman.model.employee.Employee;
  */
 public class EmployeeListPanel extends UiPart<Region> {
     private static final String FXML = "EmployeeListPanel.fxml";
+    private static final String PANEL_HEADER = "Employees";
     private final Logger logger = LogsCenter.getLogger(EmployeeListPanel.class);
 
     @FXML
     private ListView<EmployeeCard> employeeListView;
 
+    @FXML
+    private Label employeeListPanelHeader;
+
     public EmployeeListPanel(ObservableList<Employee> employeeList) {
         super(FXML);
+        employeeListPanelHeader.setText(PANEL_HEADER);
         setConnections(employeeList);
         registerAsAnEventHandler(this);
     }
