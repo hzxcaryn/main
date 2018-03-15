@@ -24,8 +24,10 @@ import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.EmployeeListPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.OutletDetailsPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
+import guitests.guihandles.TimetableViewHandle;
 import seedu.ptman.TestApp;
 import seedu.ptman.commons.core.EventsCenter;
 import seedu.ptman.commons.core.index.Index;
@@ -112,6 +114,12 @@ public abstract class PartTimeManagerSystemTest {
         return mainWindowHandle.getMainMenu();
     }
 
+    public OutletDetailsPanelHandle getOutletDetailsPanel() {
+        return mainWindowHandle.getOutletDetailsPanel();
+    }
+
+    public TimetableViewHandle getTimetableView() {
+        return mainWindowHandle.getTimetableView();
     }
 
     public StatusBarFooterHandle getStatusBarFooter() {
