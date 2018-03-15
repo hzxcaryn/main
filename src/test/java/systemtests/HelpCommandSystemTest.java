@@ -14,7 +14,6 @@ import guitests.guihandles.HelpWindowHandle;
 import seedu.ptman.logic.commands.DeleteCommand;
 import seedu.ptman.logic.commands.HelpCommand;
 import seedu.ptman.logic.commands.SelectCommand;
-import seedu.ptman.ui.BrowserPanel;
 import seedu.ptman.ui.StatusBarFooter;
 
 /**

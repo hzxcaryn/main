@@ -73,7 +73,6 @@ public abstract class PartTimeManagerSystemTest {
         defaultStyleOfResultDisplay = mainWindowHandle.getResultDisplay().getStyleClass();
         errorStyleOfResultDisplay = mainWindowHandle.getResultDisplay().getStyleClass();
         errorStyleOfResultDisplay.add(ResultDisplay.ERROR_STYLE_CLASS);
-        
         assertApplicationStartingStateIsCorrect();
     }
 
@@ -282,8 +281,8 @@ public abstract class PartTimeManagerSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         try {
             assertEquals("", getCommandBox().getInput());
-            assertEquals("Welcome to PTMan. Type a command in the search bar above to get started. " +
-                    "If you need somewhere to start, search “help” to view the user guide.",
+            assertEquals("Welcome to PTMan. Type a command in the search bar above to get started. "
+                    + "If you need somewhere to start, search “help” to view the user guide.",
                     getResultDisplay().getText());
             assertListMatching(getEmployeeListPanel(), getModel().getFilteredEmployeeList());
             assertEquals("./" + testApp.getStorageSaveLocation(), getStatusBarFooter().getSaveLocation());

@@ -41,7 +41,9 @@ public class ResultDisplayTest extends GuiUnitTest {
     public void display() {
         // default result text
         guiRobot.pauseForHuman();
-        assertEquals("Welcome to PTMan. Type a command in the search bar above to get started. If you need somewhere to start, search “help” to view the user guide.", resultDisplayHandle.getText());
+        assertEquals("Welcome to PTMan. Type a command in the search bar above to get started. "
+                + "If you need somewhere to start, search “help” to view the user guide.",
+                resultDisplayHandle.getText());
         assertEquals(defaultStyleOfResultDisplay, resultDisplayHandle.getStyleClass());
 
         // new results received
