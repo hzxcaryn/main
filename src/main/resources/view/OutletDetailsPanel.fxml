@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1">
+    <VBox>
+        <Label fx:id="outletNamePanelHeader" styleClass="panel_large_label"/>
+        <padding>
+            <Insets top="20" right="15" bottom="15" left="15" />
+        </padding>
+        <StackPane fx:id="placeHolder" xmlns="http://javafx.com/javafx/8"
+                   xmlns:fx="http://javafx.com/fxml/1">
+            <Label fx:id="outletInformation" styleClass="outlet-information"/>
+        </StackPane>
+    </VBox>
+</StackPane>

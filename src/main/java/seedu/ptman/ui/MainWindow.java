@@ -34,13 +34,17 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    private OutletDetailsPanel outletPanel;
+    private TimetableView timetableView;
     private EmployeeListPanel employeeListPanel;
     private Config config;
     private UserPrefs prefs;
 
     @FXML
     private StackPane browserPlaceholder;
+
+    @FXML
+    private StackPane outletDetailsPanelPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -56,6 +60,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane timetableViewPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
@@ -116,8 +123,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        outletPanel = new OutletDetailsPanel();
+        outletDetailsPanelPlaceholder.getChildren().add(outletPanel.getRoot());
+
+        timetableView = new TimetableView();
+        timetableViewPlaceholder.getChildren().add(timetableView.getRoot());
 
         employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
         employeeListPanelPlaceholder.getChildren().add(employeeListPanel.getRoot());
@@ -184,10 +194,6 @@ public class MainWindow extends UiPart<Stage> {
 
     public EmployeeListPanel getEmployeeListPanel() {
         return this.employeeListPanel;
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
     }
 
     @Subscribe
