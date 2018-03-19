@@ -12,6 +12,7 @@ import seedu.ptman.logic.parser.PartTimeManagerParser;
 import seedu.ptman.logic.parser.exceptions.ParseException;
 import seedu.ptman.model.Model;
 import seedu.ptman.model.employee.Employee;
+import seedu.ptman.model.outlet.Timetable;
 
 /**
  * The main LogicManager of the app.
@@ -53,5 +54,10 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ListElementPointer getHistorySnapshot() {
         return new ListElementPointer(history.getHistory());
+    }
+
+    @Override
+    public Timetable getTimetable() {
+        return model.getTimetable();
     }
 }

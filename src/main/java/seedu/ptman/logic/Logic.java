@@ -5,6 +5,7 @@ import seedu.ptman.logic.commands.CommandResult;
 import seedu.ptman.logic.commands.exceptions.CommandException;
 import seedu.ptman.logic.parser.exceptions.ParseException;
 import seedu.ptman.model.employee.Employee;
+import seedu.ptman.model.outlet.Timetable;
 
 /**
  * API of the Logic component
@@ -24,4 +25,7 @@ public interface Logic {
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();
+
+    /** Returns the {@code Timetable} object */
+    Timetable getTimetable();
 }

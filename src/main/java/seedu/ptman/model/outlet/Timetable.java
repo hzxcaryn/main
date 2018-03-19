@@ -38,6 +38,17 @@ public class Timetable {
     }
 
     /**
+     * Gets all the shifts for the week, starting from Monday
+     */
+    public ArrayList<Shift> getShiftsForWeek() {
+        ArrayList<Shift> shifts = new ArrayList<>();
+        for (TimetableDay day: dayList) {
+            shifts.addAll(day.getShifts());
+        }
+        return shifts;
+    }
+
+    /**
      * Gets the date for the Monday of this timetable week
      * @return LocalDate of Monday
      */

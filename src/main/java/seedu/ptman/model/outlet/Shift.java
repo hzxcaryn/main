@@ -83,7 +83,24 @@ public class Shift {
         return uniqueEmployeeList.asObservableList();
     }
 
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
     public DayOfWeek getDayOfWeek() {
         return dayOfWeek;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getSlotsLeft() {
+        int numEmployees = (int) uniqueEmployeeList.spliterator().getExactSizeIfKnown();
+        return capacity - numEmployees;
     }
 }

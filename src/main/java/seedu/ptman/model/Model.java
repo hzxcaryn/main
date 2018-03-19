@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.ptman.model.employee.Employee;
 import seedu.ptman.model.employee.exceptions.DuplicateEmployeeException;
 import seedu.ptman.model.employee.exceptions.EmployeeNotFoundException;
+import seedu.ptman.model.outlet.Timetable;
 import seedu.ptman.model.tag.Tag;
 
 /**
@@ -31,6 +32,7 @@ public interface Model {
      * Delete tag from all employees
      */
     void deleteTagFromAllEmployee(Tag tag);
+
     /**
      * Replaces the given employee {@code target} with {@code editedEmployee}.
      *
@@ -49,5 +51,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEmployeeList(Predicate<Employee> predicate);
+
+    /** Returns the {@code Timetable} object */
+    Timetable getTimetable();
 
 }
