@@ -7,6 +7,8 @@ import seedu.ptman.model.employee.Employee;
 import seedu.ptman.model.employee.exceptions.DuplicateEmployeeException;
 import seedu.ptman.model.employee.exceptions.EmployeeNotFoundException;
 import seedu.ptman.model.outlet.Timetable;
+import seedu.ptman.model.outlet.Shift;
+import seedu.ptman.model.outlet.exceptions.DuplicateShiftException;
 import seedu.ptman.model.tag.Tag;
 
 /**
@@ -15,6 +17,7 @@ import seedu.ptman.model.tag.Tag;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Employee> PREDICATE_SHOW_ALL_EMPLOYEES = unused -> true;
+    Predicate<Shift> PREDICATE_SHOW_ALL_SHIFTS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyPartTimeManager newData);
@@ -27,6 +30,12 @@ public interface Model {
 
     /** Adds the given employee */
     void addEmployee(Employee employee) throws DuplicateEmployeeException;
+
+    /** Adds the given shift */
+    void addShift(Shift shift) throws DuplicateShiftException;
+
+    //** check if authorized */
+    boolean isAdmin(String password);
 
     /**
      * Delete tag from all employees

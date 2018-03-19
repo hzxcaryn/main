@@ -77,7 +77,7 @@ public class Timetable {
      */
     public void removeShift(Shift shift) throws ShiftNotFoundException {
         uniqueShiftList.remove(shift);
-        getTimetableDay(shift.getDayOfWeek()).removeShift(shift);
+        getTimetableDay(shift.getDay().toDayOfWeek()).removeShift(shift);
     }
 
     /**
@@ -108,7 +108,7 @@ public class Timetable {
      */
     public void addShift(Shift shift) throws DuplicateShiftException {
         uniqueShiftList.add(shift);
-        getTimetableDay(shift.getDayOfWeek()).getShifts().add(shift);
+        getTimetableDay(shift.getDay().toDayOfWeek()).getShifts().add(shift);
     }
 
     private TimetableDay getTimetableDay(DayOfWeek dayOfWeek) {

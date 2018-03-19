@@ -4,11 +4,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static seedu.ptman.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.ptman.logic.parser.CliSyntax.PREFIX_CAPACITY;
+import static seedu.ptman.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.ptman.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ptman.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.ptman.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.ptman.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ptman.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.ptman.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.ptman.logic.parser.CliSyntax.PREFIX_TIME_END;
+import static seedu.ptman.logic.parser.CliSyntax.PREFIX_TIME_START;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,6 +47,32 @@ public class CommandTestUtil {
     public static final String VALID_SALARY_BOB = "10";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String DEFAULT1_HASH = "wkqTFuX6NX3hucWqn2ZxB24cRo73LssRq7IDOk6Zx00=";
+    public static final String DEFAULT_PASSWORD = "DEFAULT1";
+
+    public static final String VALID_DAY_MONDAY = "monday";
+    public static final String VALID_DAY_TUESDAY = "Tuesday";
+    public static final String VALID_TIME_START_10AM = "1000";
+    public static final String VALID_TIME_START_12PM = "1200";
+    public static final String VALID_TIME_END_8PM = "2000";
+    public static final String VALID_TIME_END_10PM = "2200";
+    public static final String VALID_CAPACITY_1 = "1";
+    public static final String VALID_CAPACITY_2 = "2";
+
+    public static final String DAY_DESC_MONDAY = " " + PREFIX_DAY + VALID_DAY_MONDAY;
+    public static final String DAY_DESC_TUESDAY = " " + PREFIX_DAY + VALID_DAY_TUESDAY;
+    public static final String TIME_START_DESC_10AM = " " + PREFIX_TIME_START + VALID_TIME_START_10AM;
+    public static final String TIME_START_DESC_12PM = " " + PREFIX_TIME_START + VALID_TIME_START_12PM;
+    public static final String TIME_END_DESC_8PM = " " + PREFIX_TIME_END + VALID_TIME_END_8PM;
+    public static final String TIME_END_DESC_10PM = " " + PREFIX_TIME_END + VALID_TIME_END_10PM;
+    public static final String CAPACITY_DESC_1 = " " + PREFIX_CAPACITY + VALID_CAPACITY_1;
+    public static final String CAPACITY_DESC_2 = " " + PREFIX_CAPACITY + VALID_CAPACITY_2;
+
+    public static final String INVALID_DAY_DESC = " " + PREFIX_DAY + "mon"; // days should be spelt in full
+    public static final String INVALID_TIME_START_DESC =
+            " " + PREFIX_TIME_START + "9am"; // time should be in 24-hour format
+    public static final String INVALID_TIME_END_DESC = " " + PREFIX_TIME_END + "23:00"; // time should not include ':'
+    public static final String INVALID_CAPACITY_DESC = " " + PREFIX_CAPACITY + "3!"; // '!' not allowed in capacity
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -55,6 +86,8 @@ public class CommandTestUtil {
     public static final String SALARY_DESC_BOB = " " + PREFIX_SALARY + VALID_SALARY_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String ADMINPASSWORD_DESC_DEFAULT = " " + PREFIX_PASSWORD + DEFAULT_PASSWORD;
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -62,6 +95,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "-1"; // negative not allowed for Salary
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_DESC_ADMINPASSWORD = " " + PREFIX_PASSWORD + "wrongpassword";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
