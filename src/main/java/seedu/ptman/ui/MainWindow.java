@@ -35,7 +35,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private OutletDetailsPanel outletPanel;
-    private TimetableView timetableView;
+    private TimetablePanel timetablePanel;
     private EmployeeListPanel employeeListPanel;
     private Config config;
     private UserPrefs prefs;
@@ -126,8 +126,8 @@ public class MainWindow extends UiPart<Stage> {
         outletPanel = new OutletDetailsPanel();
         outletDetailsPanelPlaceholder.getChildren().add(outletPanel.getRoot());
 
-        timetableView = new TimetableView();
-        timetableViewPlaceholder.getChildren().add(timetableView.getRoot());
+        timetablePanel = new TimetablePanel(logic.getTimetable());
+        timetableViewPlaceholder.getChildren().add(timetablePanel.getRoot());
 
         employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
         employeeListPanelPlaceholder.getChildren().add(employeeListPanel.getRoot());
