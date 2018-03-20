@@ -297,5 +297,6 @@ public class EditCommandSystemTest extends PartTimeManagerSystemTest {
         assertSelectedCardUnchanged();
         assertCommandBoxAndResultDisplayShowsErrorStyle();
         assertStatusBarUnchanged();
+        assertOutletDetailsPanelUnchanged();
     }
 }

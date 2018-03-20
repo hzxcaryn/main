@@ -209,5 +209,6 @@ public class DeleteCommandSystemTest extends PartTimeManagerSystemTest {
         assertSelectedCardUnchanged();
         assertCommandBoxAndResultDisplayShowsErrorStyle();
         assertStatusBarUnchanged();
+        assertOutletDetailsPanelUnchanged();
     }
 }

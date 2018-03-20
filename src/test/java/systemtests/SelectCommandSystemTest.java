@@ -160,5 +160,6 @@ public class SelectCommandSystemTest extends PartTimeManagerSystemTest {
         assertSelectedCardUnchanged();
         assertCommandBoxAndResultDisplayShowsErrorStyle();
         assertStatusBarUnchanged();
+        assertOutletDetailsPanelUnchanged();
     }
 }

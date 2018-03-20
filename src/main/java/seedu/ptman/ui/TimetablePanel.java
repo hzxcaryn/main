@@ -160,7 +160,7 @@ public class TimetablePanel extends UiPart<Region> {
 
     @Subscribe
     private void handleShiftChangedEvent(PartTimeManagerChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event) + "Updating timetable view....");
+        logger.info(LogsCenter.getEventHandlingLogMessage(event) + ": Updating timetable view....");
         Platform.runLater(() -> updateTimetableView());
     }
 

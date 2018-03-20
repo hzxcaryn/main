@@ -108,5 +108,6 @@ public class ClearCommandSystemTest extends PartTimeManagerSystemTest {
         assertSelectedCardUnchanged();
         assertCommandBoxAndResultDisplayShowsErrorStyle();
         assertStatusBarUnchanged();
+        assertOutletDetailsPanelUnchanged();
     }
 }

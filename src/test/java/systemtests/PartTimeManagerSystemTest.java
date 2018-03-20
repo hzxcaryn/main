@@ -40,6 +40,7 @@ import seedu.ptman.model.PartTimeManager;
 import seedu.ptman.testutil.TypicalEmployees;
 import seedu.ptman.ui.BrowserPanel;
 import seedu.ptman.ui.CommandBox;
+import seedu.ptman.ui.OutletDetailsPanel;
 import seedu.ptman.ui.ResultDisplay;
 
 /**
@@ -193,10 +194,13 @@ public abstract class PartTimeManagerSystemTest {
     }
 
     /**
-     * Calls {@code EmployeeListPanelHandle} and {@code StatusBarFooterHandle} to remember
-     * their current state.
+     * Calls {@code OutletDetailsPanelHandle}, {@code EmployeeListPanelHandle} and {@code StatusBarFooterHandle} to
+     * remember their current state.
      */
     private void rememberStates() {
+        OutletDetailsPanelHandle outletDetailsPanelHandle = getOutletDetailsPanel();
+        outletDetailsPanelHandle.rememberOutletInformation();
+        outletDetailsPanelHandle.rememberOutletName();
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
@@ -254,6 +258,15 @@ public abstract class PartTimeManagerSystemTest {
     protected void assertCommandBoxAndResultDisplayShowsErrorStyle() {
         assertEquals(COMMAND_BOX_ERROR_STYLE, getCommandBox().getStyleClass());
         assertEquals(errorStyleOfResultDisplay, getResultDisplay().getStyleClass());
+    }
+
+    /**
+     * Asserts that the entire outlet panel remains the same.
+     */
+    protected void assertOutletDetailsPanelUnchanged() {
+        OutletDetailsPanelHandle handle = getOutletDetailsPanel();
+        assertFalse(handle.isOutletInformationChanged());
+        assertFalse(handle.isOutletNameChanged());
     }
 
     /**

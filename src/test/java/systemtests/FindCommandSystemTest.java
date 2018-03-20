@@ -202,5 +202,6 @@ public class FindCommandSystemTest extends PartTimeManagerSystemTest {
         assertSelectedCardUnchanged();
         assertCommandBoxAndResultDisplayShowsErrorStyle();
         assertStatusBarUnchanged();
+        assertOutletDetailsPanelUnchanged();
     }
 }
