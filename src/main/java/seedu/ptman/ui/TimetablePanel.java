@@ -1,9 +1,10 @@
 package seedu.ptman.ui;
 
 import java.time.DayOfWeek;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.WeekFields;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 import com.calendarfx.model.Calendar;
@@ -70,8 +71,10 @@ public class TimetablePanel extends UiPart<Region> {
     private void showRelevantViewsOnly() {
         timetableView.showWeekPage();
 
+        timetableView.weekFieldsProperty().setValue(WeekFields.of(Locale.FRANCE)); // Start week from Monday
+        timetableView.disableProperty();
         timetableView.setShowToday(false);
-        timetableView.setShowPrintButton(false);
+        timetableView.setShowPrintButton(true);
         timetableView.setShowAddCalendarButton(false);
         timetableView.setShowSearchField(false);
         timetableView.setShowToolBar(false);
@@ -135,10 +138,6 @@ public class TimetablePanel extends UiPart<Region> {
         CalendarSource calendarSource = new CalendarSource("Shifts");
         addCalendars(calendarSource);
 
-        //timetableAvail.setReadOnly(true);
-        //timetableRunningOut.setReadOnly(true);
-        //timetableFull.setReadOnly(true);
-
         setShifts();
         timetableView.getCalendarSources().add(calendarSource);
     }
@@ -155,9 +154,6 @@ public class TimetablePanel extends UiPart<Region> {
         timetableAvail.setStyle(Calendar.Style.STYLE1); // Green
         timetableRunningOut.setStyle(Calendar.Style.STYLE3); // Yellow
         timetableFull.setStyle(Calendar.Style.STYLE5); // Red
-
-        timetableAvail.setLookAheadDuration(Duration.ofDays(7));
-        timetableAvail.setLookBackDuration(Duration.ofDays(7));
 
         calendarSource.getCalendars().addAll(timetableAvail, timetableRunningOut, timetableFull);
     }
