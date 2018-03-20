@@ -3,7 +3,6 @@ package systemtests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.ptman.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.ptman.ui.StatusBarFooter.NUM_EMPLOYEES_STATUS;
 import static seedu.ptman.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.ptman.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
@@ -194,7 +193,7 @@ public abstract class PartTimeManagerSystemTest {
     }
 
     /**
-     * Calls {@code BrowserPanelHandle}, {@code EmployeeListPanelHandle} and {@code StatusBarFooterHandle} to remember
+     * Calls {@code EmployeeListPanelHandle} and {@code StatusBarFooterHandle} to remember
      * their current state.
      */
     private void rememberStates() {
