@@ -61,4 +61,12 @@ public class Day {
     public int hashCode() {
         return day.toString().hashCode();
     }
+
+    public int compareTo(Day other) {
+        return day.compareTo(other.getDayOfWeek());
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return day;
+    }
 }

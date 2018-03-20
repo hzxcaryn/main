@@ -63,4 +63,12 @@ public class Time {
     public int hashCode() {
         return time.hashCode();
     }
+
+    public int compareTo(Time startTime) {
+        return time.compareTo(startTime.getLocalTime());
+    }
+
+    public LocalTime getLocalTime() {
+        return time;
+    }
 }

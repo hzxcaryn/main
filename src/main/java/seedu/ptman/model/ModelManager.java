@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.ptman.commons.core.ComponentManager;
 import seedu.ptman.commons.core.LogsCenter;
 import seedu.ptman.commons.events.model.PartTimeManagerChangedEvent;
@@ -16,8 +17,11 @@ import seedu.ptman.model.employee.Employee;
 import seedu.ptman.model.employee.exceptions.DuplicateEmployeeException;
 import seedu.ptman.model.employee.exceptions.EmployeeNotFoundException;
 import seedu.ptman.model.outlet.Timetable;
+import seedu.ptman.model.outlet.OperatingHours;
+import seedu.ptman.model.outlet.OutletName;
 import seedu.ptman.model.outlet.Shift;
 import seedu.ptman.model.outlet.exceptions.DuplicateShiftException;
+import seedu.ptman.model.outlet.exceptions.ShiftNotFoundException;
 import seedu.ptman.model.tag.Tag;
 
 /**
@@ -81,19 +85,41 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean isAdminMode() {
+        return partTimeManager.isAdminMode();
+    }
+
+    @Override
+    public synchronized boolean setTrueAdminMode(Password password) {
+        requireNonNull(password);
+        if (!partTimeManager.isAdminPassword(password)) {
+            return false;
+        }
+        partTimeManager.setAdminMode(partTimeManager.isAdminPassword(password));
+        return true;
+    }
+
+    @Override
+    public synchronized void setFalseAdminMode() {
+        partTimeManager.setAdminMode(false);
+    }
+
+    @Override
     public void addShift(Shift shift) throws DuplicateShiftException {
         partTimeManager.addShift(shift);
-        updateFilteredShiftList(PREDICATE_SHOW_ALL_SHIFTS);
         indicatePartTimeManagerChanged();
     }
 
-    private void updateFilteredShiftList(Predicate<Shift> predicate) {
-        requireNonNull(predicate);
-        filteredShifts.setPredicate(predicate);
+    @Override
+    public ObservableList<Shift> getFilteredShiftList() {
+        SortedList<Shift> sortedShiftList = new SortedList<>(filteredShifts, Shift::compareTo);
+        return FXCollections.unmodifiableObservableList(sortedShiftList);
     }
 
-    public synchronized boolean isAdmin(String password) {
-        return partTimeManager.isAdmin(password);
+    @Override
+    public void deleteShift(Shift target) throws ShiftNotFoundException {
+        partTimeManager.removeShift(target);
+        indicatePartTimeManagerChanged();
     }
 
     @Override
@@ -103,6 +129,17 @@ public class ModelManager extends ComponentManager implements Model {
 
         partTimeManager.updateEmployee(target, editedEmployee);
         indicatePartTimeManagerChanged();
+    }
+
+    @Override
+    public void updateOutlet(OutletName name, OperatingHours operatingHours) {
+        partTimeManager.updateOutlet(name, operatingHours);
+        indicatePartTimeManagerChanged();
+    }
+
+    @Override
+    public String getOutletInformationMessage() {
+        return partTimeManager.getOutletInformationMessage();
     }
 
     //=========== Timetable Accessors =========================================================================
