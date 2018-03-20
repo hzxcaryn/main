@@ -40,7 +40,6 @@ import seedu.ptman.model.PartTimeManager;
 import seedu.ptman.testutil.TypicalEmployees;
 import seedu.ptman.ui.BrowserPanel;
 import seedu.ptman.ui.CommandBox;
-import seedu.ptman.ui.OutletDetailsPanel;
 import seedu.ptman.ui.ResultDisplay;
 
 /**
