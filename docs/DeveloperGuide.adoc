@@ -240,6 +240,58 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+=== Shifts feature
+*Reason for implementation*
+
+PTMan is designed to give employees the freedom and flexibility to choose the shifts they want to work in.
+By allowing employers to add or delete shifts, employees can then apply for shifts that are available.
+
+*How it is implemented*
+
+A `Shift` object is created using it's constructor:
+----
+Shift(Day day, Time startTime, Time endTime, Capacity capacity)
+----
+
+Explanation for arguments:
+
+. `Day`: A class that wraps Java's `DayOfWeek` enum. It indicates the day that the shift is on. +
+Example: `new Day("monday")` creates a `Day` object representing Monday.
+[NOTE]
+The string argument is not case-sensitive, but should be a valid day of week spelt in full.
+
+. `Time`: A class that wraps Java's `LocalTime` class. It indicates the either the starting time or ending time of the shift. +
+Example: `new Time("1030")` creates a `Time` object representing 10:30am.
+[NOTE]
+The string argument should represent a time in the 24-hour format.
+
+. `Capacity`: A class that wraps an integer that indicates the number of employees required for the shift. +
+Example: `new Capacity("4")` creates a `Capacity` object representing integer `4`.
+
+In addition to these classes, `Shift` also contains a `UniqueEmployeeList` which is empty when `Shift` is constructed.
+This is used to store employees that have applied for this shift.
+
+To store a list of shifts, we may use a `UniqueShiftList` to ensure there are no duplicate shifts.
+
+The following commands directly interact with the `Shift` class:
+
+. `AddShiftCommand`: Creates a `Shift` and adds it to the `UniqueShiftList` in `OutletInformation`.
+. `DeleteShiftCommand`: Deletes a `Shift` from the `UniqueShiftList` in `OutletInformation`.
+. `ApplyCommand`: Adds an `Employee` to the `UniqueEmployeeList` in the `Shift`.
+. `UnapplyCommand`: Removes an `Employee` from the `UniqueEmployeeList` in the `Shift`.
+
+
+*Reasons for how it is implemented*
+
+* We wrap the arguments in the classes above so that we may carry out validity checks in those classes.
+
+* `Time` uses Java's well-documented `LocalTime` class for easy integration with the GUI timetable.
+
+* `UniqueEmployeeList` is used to ensure there are no duplicate employees in the shift.
+
+
+
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
@@ -939,30 +991,78 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 *MSS*
 
-1.  Employer enters employee details and working outlet(s)
-2.  PTMan adds the employee
+1.  Employer logs in to their admin account.
+2.  Employer enters the employee's details.
+3.  PTMan adds the employee.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. The entered format is invalid.
+* 2a. The entered format is invalid.
 +
 [none]
-** 1a1. PTMan shows an error message.
+** 2a1. PTMan shows an error message.
 +
 Use case resumes at step 1.
+
+=== Use case: Add shift
+
+*MSS*
+
+1.  Employer logs in to their admin account.
+2.  Employer enters the shift details.
+3.  PTMan adds the shift.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The entered format is invalid.
++
+[none]
+** 2a1. PTMan shows an error message.
++
+Use case resumes at step 1.
+
+=== Use case: Delete shift
+
+*MSS*
+
+1.  Employer logs in to their admin account.
+2.  Employer enters the shift's index.
+3.  PTMan deletes the shift.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The entered format is invalid.
++
+[none]
+** 2a1. PTMan shows an error message.
++
+Use case resumes at step 2.
+[none]
+* 2b. The entered index does not exist.
++
+[none]
+** 2b1. PTMan shows an error message.
++
+Use case resumes at step 2.
 
 [discrete]
 === Use case: Delete employee
 
 *MSS*
 
-1.  Employer requests to list employees
-2.  PTMan shows a list of employees
-3.  Employer requests to delete a specific employee in the list
-4.  PTMan deletes the employee
+1.  Employer requests to list employees.
+2.  PTMan shows a list of employees.
+3.  Employer requests to delete a specific employee in the list.
+4.  PTMan deletes the employee.
 +
 Use case ends.
 
@@ -985,44 +1085,42 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  Employer enters an employee's name and working outlet.
-2.  PTMan finds the employee in the corresponding outlet.
-3.  Employer enters new details of the employee that he wants to update.
-4.  PTMan changes the employee's details.
+1.  Employer logs in to their admin account.
+2.  Employer enters the employee's index and the new details of the employee.
+3.  PTMan changes the employee's details.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. The entered format is invalid.
+* 2a. The entered format is invalid.
 +
 [none]
-** 1a1. PTMan shows an error message.
+** 2a1. PTMan shows an error message.
 +
-Use case resumes at step 1.
-* 1b. The employee cannot be found.
-+
-[none]
-** 1b1. PTMan shows an error message.
-+
-Use case resumes at step 1.
-* 3a. The entered format of new details is invalid.
+Use case resumes at step 2.
+* 2b. The employee cannot be found.
 +
 [none]
-** 3a1. PTMan shows an error message.
+** 2b1. PTMan shows an error message.
 +
-Use case resumes at step 3.
+Use case resumes at step 2.
+* 2c. The entered format of new details is invalid.
++
+[none]
+** 2c1. PTMan shows an error message.
++
+Use case resumes at step 2.
 
 [discrete]
-=== Use case: Sign up for available time slots
+=== Use case: Sign up for available shifts
 
 *MSS*
 
-1.  Employee enters a time slot that he wants to sign up and the corresponding outlet.
-2.  PTMan sends a confirm message.
-3.  Employee confirms.
-4.  PTMan updates the indicated time slot in the timetable of the indicated outlet.
+1.  Employee enters a shift that he wants to work in.
+2.  PTMan sends a confirmation message to the employee.
+3.  PTMan updates the indicated time slot in the timetable of the indicated outlet.
 +
 Use case ends.
 
@@ -1035,54 +1133,16 @@ Use case ends.
 ** 1a1. PTMan shows an error message.
 +
 Use case resumes at step 1.
-* 1b. The time slot is not available.
+* 1b. The shift is full.
 +
 [none]
 ** 1b1. PTMan shows an error message.
 +
 Use case resumes at step 1.
-* 1c. The outlet is invalid.
-+
-[none]
-** 1c1. PTMan shows an error message.
-+
-Use case resumes at step 1.
-* 3a. The employee does not confirm.
-+
-[none]
-** 3a1. PTMan shows a message that employee cancels the request.
-+
-Use case ends.
 
 [none]
-* 1b. The entered outlet already exist.
-+
-[none]
-** 1b1. PTMan shows an error message.
-+
-Use case resumes at step 1.
 
 [discrete]
-=== Use case: Add outlet
-
-*MSS*
-
-1.  Employer enters outlet details
-2.  PTMan adds the outlet into the list of outlet
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. The entered format is invalid.
-+
-[none]
-** 1a1. PTMan shows an error message.
-+
-Use case resumes at step 1.
-
-[appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `1.8.0_60` or higher installed.
@@ -1145,19 +1205,17 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
-=== Deleting a person
+=== Deleting an employee
 
-. Deleting a person while all persons are listed
+. Deleting an employee while all employees are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all employees using the `list` command. Multiple persons in the list.
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First employee is deleted from the list. Details of the deleted employee shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No employee is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
-
-_{ more test cases ... }_
 
 === Saving data
 

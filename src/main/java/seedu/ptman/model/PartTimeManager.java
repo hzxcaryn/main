@@ -84,6 +84,11 @@ public class PartTimeManager implements ReadOnlyPartTimeManager {
         this.employees.setEmployees(employees);
     }
 
+    public void setOutletInformation(OutletName outletName, OperatingHours operatingHours,
+                                     OutletContact outletContact) throws NoOutletInformationFieldChangeException {
+        this.outlet.setOutletInformation(outletName, operatingHours, outletContact);
+    }
+
     public void setShifts(List<Shift> shifts) throws DuplicateShiftException {
         this.shifts.setShifts(shifts);
     }
@@ -103,13 +108,20 @@ public class PartTimeManager implements ReadOnlyPartTimeManager {
                 .collect(Collectors.toList());
 
         List<Shift> syncedShiftList = newData.getShiftList();
+        OutletName syncedOutletName = newData.getOutletName();
+        OperatingHours syncedOperatingHours = newData.getOperatingHours();
+        OutletContact syncedOutletContact = newData.getOutletContact();
+
         try {
             setEmployees(syncedEmployeeList);
             setShifts(syncedShiftList);
+            setOutletInformation(syncedOutletName, syncedOperatingHours, syncedOutletContact);
         } catch (DuplicateEmployeeException e) {
             throw new AssertionError("PartTimeManagers should not have duplicate employees");
         } catch (DuplicateShiftException e) {
             throw new AssertionError("PartTimeManagers should not have duplicate shifts");
+        } catch (NoOutletInformationFieldChangeException noifce) {
+            throw new AssertionError("PartTimeManagers should not have empty outlet information");
         }
     }
 
@@ -298,6 +310,21 @@ public class PartTimeManager implements ReadOnlyPartTimeManager {
     @Override
     public ObservableList<Tag> getTagList() {
         return tags.asObservableList();
+    }
+
+    @Override
+    public OutletName getOutletName() {
+        return outlet.getName();
+    }
+
+    @Override
+    public OperatingHours getOperatingHours() {
+        return outlet.getOperatingHours();
+    }
+
+    @Override
+    public OutletContact getOutletContact() {
+        return outlet.getOutletContact();
     }
 
     @Override

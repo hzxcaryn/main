@@ -18,6 +18,10 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.ptman.model.employee.Employee;
+import seedu.ptman.model.outlet.OperatingHours;
+import seedu.ptman.model.outlet.OutletContact;
+import seedu.ptman.model.outlet.OutletInformation;
+import seedu.ptman.model.outlet.OutletName;
 import seedu.ptman.model.outlet.Shift;
 import seedu.ptman.model.tag.Tag;
 import seedu.ptman.testutil.EmployeeBuilder;
@@ -65,6 +69,17 @@ public class PartTimeManagerTest {
     }
 
     @Test
+    public void resetData_withEmptyOutletInformation_throwsAssertionError() {
+        List<Employee> newEmployees = Arrays.asList(ALICE);
+        List<Shift> newShifts = new ArrayList<>();
+        List<Tag> newTags = new ArrayList<>(ALICE.getTags());
+        PartTimeManagerStub newData = new PartTimeManagerStub(newEmployees, newTags, newShifts);
+
+        thrown.expect(AssertionError.class);
+        partTimeManager.resetData(newData);
+    }
+
+    @Test
     public void getEmployeeList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         partTimeManager.getEmployeeList().remove(0);
@@ -98,6 +113,13 @@ public class PartTimeManagerTest {
         assertEquals(expectedPartTimeManager, partTimeManagerWithAliceAndBenson);
     }
 
+    @Test
+    public void getOutletInformationMessage_defaultData_returnCorrectMessage() {
+        String actualMessage = partTimeManager.getOutletInformationMessage();
+        String expectedMessage = new OutletInformation().toString();
+        assertEquals(actualMessage, expectedMessage);
+    }
+
     /**
      * A stub ReadOnlyPartTimeManager whose employees and tags lists can violate interface constraints.
      */
@@ -125,6 +147,21 @@ public class PartTimeManagerTest {
         @Override
         public ObservableList<Tag> getTagList() {
             return tags;
+        }
+
+        @Override
+        public OutletName getOutletName() {
+            return null;
+        }
+
+        @Override
+        public OperatingHours getOperatingHours() {
+            return null;
+        }
+
+        @Override
+        public OutletContact getOutletContact() {
+            return null;
         }
     }
 
