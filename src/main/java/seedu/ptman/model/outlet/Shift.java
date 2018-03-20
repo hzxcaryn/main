@@ -5,6 +5,8 @@ import static seedu.ptman.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import com.google.common.collect.Iterables;
+
 import javafx.collections.ObservableList;
 import seedu.ptman.model.employee.Employee;
 import seedu.ptman.model.employee.UniqueEmployeeList;
@@ -96,7 +98,7 @@ public class Shift {
     }
 
     public int getSlotsLeft() {
-        int numEmployees = (int) uniqueEmployeeList.spliterator().getExactSizeIfKnown();
+        int numEmployees = Iterables.size(uniqueEmployeeList);
         return capacity.getCapacity() - numEmployees;
 
     }

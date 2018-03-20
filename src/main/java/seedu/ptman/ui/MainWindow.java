@@ -126,7 +126,7 @@ public class MainWindow extends UiPart<Stage> {
         outletPanel = new OutletDetailsPanel();
         outletDetailsPanelPlaceholder.getChildren().add(outletPanel.getRoot());
 
-        timetablePanel = new TimetablePanel(logic.getTimetable());
+        timetablePanel = new TimetablePanel(logic.getFilteredShiftList());
         timetableViewPlaceholder.getChildren().add(timetablePanel.getRoot());
 
         employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());

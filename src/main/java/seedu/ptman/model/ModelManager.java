@@ -16,7 +16,6 @@ import seedu.ptman.commons.events.model.PartTimeManagerChangedEvent;
 import seedu.ptman.model.employee.Employee;
 import seedu.ptman.model.employee.exceptions.DuplicateEmployeeException;
 import seedu.ptman.model.employee.exceptions.EmployeeNotFoundException;
-import seedu.ptman.model.outlet.Timetable;
 import seedu.ptman.model.outlet.OperatingHours;
 import seedu.ptman.model.outlet.OutletName;
 import seedu.ptman.model.outlet.Shift;
@@ -33,7 +32,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final PartTimeManager partTimeManager;
     private final FilteredList<Employee> filteredEmployees;
-    private final Timetable timetable;
     private final FilteredList<Shift> filteredShifts;
 
     /**
@@ -47,7 +45,6 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.partTimeManager = new PartTimeManager(partTimeManager);
         filteredEmployees = new FilteredList<>(this.partTimeManager.getEmployeeList());
-        timetable = this.partTimeManager.getTimetable();
         filteredShifts = new FilteredList<>(this.partTimeManager.getShiftList());
     }
 
@@ -140,12 +137,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public String getOutletInformationMessage() {
         return partTimeManager.getOutletInformationMessage();
-    }
-
-    //=========== Timetable Accessors =========================================================================
-    @Override
-    public Timetable getTimetable() {
-        return timetable;
     }
 
     //=========== Filtered Employee List Accessors =============================================================

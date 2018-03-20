@@ -2,7 +2,6 @@ package seedu.ptman.model;
 
 import javafx.collections.ObservableList;
 import seedu.ptman.model.employee.Employee;
-import seedu.ptman.model.outlet.Timetable;
 import seedu.ptman.model.outlet.Shift;
 import seedu.ptman.model.tag.Tag;
 
@@ -28,9 +27,4 @@ public interface ReadOnlyPartTimeManager {
      * This list will not contain any duplicate tags.
      */
     ObservableList<Tag> getTagList();
-
-    /**
-     * Returns an unmodifiable timetable object.
-     */
-    Timetable getTimetable();
 }

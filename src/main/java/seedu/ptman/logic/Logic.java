@@ -5,7 +5,7 @@ import seedu.ptman.logic.commands.CommandResult;
 import seedu.ptman.logic.commands.exceptions.CommandException;
 import seedu.ptman.logic.parser.exceptions.ParseException;
 import seedu.ptman.model.employee.Employee;
-import seedu.ptman.model.outlet.Timetable;
+import seedu.ptman.model.outlet.Shift;
 
 /**
  * API of the Logic component
@@ -23,9 +23,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of employees */
     ObservableList<Employee> getFilteredEmployeeList();
 
+    /** Returns an unmodifiable sorted view of the filtered employee list */
+    ObservableList<Shift> getFilteredShiftList();
+
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();
-
-    /** Returns the {@code Timetable} object */
-    Timetable getTimetable();
 }

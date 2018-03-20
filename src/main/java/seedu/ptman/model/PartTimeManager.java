@@ -2,7 +2,6 @@ package seedu.ptman.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -16,10 +15,9 @@ import seedu.ptman.model.employee.Employee;
 import seedu.ptman.model.employee.UniqueEmployeeList;
 import seedu.ptman.model.employee.exceptions.DuplicateEmployeeException;
 import seedu.ptman.model.employee.exceptions.EmployeeNotFoundException;
-import seedu.ptman.model.outlet.Timetable;
-import seedu.ptman.model.outlet.OutletName;
 import seedu.ptman.model.outlet.OperatingHours;
 import seedu.ptman.model.outlet.OutletInformation;
+import seedu.ptman.model.outlet.OutletName;
 import seedu.ptman.model.outlet.Shift;
 import seedu.ptman.model.outlet.UniqueShiftList;
 import seedu.ptman.model.outlet.exceptions.DuplicateShiftException;
@@ -36,10 +34,9 @@ public class PartTimeManager implements ReadOnlyPartTimeManager {
     private final UniqueEmployeeList employees;
     private final UniqueShiftList shifts;
     private final UniqueTagList tags;
-    private final Timetable timetable;
-    private final Password password;
-    private boolean isAdminMode;
     private final OutletInformation outlet;
+    private boolean isAdminMode;
+
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -51,8 +48,6 @@ public class PartTimeManager implements ReadOnlyPartTimeManager {
         employees = new UniqueEmployeeList();
         shifts = new UniqueShiftList();
         tags = new UniqueTagList();
-        timetable = new Timetable(LocalDate.now());
-        password = new Password();
         outlet = new OutletInformation();
         isAdminMode = false;
     }
@@ -300,12 +295,6 @@ public class PartTimeManager implements ReadOnlyPartTimeManager {
     @Override
     public ObservableList<Tag> getTagList() {
         return tags.asObservableList();
-    }
-
-    @Override
-    public Timetable getTimetable() {
-        // TODO: Make this unmodifiable!!!!! (For now it's still just a timetable object)
-        return timetable;
     }
 
     @Override
