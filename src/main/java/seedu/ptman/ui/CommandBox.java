@@ -4,6 +4,8 @@ import static seedu.ptman.logic.parser.CliSyntax.PREFIX_PASSWORD;
 
 import java.util.logging.Logger;
 
+import org.controlsfx.control.textfield.TextFields;
+
 import com.sun.javafx.scene.control.behavior.PasswordFieldBehavior;
 import com.sun.javafx.scene.control.skin.TextFieldSkin;
 
@@ -15,7 +17,6 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-
 import seedu.ptman.commons.core.LogsCenter;
 import seedu.ptman.commons.events.ui.NewResultAvailableEvent;
 import seedu.ptman.logic.ListElementPointer;
@@ -54,7 +55,7 @@ public class CommandBox extends UiPart<Region> {
         historySnapshot = logic.getHistorySnapshot();
         tooltip.setText("Tip: Enter \"help\" when you get stuck");
         commandTextField.setTooltip(tooltip);
-
+        setAutoCompletion();
     }
 
     /**
@@ -80,6 +81,14 @@ public class CommandBox extends UiPart<Region> {
         return newString.toString();
     }
 
+    //@@author hzxcaryn
+    /**
+     * Bind command text field to provide suggestions and carry out auto complete.
+     */
+    private void setAutoCompletion() {
+        ObservableList<String> commandSuggestions = logic.getCommandList();
+        TextFields.bindAutoCompletion(commandTextField, commandSuggestions);
+    }
 
     //@@author
     /**

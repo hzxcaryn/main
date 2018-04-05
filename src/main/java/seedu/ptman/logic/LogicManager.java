@@ -2,14 +2,17 @@ package seedu.ptman.logic;
 
 import static seedu.ptman.logic.parser.CliSyntax.PREFIX_PASSWORD;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.ptman.commons.core.ComponentManager;
 import seedu.ptman.commons.core.LogsCenter;
 import seedu.ptman.logic.commands.Command;
 import seedu.ptman.logic.commands.CommandResult;
 import seedu.ptman.logic.commands.exceptions.CommandException;
+import seedu.ptman.logic.commands.util.CommandListUtil;
 import seedu.ptman.logic.parser.PartTimeManagerParser;
 import seedu.ptman.logic.parser.exceptions.ParseException;
 import seedu.ptman.model.Model;
@@ -70,6 +73,14 @@ public class LogicManager extends ComponentManager implements Logic {
 
         }
         return newString.toString();
+    }
+
+    //@@author hzxcaryn
+    @Override
+    public ObservableList<String> getCommandList() {
+        ArrayList<String> commandList = CommandListUtil.getAllCommands();
+        ObservableList<String> observableCommandList = FXCollections.observableList(commandList);
+        return FXCollections.unmodifiableObservableList(observableCommandList);
     }
 
     //@@author
