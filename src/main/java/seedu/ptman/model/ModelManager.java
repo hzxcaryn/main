@@ -227,6 +227,17 @@ public class ModelManager extends ComponentManager implements Model {
         return partTimeManager.getOutletInformation();
     }
 
+    @Override
+    public void encryptLocalStorage() {
+        partTimeManager.encryptLocalStorage();
+        indicatePartTimeManagerChanged();
+    }
+
+    @Override
+    public void decryptLocalStorage() {
+        partTimeManager.decryptLocalStorage();
+        indicatePartTimeManagerChanged();
+    }
     //@@author
     //=========== Filtered Employee List Accessors =============================================================
     @Override

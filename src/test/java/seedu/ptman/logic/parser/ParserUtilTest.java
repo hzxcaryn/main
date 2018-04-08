@@ -329,6 +329,7 @@ public class ParserUtilTest {
         assertEquals(expectedTagSet, actualTagSet);
     }
 
+    //@@author SunBangjie
     @Test
     public void parseOutletName_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseOutletName((String) null));
@@ -441,4 +442,5 @@ public class ParserUtilTest {
         assertEquals(Optional.of(expectedOperatingHours), ParserUtil.parseOperatingHours(
                 Optional.of(operatingHoursWithWhitespace)));
     }
+    //@@author
 }

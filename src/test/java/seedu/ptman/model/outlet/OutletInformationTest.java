@@ -21,7 +21,7 @@ public class OutletInformationTest {
         Password password = new Password();
         Announcement announcement = new Announcement("New Announcement.");
         Assert.assertThrows(NullPointerException.class, () -> new OutletInformation(null, operatingHours,
-                outletContact, outletEmail, password, announcement));
+                outletContact, outletEmail, announcement, password, false));
     }
 
     @Test
@@ -32,7 +32,7 @@ public class OutletInformationTest {
         Password password = new Password();
         Announcement announcement = new Announcement("New Announcement.");
         Assert.assertThrows(NullPointerException.class, () -> new OutletInformation(name,
-                null, outletContact, outletEmail, password, announcement));
+                null, outletContact, outletEmail, announcement, password, false));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class OutletInformationTest {
         Password password = new Password();
         Announcement announcement = new Announcement("New Announcement.");
         Assert.assertThrows(NullPointerException.class, () -> new OutletInformation(name,
-                operatingHours, null, outletEmail, password, announcement));
+                operatingHours, null, outletEmail, announcement, password, false));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class OutletInformationTest {
         Password password = new Password();
         Announcement announcement = new Announcement("New Announcement.");
         Assert.assertThrows(NullPointerException.class, () -> new OutletInformation(name, operatingHours,
-                outletContact, null, password, announcement));
+                outletContact, null, announcement, password, false));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class OutletInformationTest {
         OutletEmail outletEmail = new OutletEmail("outlet@gmail.com");
         Announcement announcement = new Announcement("New Announcement.");
         Assert.assertThrows(NullPointerException.class, () -> new OutletInformation(name, operatingHours,
-                outletContact, outletEmail, null, announcement));
+                outletContact, outletEmail, announcement, null, false));
     }
 
     @Test
@@ -76,7 +76,7 @@ public class OutletInformationTest {
         OutletEmail outletEmail = new OutletEmail("outlet@gmail.com");
         Password password = new Password();
         Assert.assertThrows(NullPointerException.class, () -> new OutletInformation(name, operatingHours,
-                outletContact, outletEmail, password, null));
+                outletContact, outletEmail, null, password, false));
     }
 
     @Test
@@ -88,9 +88,9 @@ public class OutletInformationTest {
         Password password = new Password();
         Announcement announcement = new Announcement("New Announcement.");
         OutletInformation outlet = new OutletInformation(name, operatingHours, outletContact, outletEmail,
-                password, announcement);
+                announcement, password, false);
         OutletInformation other = new OutletInformation(name, operatingHours, outletContact, outletEmail,
-                password, announcement);
+                announcement, password, false);
         assertTrue(outlet.equals(other));
     }
 
@@ -104,6 +104,26 @@ public class OutletInformationTest {
     }
 
     @Test
+    public void setEncryptionMode_inputTrue_returnsTrue() {
+        OutletInformation outlet = new OutletInformation();
+        outlet.setEncryptionMode(true);
+        assertTrue(outlet.getEncryptionMode());
+    }
+
+    @Test
+    public void getEncryptionModeMessage_inputTrue_returnsEncryptedMessage() {
+        OutletInformation outlet = new OutletInformation();
+        outlet.setEncryptionMode(true);
+        assertEquals(outlet.getEncryptionModeMessage(), OutletInformation.DATA_ENCRYPTED_MESSAGE);
+    }
+
+    @Test
+    public void getEncryptionModeMessage_inputFalse_returnsNotEncryptedMessage() {
+        OutletInformation outlet = new OutletInformation();
+        assertEquals(outlet.getEncryptionModeMessage(), OutletInformation.DATA_NOT_ENCRYPTED_MESSAGE);
+    }
+
+    @Test
     public void hashCode_sameObject_returnsTrue() {
         Password masterPassword = new Password();
         OutletName name = new OutletName("outlet");
@@ -112,9 +132,9 @@ public class OutletInformationTest {
         OutletEmail outletEmail = new OutletEmail("outlet@gmail.com");
         Announcement announcement = new Announcement("New Announcement.");
         OutletInformation outlet = new OutletInformation(name, operatingHours, outletContact, outletEmail,
-                masterPassword, announcement);
+                announcement, masterPassword, false);
         assertEquals(outlet.hashCode(), Objects.hash(name, masterPassword, operatingHours, outletContact,
-                outletEmail, announcement));
+                outletEmail, announcement, false));
     }
 
     @Test
@@ -124,11 +144,12 @@ public class OutletInformationTest {
         OutletContact outletContact = new OutletContact("91234567");
         OutletEmail outletEmail = new OutletEmail("outlet@gmail.com");
         Password password = new Password();
-        Announcement announcement = new Announcement("New Announcement.");
+        Announcement announcement = new Announcement("New announcement.");
         OutletInformation outlet = new OutletInformation(name, operatingHours, outletContact, outletEmail,
-                password, announcement);
-        String expected = "Operating Hours: 09:00-22:00 Contact: 91234567 "
-                + "Email: outlet@gmail.com";
+                announcement, password, false);
+        String expected = "Outlet Name: outlet Operating Hours: 09:00-22:00 "
+                + "Contact: 91234567 Email: outlet@gmail.com Announcement: New announcement. "
+                + "Encryption: Outlet information storage files are not encrypted.";
         assertEquals(outlet.toString(), expected);
     }
 }
