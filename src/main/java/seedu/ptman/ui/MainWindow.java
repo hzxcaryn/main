@@ -78,7 +78,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private StackPane timetableViewPlaceholder;
+    private StackPane timetablePanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
@@ -144,7 +144,7 @@ public class MainWindow extends UiPart<Stage> {
         outletDetailsPanelPlaceholder.getChildren().add(outletPanel.getRoot());
 
         timetablePanel = new TimetablePanel(logic);
-        timetableViewPlaceholder.getChildren().add(timetablePanel.getRoot());
+        timetablePanelPlaceholder.getChildren().add(timetablePanel.getRoot());
 
         employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
         employeeListPanelPlaceholder.getChildren().add(employeeListPanel.getRoot());

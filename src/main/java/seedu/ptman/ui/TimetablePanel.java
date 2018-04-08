@@ -103,7 +103,7 @@ public class TimetablePanel extends UiPart<Region> {
 
     private Employee currentEmployee = null;
 
-    protected TimetablePanel(Logic logic) {
+    public TimetablePanel(Logic logic) {
         super(FXML);
 
         this.logic = logic;
