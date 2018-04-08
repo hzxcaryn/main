@@ -11,11 +11,6 @@ import static seedu.ptman.testutil.TypicalEmployees.ALICE;
 import static seedu.ptman.testutil.TypicalShifts.MONDAY_AM;
 import static seedu.ptman.testutil.TypicalShifts.getTypicalPartTimeManagerWithShiftsWithoutSunday;
 import static seedu.ptman.ui.TimetablePanel.TIMETABLE_IMAGE_FILE_FORMAT;
-import static seedu.ptman.ui.TimetablePanel.getTimetableAvail;
-import static seedu.ptman.ui.TimetablePanel.getTimetableEmployee;
-import static seedu.ptman.ui.TimetablePanel.getTimetableFull;
-import static seedu.ptman.ui.TimetablePanel.getTimetableOthers;
-import static seedu.ptman.ui.TimetablePanel.getTimetableRunningOut;
 import static seedu.ptman.ui.testutil.GuiTestAssert.assertEntryDisplaysShift;
 
 import java.io.File;
@@ -24,21 +19,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+import guitests.guihandles.TimetablePanelHandle;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Entry;
 
 import javafx.collections.ObservableList;
@@ -79,7 +66,7 @@ public class TimetablePanelTest extends GuiUnitTest {
     private TimetableWeekChangeRequestEvent timetableWeekChangeRequestEventInvalidStub;
 
     private TimetablePanel timetablePanel;
-    //private TimetableViewHandle timetableViewHandle;
+    private TimetablePanelHandle timetablePanelHandle;
 
     private Path testFilePathFirst;
     private Path testFilePathSecond;
@@ -114,21 +101,21 @@ public class TimetablePanelTest extends GuiUnitTest {
         logic = new LogicManager(model);
         logic.setFilteredShiftListToCustomWeek(MONDAY_AM.getDate().getLocalDate());
         timetablePanel = new TimetablePanel(logic);
-        //timetableViewHandle = new TimetableViewHandle(timetablePanel.getRoot());
+        timetablePanelHandle = new TimetablePanelHandle(timetablePanel.getRoot());
         uiPartRule.setUiPart(timetablePanel);
 
-        startingDate = timetablePanel.getRoot().getDate();
+        startingDate = timetablePanelHandle.getTimetableDate();
     }
 
     @Test
     public void display() {
         // Default timetable view: Displays current week view
         assertNotNull(timetablePanel.getRoot());
-        assertEquals(timetablePanel.getRoot().getSelectedPage(), timetablePanel.getRoot().getWeekPage());
-        assertEquals(startingDate, timetablePanel.getRoot().getDate());
+        assertEquals(timetablePanelHandle.getSelectedPage(), timetablePanelHandle.getWeekPage());
+        assertEquals(startingDate, timetablePanelHandle.getTimetableDate());
 
         // Default timetable view: Displays all shifts
-        List<Entry> defaultEntries = getTimetableEntries();
+        List<Entry> defaultEntries = timetablePanelHandle.getTimetableEntries();
         for (int i = 0; i < TYPICAL_SHIFTS.size(); i++) {
             Shift expectedShift = TYPICAL_SHIFTS.get(i);
             Entry actualEntry = defaultEntries.get(i);
@@ -137,7 +124,7 @@ public class TimetablePanelTest extends GuiUnitTest {
 
         // Associated shifts of employee highlighted
         postNow(employeePanelSelectionChangedEventAliceStub);
-        List<Entry> entriesAfterSelectionEventAlice = getTimetableEntries();
+        List<Entry> entriesAfterSelectionEventAlice = timetablePanelHandle.getTimetableEntries();
         for (int i = 0; i < TYPICAL_SHIFTS.size(); i++) {
             Shift expectedShift = TYPICAL_SHIFTS.get(i);
             Entry actualEntry = entriesAfterSelectionEventAlice.get(i);
@@ -146,7 +133,7 @@ public class TimetablePanelTest extends GuiUnitTest {
 
         // Load back to default timetable view: Displays current week view
         postNow(employeePanelSelectionChangedEventNullStub);
-        List<Entry> entriesAfterSelectionEventNull = getTimetableEntries();
+        List<Entry> entriesAfterSelectionEventNull = timetablePanelHandle.getTimetableEntries();
         for (int i = 0; i < logic.getFilteredShiftList().size(); i++) {
             Shift expectedShift = TYPICAL_SHIFTS.get(i);
             Entry actualEntry = entriesAfterSelectionEventNull.get(i);
@@ -157,16 +144,34 @@ public class TimetablePanelTest extends GuiUnitTest {
     @Test
     public void timetablePanel_handleTimetableWeekChangeRequestEvent() {
         postNow(timetableWeekChangeRequestEventNextStub);
-        assertEquals(getNextWeekDate(startingDate), timetablePanel.getRoot().getDate());
+        assertEquals(getNextWeekDate(startingDate), timetablePanelHandle.getTimetableDate());
 
         postNow(timetableWeekChangeRequestEventPrevStub);
-        assertEquals(startingDate, timetablePanel.getRoot().getDate());
+        assertEquals(startingDate, timetablePanelHandle.getTimetableDate());
 
         postNow(timetableWeekChangeRequestEventInvalidStub);
-        assertEquals(startingDate, timetablePanel.getRoot().getDate());
+        assertEquals(startingDate, timetablePanelHandle.getTimetableDate());
 
         postNow(timetableWeekChangeRequestEventPrevStub);
-        assertEquals(getPrevWeekDate(startingDate), timetablePanel.getRoot().getDate());
+        assertEquals(getPrevWeekDate(startingDate), timetablePanelHandle.getTimetableDate());
+    }
+
+    @Test
+    public void handleTimetableWeekChangeRequestEvent_usingButtons() {
+        timetablePanelHandle.navigateToNextUsingButton();
+        assertEquals(getNextWeekDate(startingDate), timetablePanelHandle.getTimetableDate());
+
+        timetablePanelHandle.navigateToPrevUsingButton();
+        assertEquals(startingDate, timetablePanelHandle.getTimetableDate());
+
+        timetablePanelHandle.navigateToPrevUsingButton();
+        assertEquals(getPrevWeekDate(startingDate), timetablePanelHandle.getTimetableDate());
+    }
+
+    @Test
+    public void timetablePanel_monthDisplay() {
+        String expectedMonthDisplay = startingDate.getMonth().name() + " " + startingDate.getYear();
+        assertEquals(expectedMonthDisplay, timetablePanelHandle.getDisplayedMonthYear());
     }
 
     @Test
@@ -193,31 +198,6 @@ public class TimetablePanelTest extends GuiUnitTest {
         } catch (IOException e) {
             throw new AssertionError("Error deleting test files.");
         }
-    }
-
-    private List<Entry<?>> getEntriesForEntryType(Calendar entryType) {
-        Map<LocalDate, List<Entry<?>>> entryMap = entryType.findEntries(
-                LocalDate.of(2018, 3, 19).minusDays(7), LocalDate.of(2018, 3, 19).plusDays(7), ZoneId.systemDefault());
-        List<Entry<?>> entryList = entryMap.values().stream()
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
-        return entryList;
-    }
-
-    private List<Entry> getTimetableEntries() {
-        List<Entry<?>> availEntries = getEntriesForEntryType(getTimetableAvail());
-        List<Entry<?>> runningOutEntries = getEntriesForEntryType(getTimetableRunningOut());
-        List<Entry<?>> fullEntries = getEntriesForEntryType(getTimetableFull());
-        List<Entry<?>> employeeEntries = getEntriesForEntryType(getTimetableEmployee());
-        List<Entry<?>> othersEntries = getEntriesForEntryType(getTimetableOthers());
-
-        ArrayList<Entry> entries = new ArrayList<>(Stream.of(
-                availEntries, runningOutEntries, fullEntries, employeeEntries, othersEntries)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList()));
-
-        Collections.sort(entries, Comparator.comparing(Entry::getStartAsLocalDateTime));
-        return entries;
     }
 
 }

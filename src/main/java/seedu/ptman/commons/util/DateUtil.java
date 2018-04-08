@@ -3,6 +3,7 @@ package seedu.ptman.commons.util;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 import java.util.Locale;
@@ -41,6 +42,20 @@ public class DateUtil {
 
     //@@author hzxcaryn
     /**
+     * Given a {@code date}, returns the date of the week's Thursday
+     */
+    public static LocalDate getThursdayOfDate(LocalDate date) {
+        requireNonNull(date);
+        int week = getWeekFromDate(date);
+        WeekFields weekFields = WeekFields.of(Locale.FRANCE);
+        return LocalDate.now()
+                .withYear(date.getYear())
+                .with(weekFields.weekOfYear(), week)
+                .with(weekFields.dayOfWeek(), 4);
+    }
+
+
+    /**
      * Given {@code currDate}, returns the date one week later
      */
     public static LocalDate getNextWeekDate(LocalDate currDate) {
@@ -56,6 +71,16 @@ public class DateUtil {
         requireNonNull(currDate);
         LocalDate prevWeekDate = currDate.minusDays(NUM_DAYS_IN_WEEK);
         return prevWeekDate;
+    }
+
+    /**
+     * Given {@code date}, returns the month and year as a string
+     */
+    public static String getMonthYearFromDate(LocalDate date) {
+        requireNonNull(date);
+        Month month = date.getMonth();
+        int year = date.getYear();
+        return month.name() + " " + year;
     }
 
 }
