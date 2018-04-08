@@ -12,6 +12,9 @@ import java.util.Locale;
  * Utility methods for handling dates
  */
 public class DateUtil {
+
+    private static final int NUM_DAYS_IN_WEEK = 7;
+
     /**
      * Returns the week number for {@code date} from the start of the year
      */
@@ -35,4 +38,24 @@ public class DateUtil {
                 .with(weekFields.weekOfYear(), week)
                 .with(weekFields.dayOfWeek(), 1);
     }
+
+    //@@author hzxcaryn
+    /**
+     * Given {@code currDate}, returns the date one week later
+     */
+    public static LocalDate getNextWeekDate(LocalDate currDate) {
+        requireNonNull(currDate);
+        LocalDate nextWeekDate = currDate.plusDays(NUM_DAYS_IN_WEEK);
+        return nextWeekDate;
+    }
+
+    /**
+     * Given {@code currDate}, returns the date one week before
+     */
+    public static LocalDate getPrevWeekDate(LocalDate currDate) {
+        requireNonNull(currDate);
+        LocalDate prevWeekDate = currDate.minusDays(NUM_DAYS_IN_WEEK);
+        return prevWeekDate;
+    }
+
 }

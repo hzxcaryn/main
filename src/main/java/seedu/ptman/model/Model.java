@@ -1,5 +1,6 @@
 package seedu.ptman.model;
 
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -111,6 +112,8 @@ public interface Model {
     void updateShift(Shift shiftToApply, Shift editedShift) throws ShiftNotFoundException, DuplicateShiftException;
 
     void updateFilteredShiftList(Predicate<Shift> predicate);
+
+    void setFilteredShiftListToWeek(LocalDate date);
 
     OutletInformation getOutletInformation();
 }

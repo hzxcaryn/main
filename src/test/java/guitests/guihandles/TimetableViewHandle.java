@@ -10,7 +10,7 @@ public class TimetableViewHandle extends NodeHandle<Node> {
 
     public static final String TIMETABLE_ID = "#timetableViewPlaceholder";
 
-    protected TimetableViewHandle(Node rootNode) {
+    public TimetableViewHandle(Node rootNode) {
         super(rootNode);
     }
 }

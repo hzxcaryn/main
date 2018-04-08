@@ -8,6 +8,7 @@ import static org.junit.Assert.fail;
 import static seedu.ptman.testutil.TypicalShifts.MONDAY_AM;
 import static seedu.ptman.testutil.TypicalShifts.MONDAY_PM;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -160,7 +161,6 @@ public class AddShiftCommandTest {
             return false;
         }
 
-
         @Override
         public boolean isCorrectTempPwd(Employee employee, Password tempPassword) {
             fail("This method should not be called.");
@@ -225,6 +225,11 @@ public class AddShiftCommandTest {
 
         @Override
         public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void setFilteredShiftListToWeek(LocalDate date) {
             fail("This method should not be called.");
         }
 
