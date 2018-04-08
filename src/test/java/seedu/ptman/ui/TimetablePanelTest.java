@@ -21,13 +21,13 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 
-import guitests.guihandles.TimetablePanelHandle;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.calendarfx.model.Entry;
 
+import guitests.guihandles.TimetablePanelHandle;
 import javafx.collections.ObservableList;
 import seedu.ptman.commons.events.ui.EmployeePanelSelectionChangedEvent;
 import seedu.ptman.commons.events.ui.ExportTimetableAsImageAndEmailRequestEvent;

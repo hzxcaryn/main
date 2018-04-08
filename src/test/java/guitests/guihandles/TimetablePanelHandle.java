@@ -21,6 +21,7 @@ import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Entry;
 import com.calendarfx.view.CalendarView;
 import com.calendarfx.view.page.PageBase;
+
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -116,7 +117,8 @@ public class TimetablePanelHandle extends NodeHandle<Node> {
     }
 
     /**
-     * For the given {@code entryType}, check for all entries in the timetable view of that entry type and return them in a list
+     * For the given {@code entryType}, check for all entries in the timetable view
+     * of that entry type and return them in a list
      * @param entryType
      * @return list of all entries of the {@code entryType}
      */

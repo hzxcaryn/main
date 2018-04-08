@@ -159,7 +159,7 @@ public class TimetablePanel extends UiPart<Region> {
      * Sets the displayed month on the {@code monthDisplay}.
      * Month is determined by the majority date displayed in the timetable view.
      * This means that if there are 4 dates that are of month April and 3 dates that are of month May,
-     * April will be displayed on the {@code monthDisplay.
+     * April will be displayed on the {@code monthDisplay}.
      */
     private void setMonthDisplay(LocalDate date) {
         LocalDate thursdayDate = DateUtil.getThursdayOfDate(date);
