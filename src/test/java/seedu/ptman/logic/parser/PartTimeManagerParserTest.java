@@ -255,7 +255,7 @@ public class PartTimeManagerParserTest {
     @Test
     public void parseCommand_editoutlet() throws Exception {
         String name = "EditedOutlet";
-        String operatingHours = "10:00-17:00";
+        String operatingHours = "1000-1700";
         String outletContact = "91234567";
         String outletEmail = "EditedOutlet@gmail.com";
         EditOutletCommand command = (EditOutletCommand) parser.parseCommand(EditOutletCommand.COMMAND_WORD
@@ -270,7 +270,7 @@ public class PartTimeManagerParserTest {
     @Test
     public void parseCommand_editoutletAlias() throws Exception {
         String name = "EditedOutlet";
-        String operatingHours = "10:00-17:00";
+        String operatingHours = "1000-1700";
         String outletContact = "91234567";
         String outletEmail = "EditedOutlet@gmail.com";
         EditOutletCommand command = (EditOutletCommand) parser.parseCommand(EditOutletCommand.COMMAND_ALIAS

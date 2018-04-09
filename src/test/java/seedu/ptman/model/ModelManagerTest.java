@@ -42,7 +42,7 @@ public class ModelManagerTest {
         PartTimeManager differentPartTimeManager = new PartTimeManager();
         UserPrefs userPrefs = new UserPrefs();
 
-        OutletInformation outlet = new OutletInformation(new OutletName("test"), new OperatingHours("10:00-15:00"),
+        OutletInformation outlet = new OutletInformation(new OutletName("test"), new OperatingHours("1000-1500"),
                 new OutletContact("123"), new OutletEmail("test@test.com"),
                 new Announcement("New Announcement."), new Password(), false);
 

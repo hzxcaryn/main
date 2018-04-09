@@ -15,7 +15,7 @@ public class OutletInformationTest {
 
     @Test
     public void constructor_nullName_throwsNullPointerException() {
-        OperatingHours operatingHours = new OperatingHours("09:00-22:00");
+        OperatingHours operatingHours = new OperatingHours("0900-2200");
         OutletContact outletContact = new OutletContact("91234567");
         OutletEmail outletEmail = new OutletEmail("outlet@gmail.com");
         Password password = new Password();
@@ -38,7 +38,7 @@ public class OutletInformationTest {
     @Test
     public void constructor_nullOutletContact_throwsNullPointerException() {
         OutletName name = new OutletName("outlet");
-        OperatingHours operatingHours = new OperatingHours("09:00-22:00");
+        OperatingHours operatingHours = new OperatingHours("0900-2200");
         OutletEmail outletEmail = new OutletEmail("outlet@gmail.com");
         Password password = new Password();
         Announcement announcement = new Announcement("New Announcement.");
@@ -49,7 +49,7 @@ public class OutletInformationTest {
     @Test
     public void constructor_nullOutletEmail_throwsNullPointerException() {
         OutletName name = new OutletName("outlet");
-        OperatingHours operatingHours = new OperatingHours("09:00-22:00");
+        OperatingHours operatingHours = new OperatingHours("0900-2200");
         OutletContact outletContact = new OutletContact("91234567");
         Password password = new Password();
         Announcement announcement = new Announcement("New Announcement.");
@@ -60,7 +60,7 @@ public class OutletInformationTest {
     @Test
     public void constructor_nullPassword_throwsNullPointerException() {
         OutletName name = new OutletName("outlet");
-        OperatingHours operatingHours = new OperatingHours("09:00-22:00");
+        OperatingHours operatingHours = new OperatingHours("0900-2200");
         OutletContact outletContact = new OutletContact("91234567");
         OutletEmail outletEmail = new OutletEmail("outlet@gmail.com");
         Announcement announcement = new Announcement("New Announcement.");
@@ -71,7 +71,7 @@ public class OutletInformationTest {
     @Test
     public void constructor_nullAnnouncement_throwsNullPointerException() {
         OutletName name = new OutletName("outlet");
-        OperatingHours operatingHours = new OperatingHours("09:00-22:00");
+        OperatingHours operatingHours = new OperatingHours("0900-2200");
         OutletContact outletContact = new OutletContact("91234567");
         OutletEmail outletEmail = new OutletEmail("outlet@gmail.com");
         Password password = new Password();
@@ -82,7 +82,7 @@ public class OutletInformationTest {
     @Test
     public void equals_sameOutletInformation_returnsTrue() {
         OutletName name = new OutletName("outlet");
-        OperatingHours operatingHours = new OperatingHours("09:00-22:00");
+        OperatingHours operatingHours = new OperatingHours("0900-2200");
         OutletContact outletContact = new OutletContact("91234567");
         OutletEmail outletEmail = new OutletEmail("outlet@gmail.com");
         Password password = new Password();
@@ -127,7 +127,7 @@ public class OutletInformationTest {
     public void hashCode_sameObject_returnsTrue() {
         Password masterPassword = new Password();
         OutletName name = new OutletName("outlet");
-        OperatingHours operatingHours = new OperatingHours("09:00-22:00");
+        OperatingHours operatingHours = new OperatingHours("0900-2200");
         OutletContact outletContact = new OutletContact("91234567");
         OutletEmail outletEmail = new OutletEmail("outlet@gmail.com");
         Announcement announcement = new Announcement("New Announcement.");
@@ -140,7 +140,7 @@ public class OutletInformationTest {
     @Test
     public void toString_validInput_returnsTrue() {
         OutletName name = new OutletName("outlet");
-        OperatingHours operatingHours = new OperatingHours("09:00-22:00");
+        OperatingHours operatingHours = new OperatingHours("0900-2200");
         OutletContact outletContact = new OutletContact("91234567");
         OutletEmail outletEmail = new OutletEmail("outlet@gmail.com");
         Password password = new Password();

@@ -22,12 +22,12 @@ public class XmlAdaptedOutletInformationTest {
     private static final String DECRYPTED = OutletInformation.DATA_NOT_ENCRYPTED_MESSAGE;
     private static final String ENCRYPTED = OutletInformation.DATA_ENCRYPTED_MESSAGE;
     private static final String INVALID_OUTLET_NAME = "Awesome@outlet";
-    private static final String INVALID_OPERATING_HOURS = "10:00/20:00";
+    private static final String INVALID_OPERATING_HOURS = "1000/2000";
     private static final String INVALID_OUTLET_CONTACT = "+6591112222";
     private static final String INVALID_OUTLET_EMAIL = "example.com";
 
     private static final String VALID_OUTLET_NAME = "AwesomeOutlet";
-    private static final String VALID_OPERATING_HOURS = "10:00-20:00";
+    private static final String VALID_OPERATING_HOURS = "1000-2000";
     private static final String VALID_OUTLET_CONTACT = "91112222";
     private static final String VALID_OUTLET_EMAIL = "AwesomeOutlet@gmail.com";
     private static final String VALID_ANNOUNCEMENT = "New Announcement";
