@@ -427,13 +427,13 @@
 
 #outletInformation .label {
     -fx-font-family: "Gotham Rounded Book";
-    -fx-font-size: 14px;
+    -fx-font-size: 15px;
     -fx-text-fill: #7A8492;
 }
 
 #announcement {
     -fx-font-family: "Gotham Rounded Book";
-    -fx-font-size: 14px;
+    -fx-font-size: 15px;
     -fx-text-fill: #7A8492;
     -fx-padding: 0 5 10 20;
 }
