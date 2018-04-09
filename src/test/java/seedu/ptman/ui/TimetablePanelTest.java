@@ -20,6 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.junit.After;
 import org.junit.Before;
@@ -143,27 +144,34 @@ public class TimetablePanelTest extends GuiUnitTest {
 
     @Test
     public void timetablePanel_handleTimetableWeekChangeRequestEvent() {
+        Logger.getAnonymousLogger().info("starting date " + startingDate);
         postNow(timetableWeekChangeRequestEventNextStub);
         assertEquals(getNextWeekDate(startingDate), timetablePanelHandle.getTimetableDate());
 
+        Logger.getAnonymousLogger().info("starting date " + startingDate);
         postNow(timetableWeekChangeRequestEventPrevStub);
         assertEquals(startingDate, timetablePanelHandle.getTimetableDate());
 
+        Logger.getAnonymousLogger().info("starting date " + startingDate);
         postNow(timetableWeekChangeRequestEventInvalidStub);
         assertEquals(startingDate, timetablePanelHandle.getTimetableDate());
 
+        Logger.getAnonymousLogger().info("starting date " + startingDate);
         postNow(timetableWeekChangeRequestEventPrevStub);
         assertEquals(getPrevWeekDate(startingDate), timetablePanelHandle.getTimetableDate());
     }
 
     @Test
     public void handleTimetableWeekChangeRequestEvent_usingButtons() {
+        Logger.getAnonymousLogger().info("starting date " + startingDate);
         timetablePanelHandle.navigateToNextUsingButton();
         assertEquals(getNextWeekDate(startingDate), timetablePanelHandle.getTimetableDate());
 
+        Logger.getAnonymousLogger().info("starting date " + startingDate);
         timetablePanelHandle.navigateToPrevUsingButton();
         assertEquals(startingDate, timetablePanelHandle.getTimetableDate());
 
+        Logger.getAnonymousLogger().info("starting date " + startingDate);
         timetablePanelHandle.navigateToPrevUsingButton();
         assertEquals(getPrevWeekDate(startingDate), timetablePanelHandle.getTimetableDate());
     }

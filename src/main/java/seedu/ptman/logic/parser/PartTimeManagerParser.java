@@ -45,6 +45,7 @@ import seedu.ptman.logic.commands.SelectCommand;
 import seedu.ptman.logic.commands.UnapplyCommand;
 import seedu.ptman.logic.commands.UndoCommand;
 import seedu.ptman.logic.commands.ViewOutletCommand;
+import seedu.ptman.logic.commands.ViewShiftCommand;
 import seedu.ptman.logic.parser.exceptions.ParseException;
 
 /**
@@ -146,6 +147,10 @@ public class PartTimeManagerParser {
         case ListCommand.COMMAND_WORD:
         case ListCommand.COMMAND_ALIAS:
             return new ListCommand();
+
+        case ViewShiftCommand.COMMAND_WORD:
+        case ViewShiftCommand.COMMAND_ALIAS:
+            return new ViewShiftCommandParser().parse(arguments);
 
         case HistoryCommand.COMMAND_WORD:
         case HistoryCommand.COMMAND_ALIAS:

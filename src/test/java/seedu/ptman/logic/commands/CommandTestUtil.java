@@ -173,7 +173,7 @@ public class CommandTestUtil {
 
     /**
      * Updates {@code model}'s filtered list to show only the employee at the given {@code targetIndex} in the
-     * {@code model}'s ptman book.
+     * {@code model}'s ptman.
      */
     public static void showEmployeeAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredEmployeeList().size());
@@ -186,7 +186,7 @@ public class CommandTestUtil {
     }
 
     /**
-     * Deletes the first employee in {@code model}'s filtered list from {@code model}'s ptman book.
+     * Deletes the first employee in {@code model}'s filtered list from {@code model}'s ptman.
      */
     public static void deleteFirstEmployee(Model model) {
         Employee firstEmployee = model.getFilteredEmployeeList().get(0);
