@@ -670,6 +670,7 @@ Finds employees whose names contain any of the given keywords. +
 * Employees matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
+// TODO: SCREENSHOT BEFORE + AFTER
 Examples:
 
 * To find employees `john` and `John Doe`, type: +

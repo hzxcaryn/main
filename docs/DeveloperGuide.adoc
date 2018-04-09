@@ -211,7 +211,7 @@ link:{repoURL}/src/main/java/seedu/ptman/logic/Logic.java[`Logic.java`]
 The `Logic` component:
 
 . Parses user commands using the `PartTimeManagerParser` class and returns a `Command` object.
-. Executes the `Command` object using `LogicManager`.	+.  This results in a `Command` object which is executed by the `LogicManager`.
+. Executes the `Command` object using `LogicManager`.
   The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 . Passes the result of the command execution (`CommandResult`) to the `UI`.
 
