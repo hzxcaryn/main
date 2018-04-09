@@ -311,8 +311,8 @@ Examples:
 
 Deletes the specified employee from PTMan. +
 
-*Format:* `delete INDEX` +
-*Shorthand:* `d INDEX`
+*Format:* `delete EMPLOYEE_INDEX` +
+*Shorthand:* `d EMPLOYEE_INDEX`
 
 ****
 * The employee will be deleted at the specified INDEX.
@@ -686,14 +686,22 @@ Shows a list of all employees in PTMan. +
 *Format:* `list` +
 *Shorthand:* `l`
 
+[[Viewshift]]
+==== Listing all employees: `viewshift`
+
+Shows a list of all employees who have applied for the input shift index in PTMan. +
+
+*Format:* `viewshift SHIFT_INDEX` +
+*Shorthand:* `vs SHIFT_INDEX`
+
 [[Select]]
 ==== Displaying an employee's shifts on the timetable: `select`
 
 Displays the shifts of the selected employee on the timetable view. Shifts applied by the selected employee would be displayed
  in blue, while the other shifts would be displayed in brown. +
 
-*Format:* `select INDEX` +
-*Shorthand:* `s INDEX`
+*Format:* `select EMPLOYEE_INDEX` +
+*Shorthand:* `s EMPLOYEE_INDEX`
 
 // TODO: SCREENSHOT
 Examples:
@@ -771,7 +779,8 @@ Exits the app. +
 * <<Help, *Help*>>: `help`
 * <<Find, *Find*>>: `find KEYWORD [MORE_KEYWORDS]`
 * <<List, *List*>>: `list`
-* <<Select, *Display employee's shifts*>>: `select INDEX`
+* <<Viewshift, *View shift*>>: `viewshift SHIFT_INDEX`
+* <<Select, *Display employee's shifts*>>: `select EMPLOYEE_INDEX`
 * <<Main, *Display default timetable*>>: `main`
 * <<Export, *Export timetable*>>: `export`
 * <<History, *History*>>: `history`
@@ -788,7 +797,7 @@ Exits the app. +
 ==== Employee management
 * <<Add, *Add*>>: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY pw/AdminPassword t/TAG...`
 * <<Edit, *Edit*>>: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY t/TAG...`
-* <<Delete, *Delete*>>: `delete INDEX`
+* <<Delete, *Delete*>>: `delete EMPLOYEE_INDEX`
 
 ==== General commands
 * <<Clear, *Clear*>>: `clear`
