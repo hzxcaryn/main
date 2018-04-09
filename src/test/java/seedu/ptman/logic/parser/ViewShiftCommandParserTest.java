@@ -6,6 +6,7 @@ import static seedu.ptman.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.ptman.testutil.TypicalIndexes.INDEX_FIRST_SHIFT;
 
 import org.junit.Test;
+
 import seedu.ptman.logic.commands.ViewShiftCommand;
 
 //@@author hzxcaryn

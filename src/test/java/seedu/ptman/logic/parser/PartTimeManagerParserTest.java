@@ -51,6 +51,7 @@ import seedu.ptman.logic.commands.SelectCommand;
 import seedu.ptman.logic.commands.UnapplyCommand;
 import seedu.ptman.logic.commands.UndoCommand;
 import seedu.ptman.logic.commands.ViewOutletCommand;
+import seedu.ptman.logic.commands.ViewShiftCommand;
 import seedu.ptman.logic.parser.exceptions.ParseException;
 import seedu.ptman.model.Password;
 import seedu.ptman.model.employee.Email;
@@ -371,6 +372,13 @@ public class PartTimeManagerParserTest {
     public void parseCommand_main() throws Exception {
         assertTrue(parser.parseCommand(MainCommand.COMMAND_WORD) instanceof MainCommand);
         assertTrue(parser.parseCommand(MainCommand.COMMAND_WORD + " 3") instanceof MainCommand);
+    }
+
+    @Test
+    public void parseCommand_viewshift() throws Exception {
+        ViewShiftCommand command = (ViewShiftCommand) parser.parseCommand(
+                ViewShiftCommand.COMMAND_WORD + " " + INDEX_FIRST_SHIFT.getOneBased());
+        assertEquals(new ViewShiftCommand(INDEX_FIRST_SHIFT), command);
     }
 
     //@@author
