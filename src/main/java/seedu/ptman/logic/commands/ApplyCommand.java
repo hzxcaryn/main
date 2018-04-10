@@ -41,6 +41,7 @@ public class ApplyCommand extends UndoableCommand {
     public static final String MESSAGE_APPLY_SHIFT_SUCCESS = "Employee %1$s applied for shift %2$s";
     public static final String MESSAGE_DUPLICATE_EMPLOYEE = "Employee is already in the shift";
     public static final String MESSAGE_SHIFT_FULL = "Shift %1$s is full";
+    public static final String MESSAGE_SHIFT_OVER = "Shift %1$s has already passed";
 
     private final Index employeeIndex;
     private final Index shiftIndex;
@@ -97,6 +98,11 @@ public class ApplyCommand extends UndoableCommand {
 
         applicant = lastShownList.get(employeeIndex.getZeroBased());
         shiftToApply = shiftList.get(shiftIndex.getZeroBased());
+
+        if (shiftToApply.isOver()) {
+            throw new CommandException(String.format(MESSAGE_SHIFT_OVER, shiftIndex.getOneBased()));
+        }
+
         editedShift = new Shift(shiftToApply);
         try {
             editedShift.addEmployee(applicant);

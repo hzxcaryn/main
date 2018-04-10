@@ -22,13 +22,6 @@ public class ShiftTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void constructor_illegalTime_throwsIllegalArgumentException() {
-        Assert.assertThrows(IllegalArgumentException.class, () ->
-                new Shift(new Date("19-03-18"), new Time("2200"), new Time("1000"), new Capacity("4"))
-        );
-    }
-
-    @Test
     public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () ->
                 new Shift(null, null, null, null)

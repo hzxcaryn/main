@@ -262,17 +262,20 @@ Classes used by multiple components are in the `seedu.ptman.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+// tag::outlet[]
 === Outlet feature
 
 ==== Reason for implementation
-PTMan is designed for outlets such as bubble tea shops and fast food resturants which require a large number of part-time workers.
+PTMan is designed for outlets such as bubble tea shops and fast food restaurants which require a large number of part-time workers.
 This outlet feature stores basic outlet information such as outlet name, operating hours, contact number, email and admin password managed by the employers.
-Such details are essential to facilitate other functions such as the access control system and the timetable displayed in the GUI.
+Such details are essential to facilitate other functions such as the access control system and the timetable displayed in the app.
 
-==== Current implementation
+==== How it is implemented and alternative implementation considered
 
+===== OutletInformation class
 The `OutletInformation` class represents an outlet in PTMan.
-It supports relevant commands that utilizes attributes of this class and it is also responsible for UI display and local storage. +
+It supports relevant commands that utilize attributes of this class. It is also responsible for information displayed in the UI and data stored in local storage files. +
 
 _<<fig-OutletClassDiagram>>_ is a class diagram that displays the association between `OutletInformation` and other components in the `Model`.
 
@@ -284,37 +287,44 @@ Currently, the `OutletInformation` object initialized in the `PartTimeManager` i
 ----
 OutletInformation()
 ----
-This default constructor initializes the six fields of `OutletInformation` as shown in _Figure 11_ to respective default values.
+This default constructor initializes a boolean value `isDataEncrypted` to false and six other fields, including `masterPassword`, `outletName`, `operatingHours`, `outletEmail`, `outletContact`, `announcement` as shown in _Figure 11_, to respective default values.
 
-With the help of initial values, any employer new to PTMan does not need to create a new `OutletInformation` object and modify necessary outlet details from there.
-It saves a lot of time as the `OutletInformation` object has already been created with default values.
+The reason why it is implemented in this way is that with the help of initial values, any employer new to PTMan does not need to create a new `OutletInformation` object.
+It saves time as the `OutletInformation` object has already been created with default values.
 Employers can edit those values by entering an `editoutlet` command after they log in.
 
-However, there is an alternative way to create an `OutletInformation` object:
+In addition, there is an alternative way to create an `OutletInformation` object:
 ----
-OutletInformation(OutletName outletName, OperatingHours operatingHours, OutletContact outletContact, OutletEmail outletEmail, Announcement announcement)
+OutletInformation(OutletName outletName, OperatingHours operatingHours, OutletContact outletContact, OutletEmail outletEmail, Announcement announcement, Password masterPassword, boolean isDataEncrypted)
 ----
-This constructor allows flexibility in storing outlet information where most fields can be initialized with specific values except the admin password.
-The admin password of an outlet must be set to the default value because it is used for employer's first login and it is impossible to change any password without the first login. +
+This constructor allows flexibility in storing outlet information where all seven attributes can be initialized with specific values.
+However, you must be careful when you want to call this constructor.
+Since `isDataEncrypted` can be initialized to true, you may want to inform the users new to this app that data stored in local files are encrypted.
+Similarly, you need to update the default admin password in the User Guide to whatever you used to initialize the `masterPassword`.
+Otherwise, users are unable to log in with correct password when they start using the app for the first time.
 
 ===== Relevant commands
 
-Currently, there are three commands that allows employers to change fields of the `OutletInformation` object. +
+Currently, there are two commands that allow employers to change attributes of the `OutletInformation`.
+There are also commands that allow employers to encrypt and decrypt local storage files. +
 
-*Edit outlet command*
+====== Edit outlet command
 
-The `editoutlet` command allows employers to edit the outlet information including
-outlet name, operating hours, contact numbers and email. The admin password can only be changed using the `changeadminpassword` command,
-while the timetable can only be modified with the relevant `Shift` commands.
-[NOTE]
-Editing with some fields unspecified is allowed.
-For example, editoutlet n/OUTLETNAME is a valid command. This enables employers to edit only the information required for change.
+The `editoutlet` command can change outlet name, operating hours, contact number and email, which are displayed in the app as shown in _<<fig-OutletInformationDisplayed>>_.
+The information displayed will change after a successful command.
 
-The current implementation to check some fields are specified is in the `setOutletInformation` method of the `OutletInformation` class.
+[[fig-OutletInformationDisplayed]]
+.Example of Outlet Information Displayed
+image::outletinformationdisplay.jpg[width="600"]
+
+Currently, editing with some fields unspecified is allowed.
+For example, `editoutlet n/OUTLETNAME` is a valid command.
+The reason why it is implemented in this why is that it enables employers to edit only the information required for change.
+
+In order to check whether some fields are specified, several branches are created in the `setOutletInformation` method of the `OutletInformation` class.
 When all fields are null, it throws a new exception as shown below:
 ----
-//in OutletInformation class
-public void setOutletInformation(OutletName name, OperatingHours operatingHours, OutletContact outletContact, OutletEmail outletEmail) throws NoOutletInformationFieldChangeException {
+public void setOutletInformation(...) throws NoOutletInformationFieldChangeException {
     ...
     if (name == null && operatingHours == null && outletContact == null && outletEmail == null) {
         throw new NoOutletInformationFieldChangeException();
@@ -322,11 +332,10 @@ public void setOutletInformation(OutletName name, OperatingHours operatingHours,
     ...
 }
 ----
-This exception is then handled by the `EditOutletCommand`.
+This `NoOutletInformationFieldChangeException` is then handled by the `EditOutletCommand`.
 When the exception is caught, the `CommandException` with a message of command failure will be thrown,
 with reference to the function below:
 ----
-//in EditOutletCommand class
 public CommandResult executeUndoableCommand() throws CommandException {
     ...
     try {
@@ -337,26 +346,84 @@ public CommandResult executeUndoableCommand() throws CommandException {
     ...
 }
 ----
+The following sequence diagram (_<<fig-EditOutletCommandSequenceDiagram>>_) illustrates how an `editoutlet` command is executed in the Logic Component, and how it interacts with the Model Component.
 
-*Change master password command*
+[[fig-EditOutletCommandSequenceDiagram]]
+.Interactions inside the Logic Component for the `editoutlet n/Edited Outlet` Admin Command
+image::EditOutletCommandSequenceDiagram.png[width="800"]
 
-After login with correct admin password, using the `changemasterpw` command, employers should be able to change the admin password.
-However, due to the possibility that previous employer forgot to log out, `changemasterpw` command requires
-the old password for further verification. This reduces the risk of password getting stolen. You can find out more information on password in _Section 4.5 Password class_.
+When `executeUndoableCommand` executed succesfully without any exception, three events will be raised:
 
-*Announcement command*
+. `OutletNameChangedEvent` updates the outlet name displayed in the app.
+. `OutletInformationChangedEvent` updates the operating hours, contact numbers and email displayed in the app.
+. `OutletDataChangedEvent` saves latest outlet information in local storage file "data/outletinformation.xml".
 
-After login with correct admin password, using the "announcement" command, employers should be able to create an announcement visible to all employees.
-This allows employers to broadcast important messages to employees. For example, when there is an urgent need of manpower in a specific time slot,
-employers can create an announcement to inform the employees who can sign up for the corresponding time slot upon receving the announcement.
+====== Announcement command
 
-===== Store and display outlet information
+Similar to `editoutlet` command, `announcement` command changes the `announcement` attribute of `OutletInformation`.
+The implementation is similar to the implementation of `editoutlet` command mentioned previously.
+Take note that there is not any input constraint on the `announcement`, unlike outlet name, operating hours, contact number and email which have specific input constraints.
 
-All outlet information is stored in a separate file with data encryption to ensure that crucial data cannot be interpreted by any third party.
-You can refer to <<Data Encryption>> for more information on how data is encrypted.
+Thus, an alternative implementation of the `Announcement` class can put certain constraints on the input string, and check whether the input string matches the validation regex as shown below:
+----
+public static final String ANNOUNCEMENT_VALIDATION_REGEX = //your own validation regex;
+public static boolean isValidAnnouncement(String test) {
+    return test.matches(ANNOUNCEMENT_VALIDATION_REGEX);
+}
+----
+When `announcement` command executes successfully, `AnnouncementChangedEvent` is raised and handled to update the information displayed in the app as highlighted in _<<fig-AnnouncementDisplayed>>_.
+[[fig-AnnouncementDisplayed]]
+.Example of Announcement Displayed
+image::announcementdisplay.jpg[width="600"]
 
-In addition, outlet information is displayed in the outlet panel above the timetable.
-Any change in the outlet information will be reflected immediately after the command.
+Similarly, `OutletDataChangedEvent` is also raised and handled to save the latest announcement into local storage file "data/outletinformation.xml".
+
+====== Encrypt and decrypt commands
+Since PTMan stores files locally, it is highly possible that any worker in the outlet can open the storage files and read data inside.
+Such files store a large amount of essential and private data such as admin password, employees' passwords, employees' phones, addresses, and emails.
+By using the `encrypt` command, the data in local storage files can be hidden from any group of people who do not have the access to it.
+Employers can use the `decrypt` command to make the files human-readable.
+
+Currently, the local data is encrypted in the Advanced Encryption Standard (AES) in XML files.
+If data is encrypted, data read from XML files must be decrypted before passing to the constructor of any object.
+The function below demonstrates how outlet data is encrypted using the encrypt(String text) function: +
+----
+public XmlAdaptedOutletInformation(String outletName, ...) {
+    ...
+    this.outletName = encrypt(outletName);
+    ...
+}
+----
+Similarly, decrypt(String encryptedText) can be called to decrypt data read from XML files. +
+
+The current implementation successfully prevents any user of the computer directly interpreting the stored information.
+However, the limitation is that the XML file structure is still maintained and the title of each element is not encrypted as shown in _<<fig-OutletEncrypt>>_.
+It is possible that any user with advanced knowledge of data encryption is able to decrypt the data with the found patterns.
+
+[[fig-OutletEncrypt]]
+.Example of Encrypted XML File of Outlet Information
+image::OutletInformationEncryptedXMLFile.jpg[width="800"]
+
+The limitation of the current implementation leads to an alternative implementation that encrypts the entire XML file.
+The XMLCipher package from apache.org can be used to encrypt the XML file stored locally, as illustrated below:
+----
+Document encryptedDoc = XMLUtil.encryptDocument(document, secretKey, XMLCipher.AES_128);
+XMLUtil.saveDocumentTo(encryptedDoc, encryptedFile);
+Document decryptedDoc = XMLUtil.decryptDocument(encryptedDoc, secretKey, XMLCipher.AES_128);
+XMLUtil.saveDocumentTo(decryptedDoc, decryptedFile);
+----
+You can implement `encryptDocument` using the code below. Take note that `decryptDocument` is simply the reverse process of `encryptDocument`.
+----
+public static Document encryptDocument(Document document, SecretKey secretKey, String algorithm) throws Exception {
+    Element rootElement = document.getDocumentElement();
+    XMLCipher xmlCipher = XMLCipher.getInstance(algorithm);
+    xmlCipher.init(XMLCipher.ENCRYPT_MODE, secretKey);
+    xmlCipher.doFinal(document, rootElement, true);
+    return document;
+}
+----
+// end::outlet[]
+
 
 // tag::shifts[]
 === Shifts feature
@@ -790,44 +857,25 @@ sendResetPasswordMessage(String name, String email, String newPassword)
 `EmailService` class is free for extension.
 // end::accessControl[]
 
-
-// tag::dataencryption[]
-=== Data encryption
+=== Backup storage
 
 ==== Reason for implementation
-
-Since PTMan stores files locally, it is highly possible that any worker in the outlet can open the storage files and read data inside.
-Such files store a large amount of essential and private data such as admin password, employees' passwords, employees' phones, addresses, and emails.
-The information is supposed to be hidden from any group of people who do not have the access to it.
-Therefore, local storage files are encrypted to prevent any direct interpretation of saved data.
+Sometimes local storage files might be corrupted due to accidents.
+It is important to keep backup files to prevent any loss of essential data.
 
 ==== How it is implemented
-
-Currently, any data is encrypted in the Advanced Encryption Standard (AES) before writing into XML files.
-Data read from XML files must be decrypted before passing to the constructor of any object.
-The function below demonstrates how outlet data is encrypted using the encrypt(String text) function: +
+Currently, backup files are stored with file extension ".backup" in the same folder as local storage files.
+Backup files are updated upon exit of the app. It is implemented by calling backupPartTimeManager(ReadOnlyPartTimeManager partTimeManager) and backupOutletInformation(OutletInformation outletInformation) in the MainApp.java as shown below:
 ----
-public XmlAdaptedOutletInformation(String outletName, String operatingHours, String outletContact, String outletEmail, String passwordHash, String announcement) {
+public void stop() {
     ...
-    this.outletName = encrypt(outletName);
+    storage.backupPartTimeManager(model.getPartTimeManager());
+    storage.backupOutletInformation(model.getOutletInformation());
     ...
 }
 ----
-Similarly, decrypt(String encryptedText) can be called to decrypt data read from XML files. +
-
-The current implementation successfully prevents any user of the computer directly interpreting the stored information.
-However, the limitation is that the XML file structure is still maintained and the title of each element is not encrypted as shown in _<<fig-OutletEncrypt>>_.
-It is possible that any user with advanced knowledge of data encryption is able to decrypt the data with the found pattern.
-
-[[fig-OutletEncrypt]]
-.Example of Encrypted XML File of Outlet Information
-image::OutletInformationEncryptedXMLFile.jpg[width="700"]
-
-Hence, there is an alternative implementation which encrypts the entire XML file.
-The XMLCipher package from apache.org can be used to encrypt the XML file stored locally.
-
-
-// end::dataencryption[]
+An alternative implementation would be not only saving backup files but also sending them to the cloud such as Dropbox and Google Drive.
+It can be done using the relevant Dropbox and Google Drive APIs.
 
 === Logging
 
@@ -1295,10 +1343,11 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 . *Outlet Feature(Major)*:
 .. *Edit outlet information*: Commands are added for the employers to edit outlet information, including outlet name and operating hours.
+.. *Create announcement*: Announcement command is added for the employers to broadcast important messages to all employees.
 .. *Display outlet information*: Outlet information will be displayed in the UI. Any change in the outlet information will be reflected as well.
-.. *Store Outlet information*: Outlet information is stored in a separate file.
-. *Data Encryption(Minor)*: Storage files are encrypted to ciphertext to ensure that data cannot be obtained and understood by any third party.
-
+.. *Store outlet information*: Outlet information is stored in a separate file.
+.. *Data encryption*: Storage files can be encrypted and decrypted on command to ensure that data cannot be obtained and understood by any third party.
+. *Backup storage files (Minor)*: Backup files with file extension ".backup" are created and updated upon exit of the app.
 
 [appendix]
 == User Stories

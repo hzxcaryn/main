@@ -72,4 +72,8 @@ public class Time {
     public LocalTime getLocalTime() {
         return time;
     }
+
+    public boolean isOver() {
+        return time.isBefore(LocalTime.now());
+    }
 }

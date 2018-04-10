@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static seedu.ptman.testutil.TypicalShifts.MONDAY_AM;
-import static seedu.ptman.testutil.TypicalShifts.MONDAY_PM;
+import static seedu.ptman.testutil.TypicalShifts.SHIFT_MONDAY_AM;
+import static seedu.ptman.testutil.TypicalShifts.SHIFT_MONDAY_PM;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -74,14 +74,14 @@ public class AddShiftCommandTest {
 
     @Test
     public void equals() {
-        AddShiftCommand addMondayAmCommand = new AddShiftCommand(MONDAY_AM);
-        AddShiftCommand addMondayPmCommand = new AddShiftCommand(MONDAY_PM);
+        AddShiftCommand addMondayAmCommand = new AddShiftCommand(SHIFT_MONDAY_AM);
+        AddShiftCommand addMondayPmCommand = new AddShiftCommand(SHIFT_MONDAY_PM);
 
         // same object -> returns true
         assertTrue(addMondayAmCommand.equals(addMondayAmCommand));
 
         // same values -> returns true
-        AddShiftCommand addMondayAmCommandCopy = new AddShiftCommand(MONDAY_AM);
+        AddShiftCommand addMondayAmCommandCopy = new AddShiftCommand(SHIFT_MONDAY_AM);
         assertTrue(addMondayAmCommand.equals(addMondayAmCommandCopy));
 
         // different types -> returns false

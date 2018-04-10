@@ -142,21 +142,37 @@ The timetable automatically displays the shifts in the current week, allowing yo
 
 If you are an employee, PTMan gives you flexibility in your working hours by allowing you to apply for shifts that you wish to work in.
 
+// tag::outletManagement[]
 === Outlet Management
-// TODO: Introduce the outlet + screenshot
+If you are a manager, PTMan allows you to manage your outlet. You can edit your outlet name, operating hours, contact number and email.
+The timetable automatically re-sizes according to the operating hours. You can also create any announcement and broadcast to your employees.
+
+If you are an employee, you can view announcement created by your manager and take actions accordingly.
+
+_<<fig-Feature_Outlet>>_ shows where you can view your outlet information.
+
+[[fig-Feature_Outlet]]
+.Sample Outlet Information Displayed +
+image::IntroductionToOutlet.jpg[width="790"]
+// end::outletManagement[]
 
 === Saving the data
 
-All data is saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
+All data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files
+// tag::backup[]
+=== Backing up the data
+Backup files are automatically created and saved in the hard disk upon exit of the app. There is no need to do backup manually. +
+You can replace any local storage files with backup files by the following steps:
 
-All data is automatically encrypted after any command that changes the data.
-PTMan will decrypt the data when reading from local files. There is no need to encrypt and decrypt manually.
-
-// end::dataencryption[]
+. Copy any backup files named `outletinformation.xml.backup` or `parttimemanager.xml.backup`.
+. Open the folder where your app `PTMan.jar` is at.
+. Open the folder named `data`.
+. Paste your copied backup files there.
+. Rename `outletinformation.xml.backup` to `outletinformation.xml`.
+. Rename `parttimemanager.xml.backup` to `parttimemanager.xml`.
+. Run the app `PTMan.jar` and you will see all the restored data read from backup files.
+// end::backup[]
 
 === Keeping track of employees' monthly salaries [Coming in v2.0]
 
@@ -394,7 +410,8 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-[[Eo]]
+// tag::outletCommand[]
+[[Editoutlet]]
 ==== Editing outlet information: `editoutlet`
 Edits the outlet information. +
 
@@ -406,23 +423,19 @@ Edits the outlet information. +
 * `OPERATING_HOURS` are in HHMM-HHMM format.
 ****
 
-// TODO: SCREENSHOT BEFORE + AFTER
-Examples:
-
-* To edit the name, operating hours, contact number, and email of the outlet to be `CoolCafe`, `8am to 8pm`, `91234567`, and `coolcafe@example.com` respectively, type: +
-`editoutlet n/CoolCafe h/0800-2000 c/91234567 e/coolcafe@example.com`
-* To only edit the name and contact number to be `Nice Dim Sum` and `901234567` respectively, type: +
-`editoutlet n/Nice Dim Sum c/901234567`
-
 [IMPORTANT]
 Ensure that the outlet email is valid as it will be used to reset the admin password should you forget it.
 
-Guided Example:
+Examples:
 
-. When you first start using PTMan, your outlet name will be DefaultOutlet, and the outlet information would not reflect that of your outlet.
-Your outlet is called *AwesomeCoffee*, with operating hours from *10am* to *11pm*.
-The outlet's contact number is *98134086* and has email *awesomecoffee@gmail.com*. +
-To make these changes into PTMan, we can do the following as illustrated in _<<fig-Edit1>>_.
+. When you first start using PTMan, your outlet information will be default values as shown in _<<fig-DefaultOutlet>>_.
++
+[[fig-DefaultOutlet]]
+.Default Outlet Information +
+image::DefaultOutlet.jpg[width="790"]
+
+. You can edit the name, operating hours, contact number, and email of the outlet to be `AwesomeCoffee`, `10am to 11pm`, `98134086`, and `awesomecoffee@gmail.com` respectively, type: +
+`editoutlet n/AwesomeCoffee h/1000-2300 c/98134086 e/awesomecoffee@gmail.com`. Or you can refer to _<<fig-Edit1>>_.
 +
 [[fig-Edit1]]
 .Example of `editoutlet` command usage +
@@ -435,6 +448,12 @@ _<<fig-Edit2>>_ shows how PTMan should look like after the above command.
 .Successful editing of outlet information in PTMan +
 image::Ui_editoutlet2.png[width="790"]
 
+. To only edit the name and contact number to be `Nice Dim Sum` and `901234567` respectively, type: `editoutlet n/Nice Dim Sum c/901234567`.
+You will see changes as shown in _<<fig-Edit3>>_.
++
+[[fig-Edit3]]
+.Successful editing of outlet information in PTMan +
+image::Ui_editoutlet3.png[width="790"]
 
 [[Announcement]]
 ==== Creating an announcement: `announcement`
@@ -443,11 +462,11 @@ Sets an announcement for the outlet. +
 *Format:* `announcement ANNOUNCEMENT_MESSAGE` +
 *Shorthand:* `announce`
 
-Guided Example:
+Examples:
 
 . Your store has a *new drink released this coming Wednesday*, and you want your employees who come working on Wednesday to be
-familiar with the recipe for it. Why not leave a note for your employees so that they can be prepared for their shifts?
-To make an announcement in PTMan, we can do the following as illustrated in _<<fig-Announce1>>_.
+familiar with the recipe for it. You can leave a note for your employees so that they can be prepared for their shifts.
+To make an announcement in PTMan, you can type the following command as illustrated in _<<fig-Announce1>>_.
 +
 [[fig-Announce1]]
 .Example of `announce` command usage +
@@ -459,6 +478,49 @@ _<<fig-Announce2>>_ shows how PTMan should look like after the above command.
 [[fig-Announce2]]
 .Successful announcement made in PTMan +
 image::Ui_announcement2.png[width="790"]
+
+[[Encrypt]]
+==== Encrypt local storage files: `encrypt`
+Encrypts data stored in the files in `data` folder.
+
+*Format:* `encrypt`
+
+After your `encrypt` command is executed successfully, you would see a confirmation message below the command bar as shown in _<<fig-SuccessfulEncryptCommand>>_.
+
+[[fig-SuccessfulEncryptCommand]]
+.Successful `encrypt` command made in PTMan +
+image::SuccessfulEncryptCommand.jpg[width="790"]
+
+In addition, you can view your data stored in local files by the following steps:
+
+. Open the folder where your app `PTMan.jar` is at.
+. Open the folder named `data`. You will see two files `outletinformation.xml` and `parttimemanager.xml` there.
+. Open `outletinformation.xml`. The third line of the file indicates the encryption status with reference to _<<fig-Encrypt>>_.
+
+_<<fig-Encrypt>>_ shows an example of what the `outletinformation.xml` file should look like when the `encrypt` command is successfully executed.
+
+[[fig-Encrypt]]
+.Example of Encrypted `outletinformation.xml` File in `data` Folder +
+image::OutletInformationEncryptedXMLFile.jpg[width="790"]
+
+[[Decrypt]]
+==== Decrypt local storage files: `decrypt`
+Decrypts data stored in the files in `data` folder.
+
+*Format:* `decrypt`
+
+After your `decrypt` command is executed successfully, you would see a confirmation message below the command bar as shown in _<<fig-SuccessfulDecryptCommand>>_.
+
+[[fig-SuccessfulDecryptCommand]]
+.Successful `decrypt` command made in PTMan +
+image::SuccessfulDecryptCommand.jpg[width="790"]
+
+Open `outletinformation.xm;` file again, now you can read and understand the data stored as shown in _<<fig-Decrypt>>_.
+
+[[fig-Decrypt]]
+.Example of Decrypted `outletinformation.xml` File in `data` Folder +
+image::OutletInformationDecryptedXMLFile.jpg[width="790"]
+// end::outletCommand[]
 
 // tag::shiftmanager[]
 [[Addshift]]

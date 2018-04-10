@@ -74,4 +74,8 @@ public class Date {
     public LocalDate getLocalDate() {
         return date;
     }
+
+    public boolean isOver() {
+        return date.isBefore(LocalDate.now());
+    }
 }
