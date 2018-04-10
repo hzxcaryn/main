@@ -517,9 +517,8 @@ image::Feature_Timetable1.png[width=800]
 ==== Reason for implementation
 
 A timetable is useful for both employers and employees, as it allows them to visualise the shifts and access them via their indexes.
-The timetable also instantly reflects any changes to shifts on the timetable, such as the addition/deletion of a shift, and the application/removal of an employee to/from a shift.
-Furthermore, the timetable can highlight the shifts that a selected employee is assigned to.
-On top of these, users are allowed to export the timetable as an image for future reference. +
+The timetable also instantly reflects any changes to the shifts and allows selected employee's shifts to be highlighted.
+On top of these, users are allowed to export the timetable as an image for future reference.
 All in all, the timetable feature improves user experience and brings convenience to the user.
 
 ==== How it is implemented
@@ -548,6 +547,7 @@ _<<fig-TimetablePanelClassDiagram>>_ below shows a class diagram of the `Timetab
 image::TimetablePanelClassDiagram.png[width="800"]
 
 A `TimetablePanel` is created with its constructor:
+[source,java]
 ----
 public TimetablePanel(Logic logic) {
     // ...
@@ -586,7 +586,7 @@ respond to a `PartTimeManagerChangedEvent`. +
  +
 [[fig-updateTimetableViewSequenceDiagram]]
 .Sequence diagram to update timetable
-image::updateTimetableViewSequenceDiagram.png[width="800"]
+image::updateTimetableViewSequenceDiagram.png[width="750"]
 
 Here are some examples of when `updateTimetableView()` is called: +
 
