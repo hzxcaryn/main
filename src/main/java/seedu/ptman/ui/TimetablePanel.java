@@ -319,7 +319,7 @@ public class TimetablePanel extends UiPart<Region> {
         updateTimetableView();
     }
 
-    private void loadMainTimetable() {
+    private void loadDefaultTimetable() {
         currentEmployee = null;
         logic.setFilteredShiftListToCurrentWeek();
         updateTimetableView();
@@ -435,7 +435,7 @@ public class TimetablePanel extends UiPart<Region> {
             if (event.hasNewSelection()) {
                 loadEmployeeTimetable(event.getNewSelection().employee);
             } else {
-                loadMainTimetable();
+                loadDefaultTimetable();
             }
         });
     }
