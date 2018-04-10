@@ -47,7 +47,6 @@ import seedu.ptman.commons.util.DateUtil;
 import seedu.ptman.logic.Logic;
 import seedu.ptman.model.employee.Email;
 import seedu.ptman.model.employee.Employee;
-import seedu.ptman.model.employee.UniqueEmployeeList;
 import seedu.ptman.model.outlet.OutletInformation;
 import seedu.ptman.model.shift.Shift;
 
