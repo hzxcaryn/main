@@ -566,8 +566,52 @@ Shifts are added to the timetable in the method `setShifts()`.
 * `outletInformation` is an `OutletInformation` object, and is responsible for providing `TimetablePanel` with the operating hours of the outlet.
 The timetable re-scales according to the operating hours of the outlet, in the method `setTimetableRange()`.
 
+===== Updating the timetable
 
-*Viewing of Individual Employee's Shifts*
+The main method in charge of updating the timetable is `updateTimetableView()`.
+When this method is called, the `Label` in the navigation bar is set to show the month that is being displayed
+on the timetable, and the timetable is rebuilt with the newly set shifts and operating hours.
+`updateTimetableView()` is called whenever a `PartTimeManagerChangedEvent`, `TimetableWeekChangeRequestEvent` or `EmployeePanelSelectionChangedEvent` is posted. +
+
+We will use `PartTimeManagerChangedEvent` to illustrate `updateTimetableView()` works.
+_<<fig-updateTimetableViewHighLevelSequenceDiagram>>_ below shows a high level sequence diagram of what happens when a `PartTimeManagerChangedEvent`
+ is posted and how it causes the `UI` to call `updateTimetableView()`. +
+ +
+[[fig-updateTimetableViewHighLevelSequenceDiagram]]
+.Component interactions for a `PartTimeManagerChangedEvent`
+image::updateTimetableViewHighLevelSequenceDiagram.png[width="800"]
+
+_<<fig-updateTimetableViewSequenceDiagram>>_ below shows the sequence diagram of how `TimetablePanel` carries out `updateTimetableView()` to
+respond to a `PartTimeManagerChangedEvent`. +
+ +
+[[fig-updateTimetableViewSequenceDiagram]]
+.Sequence diagram to update timetable
+image::updateTimetableViewSequenceDiagram.png[width="800"]
+
+Here are some examples of when `updateTimetableView()` is called: +
+
+* A `Shift` is added, removed, or altered:
+`PartTimeManagerChangedEvent` is posted which calls `updateTimetableView()` to rebuild the timetable with the changed shifts.
+* `OutletInformation` is edited:
+`PartTimeManagerChangedEvent` is posted which calls `updateTimetableView()` to rebuild the timetable to fit in the updated operating hours.
+* The user wants to navigate the timetable to the next/previous week:
+`TimetableWeekChangeRequestEvent` is posted which calls `navigateToNextWeek()` or `navigateToPreviousWeek()` accordingly.
+Both of these methods call `updateTimetableView()` to rebuild the timetable showing the appropriate weeks.
+* Selection of an employee:
+`EmployeePanelSelectionChangedEvent` is posted which calls `loadEmployeeTimetable` or `loadMainTimetable` accordingly. Both of these
+methods call `updateTimetableView()` to rebuild the timetable with the appropriate colours of the entries.
+
+
+===== Commands
+
+The following are commands that are supported as part of the timetable feature:
+
+. <<Viewing of individual employee's shifts, `SelectCommand`>>: Selects an employee and highlight their shifts on the timetable.
+. <<Returning to main view of timetable , `MainCommand`>>: Returns the timetable back to the default view of the current week.
+. <<Exporting timetable, `ExportCommand`>>: Exports timetable as an image.
+
+
+===== Viewing of individual employee's shifts
 
 PTMan allows employees to highlight their own shifts on the timetable GUI through `SelectCommand`. When a particular employee is
 being selected, an `EmployeePanelSelectionChangedEvent` is posted with the selected employee as the argument to indicate the change. +
@@ -580,7 +624,7 @@ public EmployeePanelSelectionChangedEvent(EmployeeCard newSelection)
 `TimetablePanel` subscribes to this event and handles it by calling the `loadEmployeeTimetable` method for the `newSelection`. +
  +
 
-*Returning to Main View of Timetable GUI*
+===== Returning to main view of timetable
 
 The returning to main timetable view is called through `MainCommand`, which also posts an `EmployeePanelSelectionChangedEvent` event
 with null as the argument.
@@ -588,23 +632,7 @@ with null as the argument.
 `TimetablePanel` subscribes to this event and handles it by calling the `loadMainTimetable` method. +
  +
 
-*Updating of Timetable GUI*
-
-The main method in charge of updating the timetable GUI is the `updateTimetableView()` method. This method is called whenever
-a `PartTimeManagerChangedEvent` or `EmployeePanelSelectionChangedEvent` is posted. +
-
-Here are some examples of how `updateTimetableView()` is called: +
-
-* A `Shift` is added, removed, or altered:
-`PartTimeManagerChangedEvent` is posted which calls `updateTimetableView()` to rebuild the timetable view with the changed shifts.
-* `OutletInformation` is edited:
-`PartTimeManagerChangedEvent` is posted which calls `updateTimetableView()` to rebuild the timetable view to fit in the updated operating hours.
-* Selection of an employee:
-`EmployeePanelSelectionChangedEvent` is posted which calls `loadEmployeeTimetable` or `loadMainTimetable` accordingly. Both of these
-methods call `updateTimetableView()` to rebuild the timetable view with the appropriate `Entry` colors. +
- +
-
-*Exporting Timetable*
+====== Exporting timetable
 
 Exporting of the timetable is triggered by `ExportCommand`, which:
 
@@ -617,7 +645,6 @@ both of which are subscribed to by `TimetablePanel`. +
 How the exporting works is that a Snapshot is first taken of the `timetableView` Node, and then being written into a file locally.
 If `exportTimetableAsImageAndEmail` is called instead of `exportTimetableAsImage`, we will go on further to email this image
 through the `EmailService` class, and then finally delete the local file containing the Snapshot.
-
 
 // end::timetable[]
 
