@@ -24,6 +24,7 @@ import seedu.ptman.logic.commands.ChangePasswordCommand;
 import seedu.ptman.logic.commands.ClearCommand;
 import seedu.ptman.logic.commands.Command;
 import seedu.ptman.logic.commands.DecryptDataCommand;
+import seedu.ptman.logic.commands.DefaultViewCommand;
 import seedu.ptman.logic.commands.DeleteCommand;
 import seedu.ptman.logic.commands.DeleteShiftCommand;
 import seedu.ptman.logic.commands.EditCommand;
@@ -37,7 +38,6 @@ import seedu.ptman.logic.commands.HistoryCommand;
 import seedu.ptman.logic.commands.ListCommand;
 import seedu.ptman.logic.commands.LogInAdminCommand;
 import seedu.ptman.logic.commands.LogOutAdminCommand;
-import seedu.ptman.logic.commands.MainCommand;
 import seedu.ptman.logic.commands.RedoCommand;
 import seedu.ptman.logic.commands.ResetAdminPasswordCommand;
 import seedu.ptman.logic.commands.ResetPasswordCommand;
@@ -125,8 +125,9 @@ public class PartTimeManagerParser {
         case SelectCommand.COMMAND_ALIAS:
             return new SelectCommandParser().parse(arguments);
 
-        case MainCommand.COMMAND_WORD:
-            return new MainCommand();
+        case DefaultViewCommand.COMMAND_WORD:
+        case DefaultViewCommand.COMMAND_ALIAS:
+            return new DefaultViewCommand();
 
         case DeleteCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_ALIAS:

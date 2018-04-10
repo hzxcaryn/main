@@ -8,9 +8,10 @@ import seedu.ptman.commons.events.ui.JumpToListRequestEvent;
 /**
  * Returns back to main timetable view (of current week) in PTMan
  */
-public class MainCommand extends Command {
+public class DefaultViewCommand extends Command {
 
-    public static final String COMMAND_WORD = "main";
+    public static final String COMMAND_WORD = "defaultview";
+    public static final String COMMAND_ALIAS = "dv";
 
     public static final String MESSAGE_SUCCESS = "Showing main timetable view.";
 

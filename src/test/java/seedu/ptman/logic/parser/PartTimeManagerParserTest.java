@@ -32,6 +32,7 @@ import seedu.ptman.logic.commands.ChangeAdminPasswordCommand;
 import seedu.ptman.logic.commands.ChangePasswordCommand;
 import seedu.ptman.logic.commands.ClearCommand;
 import seedu.ptman.logic.commands.DecryptDataCommand;
+import seedu.ptman.logic.commands.DefaultViewCommand;
 import seedu.ptman.logic.commands.DeleteCommand;
 import seedu.ptman.logic.commands.DeleteShiftCommand;
 import seedu.ptman.logic.commands.EditCommand;
@@ -45,7 +46,6 @@ import seedu.ptman.logic.commands.HelpCommand;
 import seedu.ptman.logic.commands.HistoryCommand;
 import seedu.ptman.logic.commands.ListCommand;
 import seedu.ptman.logic.commands.LogOutAdminCommand;
-import seedu.ptman.logic.commands.MainCommand;
 import seedu.ptman.logic.commands.RedoCommand;
 import seedu.ptman.logic.commands.SelectCommand;
 import seedu.ptman.logic.commands.UnapplyCommand;
@@ -369,9 +369,9 @@ public class PartTimeManagerParserTest {
 
     //@@author hzxcaryn
     @Test
-    public void parseCommand_main() throws Exception {
-        assertTrue(parser.parseCommand(MainCommand.COMMAND_WORD) instanceof MainCommand);
-        assertTrue(parser.parseCommand(MainCommand.COMMAND_WORD + " 3") instanceof MainCommand);
+    public void parseCommand_defaultview() throws Exception {
+        assertTrue(parser.parseCommand(DefaultViewCommand.COMMAND_WORD) instanceof DefaultViewCommand);
+        assertTrue(parser.parseCommand(DefaultViewCommand.COMMAND_WORD + " 3") instanceof DefaultViewCommand);
     }
 
     @Test
