@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.ptman.storage.XmlAdaptedShift.MISSING_FIELD_MESSAGE_FORMAT_SHIFT;
-import static seedu.ptman.testutil.TypicalShifts.THURSDAY_AM;
+import static seedu.ptman.testutil.TypicalShifts.SHIFT_THURSDAY_AM;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,19 +27,19 @@ public class XmlEncryptedAdaptedShiftTest {
     private static final String INVALID_CAPACITY = "two";
 
     private static final String VALID_DATE = "01-01-18";
-    private static final String VALID_CAPACITY = THURSDAY_AM.getCapacity().toString();
-    private static final String VALID_START_TIME = THURSDAY_AM.getStartTime().toString();
-    private static final String VALID_END_TIME = THURSDAY_AM.getEndTime().toString();
+    private static final String VALID_CAPACITY = SHIFT_THURSDAY_AM.getCapacity().toString();
+    private static final String VALID_START_TIME = SHIFT_THURSDAY_AM.getStartTime().toString();
+    private static final String VALID_END_TIME = SHIFT_THURSDAY_AM.getEndTime().toString();
 
     private static final List<XmlEncryptedAdaptedEmployee> VALID_EMPLOYEES =
-            THURSDAY_AM.getEmployeeList().stream()
+            SHIFT_THURSDAY_AM.getEmployeeList().stream()
             .map(XmlEncryptedAdaptedEmployee::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validShiftDetails_returnsShift() throws Exception {
-        XmlEncryptedAdaptedShift shift = new XmlEncryptedAdaptedShift(THURSDAY_AM);
-        assertEquals(THURSDAY_AM, shift.toModelType());
+        XmlEncryptedAdaptedShift shift = new XmlEncryptedAdaptedShift(SHIFT_THURSDAY_AM);
+        assertEquals(SHIFT_THURSDAY_AM, shift.toModelType());
     }
 
     @Test
@@ -175,7 +175,7 @@ public class XmlEncryptedAdaptedShiftTest {
     @Test
     public void setAttributesFromSource_validInputs_returnsSameObject() {
         Shift shift = new Shift(new Date(VALID_DATE), new Time(VALID_START_TIME), new Time(VALID_END_TIME),
-                new Capacity(VALID_CAPACITY), THURSDAY_AM.getEmployees());
+                new Capacity(VALID_CAPACITY), SHIFT_THURSDAY_AM.getEmployees());
         XmlEncryptedAdaptedShift xmlAdaptedShift = new XmlEncryptedAdaptedShift();
         XmlEncryptedAdaptedShift sameXmlAdaptedShift = new XmlEncryptedAdaptedShift();
         xmlAdaptedShift.setAttributesFromSource(shift);

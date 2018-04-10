@@ -8,8 +8,8 @@ import static seedu.ptman.commons.util.DateUtil.getNextWeekDate;
 import static seedu.ptman.commons.util.DateUtil.getPrevWeekDate;
 import static seedu.ptman.testutil.EventsUtil.postNow;
 import static seedu.ptman.testutil.TypicalEmployees.ALICE;
-import static seedu.ptman.testutil.TypicalShifts.MONDAY_AM;
-import static seedu.ptman.testutil.TypicalShifts.getTypicalPartTimeManagerWithShiftsWithoutSunday;
+import static seedu.ptman.testutil.TypicalShifts.SHIFT_MONDAY_AM;
+import static seedu.ptman.testutil.TypicalShifts.getTypicalPartTimeManagerWithShifts;
 import static seedu.ptman.ui.TimetablePanel.TIMETABLE_IMAGE_FILE_FORMAT;
 import static seedu.ptman.ui.testutil.GuiTestAssert.assertEntryDisplaysShift;
 
@@ -50,7 +50,7 @@ import seedu.ptman.model.shift.exceptions.DuplicateShiftException;
 public class TimetablePanelTest extends GuiUnitTest {
 
     private static final PartTimeManager TYPICAL_PTMAN =
-            getTypicalPartTimeManagerWithShiftsWithoutSunday();
+            getTypicalPartTimeManagerWithShifts();
     private static final ObservableList<Shift> TYPICAL_SHIFTS = TYPICAL_PTMAN.getShiftList();
     private static final OutletInformation TYPICAL_OUTLET = TYPICAL_PTMAN.getOutletInformation();
 
@@ -100,7 +100,7 @@ public class TimetablePanelTest extends GuiUnitTest {
 
         Model model = new ModelManager(TYPICAL_PTMAN, new UserPrefs(), TYPICAL_OUTLET);
         logic = new LogicManager(model);
-        logic.setFilteredShiftListToCustomWeek(MONDAY_AM.getDate().getLocalDate());
+        logic.setFilteredShiftListToCustomWeek(SHIFT_MONDAY_AM.getDate().getLocalDate());
         timetablePanel = new TimetablePanel(logic);
         timetablePanelHandle = new TimetablePanelHandle(timetablePanel.getRoot());
         uiPartRule.setUiPart(timetablePanel);

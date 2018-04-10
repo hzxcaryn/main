@@ -62,6 +62,12 @@ public class AddShiftCommandIntegrationTest {
         assertCommandFailure(prepareCommand(shift, model), model, AddShiftCommand.MESSAGE_DATE_OVER);
     }
 
+    @Test
+    public void execute_startTimeAfterEndTime_throwsCommandException() {
+        Shift shift = new ShiftBuilder().withStartTime("1000").withEndTime("0800").build();
+        assertCommandFailure(prepareCommand(shift, model), model, AddShiftCommand.MESSAGE_INVALID_TIME);
+    }
+
     /**
      * Generates a new {@code AddShiftCommand} which upon execution, adds {@code shift} into the {@code model}.
      */

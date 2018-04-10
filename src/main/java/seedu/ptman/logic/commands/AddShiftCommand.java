@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 import seedu.ptman.logic.commands.exceptions.CommandException;
 import seedu.ptman.model.shift.Shift;
+import seedu.ptman.model.shift.Time;
 import seedu.ptman.model.shift.exceptions.DuplicateShiftException;
 
 //@@author shanwpf
@@ -38,6 +39,7 @@ public class AddShiftCommand extends UndoableCommand {
     public static final String MESSAGE_SUCCESS = "New shift added: %1$s";
     public static final String MESSAGE_DUPLICATE_SHIFT = "This shift already exists in PTMan";
     public static final String MESSAGE_DATE_OVER = "You cannot add a shift to a date that is already over";
+    public static final String MESSAGE_INVALID_TIME = "The start time of the shift must be before the end time";
 
     private final Shift toAdd;
 
@@ -60,6 +62,12 @@ public class AddShiftCommand extends UndoableCommand {
         LocalDate shiftDate = toAdd.getDate().getLocalDate();
         if (shiftDate.isBefore(LocalDate.now())) {
             throw new CommandException(MESSAGE_DATE_OVER);
+        }
+
+        Time startTime = toAdd.getStartTime();
+        Time endTime = toAdd.getEndTime();
+        if (startTime.isAfter(endTime)) {
+            throw new CommandException(MESSAGE_INVALID_TIME);
         }
 
         try {

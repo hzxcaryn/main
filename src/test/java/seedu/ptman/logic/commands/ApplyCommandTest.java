@@ -4,14 +4,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.ptman.logic.commands.ApplyCommand.MESSAGE_DUPLICATE_EMPLOYEE;
 import static seedu.ptman.logic.commands.ApplyCommand.MESSAGE_SHIFT_FULL;
+import static seedu.ptman.logic.commands.ApplyCommand.MESSAGE_SHIFT_OVER;
 import static seedu.ptman.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ptman.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.ptman.testutil.TypicalEmployees.ALICE;
 import static seedu.ptman.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
 import static seedu.ptman.testutil.TypicalIndexes.INDEX_FIRST_SHIFT;
 import static seedu.ptman.testutil.TypicalIndexes.INDEX_SECOND_EMPLOYEE;
 import static seedu.ptman.testutil.TypicalIndexes.INDEX_SECOND_SHIFT;
-import static seedu.ptman.testutil.TypicalShifts.MONDAY_AM;
 import static seedu.ptman.testutil.TypicalShifts.getTypicalPartTimeManagerWithShifts;
 
 import java.util.Optional;
@@ -65,33 +64,11 @@ public class ApplyCommandTest {
     }
 
     @Test
-    public void execute_userModeEmployeeNotInShift_success() throws Exception {
-        Employee employee = new EmployeeBuilder().build();
-        ApplyCommand applyCommand = prepareCommandWithPassword(INDEX_FIRST_EMPLOYEE, INDEX_FIRST_SHIFT, model);
-
-        String expectedMessage = String.format(ApplyCommand.MESSAGE_APPLY_SHIFT_SUCCESS,
-                employee.getName(), INDEX_FIRST_SHIFT.getOneBased());
-
-        Model expectedModel = new ModelManager(new PartTimeManager(model.getPartTimeManager()), new UserPrefs(),
-                new OutletInformation());
-        expectedModel.setTrueAdminMode(new Password());
-        expectedModel.updateFilteredShiftList(Model.PREDICATE_SHOW_ALL_SHIFTS);
-
-        Shift editedShift = new Shift(MONDAY_AM);
-        editedShift.addEmployee(ALICE);
-        expectedModel.updateShift(model.getFilteredShiftList().get(0), editedShift);
-        assertCommandSuccess(applyCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_userModeNoPassword_throwsMissingPasswordException() throws Exception {
-        Model model = new ModelManager(new PartTimeManager(), new UserPrefs(), new OutletInformation());
-        model.setFalseAdminMode();
-        model.updateFilteredShiftList(Model.PREDICATE_SHOW_ALL_SHIFTS);
         Employee employee = new EmployeeBuilder().withName("Present").build();
         Shift shift = new ShiftBuilder().build();
-        model.addEmployee(employee);
-        model.addShift(shift);
+        Model model = prepareModel(false, shift, employee);
+
         ApplyCommand applyCommand = prepareCommandWithoutPassword(INDEX_FIRST_EMPLOYEE, INDEX_FIRST_SHIFT, model);
         thrown.expect(MissingPasswordException.class);
         applyCommand.execute();
@@ -99,13 +76,10 @@ public class ApplyCommandTest {
 
     @Test
     public void execute_userModeIncorrectPassword_throwsInvalidPasswordException() throws Exception {
-        Model model = new ModelManager(new PartTimeManager(), new UserPrefs(), new OutletInformation());
-        model.setFalseAdminMode();
-        model.updateFilteredShiftList(Model.PREDICATE_SHOW_ALL_SHIFTS);
         Employee employee = new EmployeeBuilder().withName("Present").withPassword("incorrect").build();
         Shift shift = new ShiftBuilder().build();
-        model.addEmployee(employee);
-        model.addShift(shift);
+        Model model = prepareModel(false, shift, employee);
+
         ApplyCommand applyCommand = prepareCommandWithPassword(INDEX_FIRST_EMPLOYEE, INDEX_FIRST_SHIFT, model);
         thrown.expect(InvalidPasswordException.class);
         applyCommand.execute();
@@ -113,23 +87,16 @@ public class ApplyCommandTest {
 
     @Test
     public void execute_adminModeEmployeeNotInShift_success() throws Exception {
-        Model model = new ModelManager(new PartTimeManager(), new UserPrefs(), new OutletInformation());
-        Model expectedModel = new ModelManager(new PartTimeManager(), new UserPrefs(), new OutletInformation());
-        model.updateFilteredShiftList(Model.PREDICATE_SHOW_ALL_SHIFTS);
-        expectedModel.updateFilteredShiftList(Model.PREDICATE_SHOW_ALL_SHIFTS);
-        model.setTrueAdminMode(new Password());
-        expectedModel.setTrueAdminMode(new Password());
         Employee employee = new EmployeeBuilder().withName("Present").build();
         Employee expectedEmployee = new EmployeeBuilder().withName("Present").build();
         Shift shift = new ShiftBuilder().build();
         Shift expectedShift = new ShiftBuilder().build();
-        model.addEmployee(employee);
-        model.addShift(shift);
         expectedShift.addEmployee(expectedEmployee);
-        expectedModel.addShift(expectedShift);
-        expectedModel.addEmployee(expectedEmployee);
-        ApplyCommand applyCommand = prepareCommandWithoutPassword(INDEX_FIRST_EMPLOYEE, INDEX_FIRST_SHIFT, model);
 
+        Model model = prepareModel(true, shift, employee);
+        Model expectedModel = prepareModel(true, expectedShift, expectedEmployee);
+
+        ApplyCommand applyCommand = prepareCommandWithoutPassword(INDEX_FIRST_EMPLOYEE, INDEX_FIRST_SHIFT, model);
         String expectedMessage =
                 String.format(ApplyCommand.MESSAGE_APPLY_SHIFT_SUCCESS, expectedEmployee.getName(), 1);
 
@@ -138,16 +105,13 @@ public class ApplyCommandTest {
 
     @Test
     public void execute_shiftFull_throwsCommandException()
-            throws ShiftFullException, DuplicateEmployeeException, DuplicateShiftException {
-        Model model = new ModelManager();
-        model.updateFilteredShiftList(Model.PREDICATE_SHOW_ALL_SHIFTS);
+            throws ShiftFullException, DuplicateEmployeeException {
         Employee employee1 = new EmployeeBuilder().withName("first").build();
         Employee employee2 = new EmployeeBuilder().withName("second").build();
         Shift shift = new ShiftBuilder().withCapacity("1").build();
         shift.addEmployee(employee1);
-        model.addEmployee(employee1);
-        model.addEmployee(employee2);
-        model.addShift(shift);
+        Model model = prepareModel(false, shift, employee1, employee2);
+
         String expectedMessage = String.format(MESSAGE_SHIFT_FULL, INDEX_FIRST_SHIFT.getOneBased());
         ApplyCommand applyCommand = prepareCommandWithPassword(INDEX_SECOND_EMPLOYEE, INDEX_FIRST_SHIFT, model);
         assertCommandFailure(applyCommand, model, expectedMessage);
@@ -155,18 +119,26 @@ public class ApplyCommandTest {
 
     @Test
     public void execute_duplicateEmployee_throwsCommandException()
-            throws ShiftFullException, DuplicateEmployeeException, DuplicateShiftException {
-        Model model = new ModelManager();
-        model.updateFilteredShiftList(Model.PREDICATE_SHOW_ALL_SHIFTS);
+            throws ShiftFullException, DuplicateEmployeeException {
         Employee employee1 = new EmployeeBuilder().withName("first").build();
         Shift shift = new ShiftBuilder().withCapacity("2").build();
         shift.addEmployee(employee1);
-        model.addEmployee(employee1);
-        model.addShift(shift);
+        Model model = prepareModel(false, shift, employee1);
+
         ApplyCommand applyCommand = prepareCommandWithPassword(INDEX_FIRST_EMPLOYEE, INDEX_FIRST_SHIFT, model);
         assertCommandFailure(applyCommand, model, MESSAGE_DUPLICATE_EMPLOYEE);
     }
 
+    @Test
+    public void execute_shiftOver_throwsCommandException() {
+        Shift shift = new ShiftBuilder().withDate("01-01-10").withCapacity("3").build();
+        Employee employee = new EmployeeBuilder().build();
+        Model model = prepareModel(false, shift, employee);
+
+        String expectedMessage = String.format(MESSAGE_SHIFT_OVER, INDEX_FIRST_SHIFT.getOneBased());
+        ApplyCommand applyCommand = prepareCommandWithPassword(INDEX_FIRST_EMPLOYEE, INDEX_FIRST_SHIFT, model);
+        assertCommandFailure(applyCommand, model, expectedMessage);
+    }
 
     @Test
     public void equals_sameObject_returnsTrue() {
@@ -251,5 +223,30 @@ public class ApplyCommandTest {
         ApplyCommand applyCommand = new ApplyCommand(employeeIndex, shiftIndex, Optional.empty());
         applyCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return applyCommand;
+    }
+
+    /**
+     * Returns a {@Code Model} with parameters {@code shift} and {@code employees}.
+     */
+    private Model prepareModel(boolean isAdmin, Shift shift, Employee... employees) {
+        Model model = new ModelManager(new PartTimeManager(), new UserPrefs(), new OutletInformation());
+        if (isAdmin) {
+            model.setTrueAdminMode(new Password());
+        } else {
+            model.setFalseAdminMode();
+        }
+        model.updateFilteredShiftList(Model.PREDICATE_SHOW_ALL_SHIFTS);
+
+        try {
+            model.addShift(shift);
+            for (final Employee employee: employees) {
+                model.addEmployee(employee);
+            }
+        } catch (DuplicateShiftException e) {
+            throw new AssertionError("Shift should not be a duplicate");
+        } catch (DuplicateEmployeeException e) {
+            throw new AssertionError("Employees should not be duplicates");
+        }
+        return model;
     }
 }

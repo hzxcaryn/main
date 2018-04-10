@@ -8,9 +8,10 @@ import static seedu.ptman.testutil.TypicalIndexes.INDEX_FIRST_SHIFT;
 import static seedu.ptman.testutil.TypicalIndexes.INDEX_OUT_OF_BOUNDS_SHIFT;
 import static seedu.ptman.testutil.TypicalIndexes.INDEX_SECOND_SHIFT;
 import static seedu.ptman.testutil.TypicalIndexes.INDEX_SEVENTH_SHIFT;
-import static seedu.ptman.testutil.TypicalShifts.MONDAY_AM;
-import static seedu.ptman.testutil.TypicalShifts.MONDAY_PM;
-import static seedu.ptman.testutil.TypicalShifts.THURSDAY_PM;
+import static seedu.ptman.testutil.TypicalShifts.SHIFT_MONDAY_AM;
+import static seedu.ptman.testutil.TypicalShifts.SHIFT_MONDAY_PM;
+import static seedu.ptman.testutil.TypicalShifts.SHIFT_THURSDAY_PM;
+import static seedu.ptman.testutil.TypicalShifts.getTypicalPartTimeManagerWithShifts;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,11 +24,9 @@ import seedu.ptman.logic.UndoRedoStack;
 import seedu.ptman.logic.commands.exceptions.CommandException;
 import seedu.ptman.model.Model;
 import seedu.ptman.model.ModelManager;
-import seedu.ptman.model.PartTimeManager;
 import seedu.ptman.model.UserPrefs;
 import seedu.ptman.model.employee.Employee;
 import seedu.ptman.model.outlet.OutletInformation;
-import seedu.ptman.testutil.TypicalShifts;
 
 //@@author hzxcaryn
 /**
@@ -39,9 +38,9 @@ public class ViewShiftCommandTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(new PartTimeManager(TypicalShifts.getTypicalPartTimeManagerWithShifts()),
+        model = new ModelManager(getTypicalPartTimeManagerWithShifts(),
                 new UserPrefs(), new OutletInformation());
-        model.setFilteredShiftListToWeek(MONDAY_AM.getDate().getLocalDate());
+        model.setFilteredShiftListToWeek(SHIFT_MONDAY_AM.getDate().getLocalDate());
     }
 
     @Test
@@ -53,12 +52,13 @@ public class ViewShiftCommandTest {
 
     @Test
     public void execute_validIndexShiftWithEmployees_success() {
-        assertExecutionSuccess(INDEX_SEVENTH_SHIFT, THURSDAY_PM.getEmployeeList().sorted()); //8th Shift has employees
+        assertExecutionSuccess(INDEX_SEVENTH_SHIFT,
+                SHIFT_THURSDAY_PM.getEmployeeList().sorted()); //8th Shift has employees
     }
 
     @Test
     public void execute_validIndexShiftWithoutEmployees_success() {
-        assertExecutionSuccess(INDEX_SECOND_SHIFT, MONDAY_PM.getEmployeeList());
+        assertExecutionSuccess(INDEX_SECOND_SHIFT, SHIFT_MONDAY_PM.getEmployeeList());
     }
 
     @Test
