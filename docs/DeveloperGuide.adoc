@@ -624,9 +624,9 @@ public EmployeePanelSelectionChangedEvent(EmployeeCard newSelection)
 `TimetablePanel` subscribes to this event and handles it by calling the `loadEmployeeTimetable` method for the `newSelection`. +
  +
 
-===== Returning to main view of timetable
+===== Returning to default view of timetable
 
-The returning to main timetable view is called through `MainCommand`, which also posts an `EmployeePanelSelectionChangedEvent` event
+The returning to default timetable view is called through `DefaultViewCommand`, which also posts an `EmployeePanelSelectionChangedEvent` event
 with null as the argument.
 
 `TimetablePanel` subscribes to this event and handles it by calling the `loadMainTimetable` method. +
