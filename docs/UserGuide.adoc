@@ -789,7 +789,7 @@ Refer to <<Displaying the default timetable: `defaultview`>> for more informatio
 [[Dv]]
 ==== Displaying the default timetable: `defaultview`
 
-Displays the default view of the timetable. The timetable display the current week without any employee selected.
+Displays the default view of the timetable, which shows the current week without any employee selected.
 Useful for users to navigate back to the default timetable after using the `select` command, or when they have lost track of
 where they have navigated the timetable week to. +
 
