@@ -768,7 +768,7 @@ Displays the shifts of the selected employee on the timetable view. Shifts appli
  in blue, while the other shifts would be displayed in brown. +
 
 *Format:* `select EMPLOYEE_INDEX` +
-*Shorthand:* `s EMPLOYEE_INDEX`
+*Shorthand:* `sel EMPLOYEE_INDEX`
 
 // TODO: SCREENSHOT
 Examples:
@@ -787,14 +787,14 @@ To stop displaying the employee's shifts on the timetable, use the `defaultview`
 Refer to <<Displaying the default timetable: `defaultview`>> for more information.
 
 [[Dv]]
-==== Displaying the default timetable: `defaultview`
+==== Deselecting an employee: `deselect`
 
-Displays the default view of the timetable, which shows the current week without any employee selected.
+Displays the timetable without any employee selected.
 Useful for users to navigate back to the default timetable after using the `select` command, or when they have lost track of
 where they have navigated the timetable week to. +
 
-*Format:* `defaultview`
-*Shorthand:* `dv`
+*Format:* `deselect`
+*Shorthand:* `dsel`
 
 [[Export]]
 ==== Exporting the timetable as image: `export`

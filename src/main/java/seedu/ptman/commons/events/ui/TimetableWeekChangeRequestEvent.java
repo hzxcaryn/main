@@ -6,13 +6,23 @@ import seedu.ptman.commons.events.BaseEvent;
  * Indicates a request to change the timetable view to the next or previous week.
  */
 public class TimetableWeekChangeRequestEvent extends BaseEvent {
+    /**
+     * This represents the different
+     */
+    public enum WeekChangeRequest {
+        NEXT,
+        PREVIOUS,
+        CURRENT
+    }
 
-    public final boolean isNext;
-    public final boolean isPrev;
+    private WeekChangeRequest request;
 
-    public TimetableWeekChangeRequestEvent(boolean isNext, boolean isPrev) {
-        this.isNext = isNext;
-        this.isPrev = isPrev;
+    public TimetableWeekChangeRequestEvent(WeekChangeRequest request) {
+        this.request = request;
+    }
+
+    public WeekChangeRequest getRequest() {
+        return request;
     }
 
     @Override
