@@ -109,6 +109,7 @@ If you are an employee, PTMan gives you flexibility in your working hours by all
 
 You are able to view shifts that are in PTMan via the <<Timetable, timetable>>.
 
+// tag::timetableIntro[]
 === Timetable
 PTMan has a timetable that displays all the shifts in a weekly format. There are many interactions between the
 timetable and you, as a user, so this section aims to familiarise you with the timetable.
@@ -143,11 +144,13 @@ There are two ways to navigate through the different weeks in the timetable:
 . Using Keyboard Shortcuts
 +
 * For Windows:
-** kbd:[Ctrl] + kbd:[Shift] + kbd:[->] : Navigates timetable to the next week.
-** kbd:[Ctrl] + kbd:[Shift] + kbd:[<-] : Navigates timetable to the previous week.
+** kbd:[Ctrl] + kbd:[Shift] + kbd:[→] : Navigates timetable to the next week.
+** kbd:[Ctrl] + kbd:[Shift] + kbd:[←] : Navigates timetable to the previous week.
+** kbd:[Ctrl] + kbd:[Shift] + kbd:[↓] : Navigates timetable to the current week.
 * For Mac:
-** kbd:[Command] + kbd:[Shift] + kbd:[->] : Navigates timetable to the next week.
-** kbd:[Command] + kbd:[Shift] + kbd:[<-] : Navigates timetable to the previous week.
+** kbd:[Command] + kbd:[Shift] + kbd:[→] : Navigates timetable to the next week.
+** kbd:[Command] + kbd:[Shift] + kbd:[←] : Navigates timetable to the previous week.
+** kbd:[Command] + kbd:[Shift] + kbd:[↓] : Navigates timetable to the current week.
 . Using Mouse Clicks
 +
 * At the top of the timetable, there is a navigation bar with two arrow buttons which you can click on.
@@ -157,7 +160,7 @@ _<<fig-Feature_Timetable3>>_ below shows the navigation bar, with the two arrow 
 [[fig-Feature_Timetable3]]
 .Navigation Bar of Timetable +
 image::Feature_Timetable3.png[width="790"]
-
+// end::timetableIntro[]
 
 
 === Saving the Data
