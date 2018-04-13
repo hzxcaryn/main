@@ -206,11 +206,11 @@ public class MainWindow extends UiPart<Stage> {
             if (keyCtrlShiftLeft.match(event)) {
                 event.consume();
                 logger.fine("Timetable view requested to display the previous week.");
-                raise(new TimetableWeekChangeRequestEvent(TimetableWeekChangeRequestEvent.WeekChangeRequest.NEXT));
+                raise(new TimetableWeekChangeRequestEvent(TimetableWeekChangeRequestEvent.WeekChangeRequest.PREVIOUS));
             } else if (keyCtrlShiftRight.match(event)) {
                 event.consume();
                 logger.fine("Timetable view requested to display the next week.");
-                raise(new TimetableWeekChangeRequestEvent(TimetableWeekChangeRequestEvent.WeekChangeRequest.PREVIOUS));
+                raise(new TimetableWeekChangeRequestEvent(TimetableWeekChangeRequestEvent.WeekChangeRequest.NEXT));
             } else if (keyCtrlShiftDown.match(event)) {
                 event.consume();
                 logger.fine("Timetable view requested to display the current week.");
