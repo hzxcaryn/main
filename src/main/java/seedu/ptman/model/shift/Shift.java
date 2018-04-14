@@ -70,6 +70,20 @@ public class Shift {
     }
 
     /**
+     * Adds an employee to this shift
+     * @throws DuplicateEmployeeException
+     * @throws ShiftFullException
+     */
+    public void addEmployee(Employee... employees) throws DuplicateEmployeeException, ShiftFullException {
+        if (this.isFull()) {
+            throw new ShiftFullException();
+        }
+        for (Employee employee : employees) {
+            uniqueEmployeeList.add(employee);
+        }
+    }
+
+    /**
      * Removes an employee from this shift
      * @throws EmployeeNotFoundException
      */

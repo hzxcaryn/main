@@ -1,19 +1,29 @@
 package systemtests;
 
+import static org.junit.Assert.assertEquals;
+import static seedu.ptman.model.Model.PREDICATE_SHOW_ALL_SHIFTS;
+import static seedu.ptman.model.util.SampleDataUtil.NUM_SHIFTS_CURR_WEEK;
+import static seedu.ptman.model.util.SampleDataUtil.NUM_SHIFTS_NEXT_WEEK;
+import static seedu.ptman.model.util.SampleDataUtil.NUM_SHIFTS_PREV_WEEK;
+import static seedu.ptman.ui.testutil.GuiTestAssert.assertEntryDisplaysShift;
 import static seedu.ptman.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import javafx.collections.ObservableList;
 import org.junit.Test;
 
+import seedu.ptman.model.Model;
 import seedu.ptman.model.PartTimeManager;
 import seedu.ptman.model.employee.Employee;
+import seedu.ptman.model.shift.Shift;
 import seedu.ptman.model.util.SampleDataUtil;
 import seedu.ptman.testutil.TestUtil;
 
 public class SampleDataTest extends PartTimeManagerSystemTest {
+
     /**
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.
      */
@@ -45,7 +55,13 @@ public class SampleDataTest extends PartTimeManagerSystemTest {
 
     @Test
     public void partTimeManager_dataFileDoesNotExist_loadSampleData() {
-        Employee[] expectedList = SampleDataUtil.getSampleEmployees();
-        assertListMatching(getEmployeeListPanel(), expectedList);
+        Employee[] expectedEmployeeList = SampleDataUtil.getSampleEmployees();
+        assertListMatching(getEmployeeListPanel(), expectedEmployeeList);
+
+        Shift[] expectedShiftList = SampleDataUtil.getSampleShifts();
+        Model model = getModel();
+        model.updateFilteredShiftList(PREDICATE_SHOW_ALL_SHIFTS);
+        ObservableList<Shift> actualShiftList = model.getFilteredShiftList();
+        assertEquals(expectedShiftList, actualShiftList.toArray());
     }
 }
