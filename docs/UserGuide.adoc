@@ -44,7 +44,7 @@ This app will not work with earlier versions of Java 8.
 +
 [[fig-Startup]]
 .Successful start up window
-image::Ui_startup.png[width="790"]
+image::Ui.png[width="790"]
 .  Type a command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
@@ -56,9 +56,34 @@ If you are a manager, you have access to <<Admin Mode, admin mode>>. Admin mode 
 To prevent unauthorized access, please change your default admin mode password using the `changeadminpw` command.
 You may refer to <<Cap>> for instructions on how to do so.
 
+// tag::guiWalkthrough[]
+== Graphical User Interface
+
+This section will help you understand the different sections of PTMan's Graphical User Interface(GUI).
+
+_<<fig-GUIwalkthrough>>_ below shows a typical PTMan GUI with its different sections highlighted and labelled.
+
+[[fig-GUIwalkthrough]]
+.Typical PTMan with UI Sections Highlighted +
+image::GUIwalkthrough.png[width="790"]
+
+Following the labels in _<<fig-GUIwalkthrough>>_, here are what the different sections are responsible for.
+
+[width=100%, cols="1,4,20"]
+|=======================================================================
+|Label |Name |What it is for
+
+|1 |Command Box |Allows you to type in your commands into PTMan.
+|2 |Result Display |Shows the resulting feedback from your most recent command.
+|3 |Outlet Display |Displays all your outlet details.
+|4 |Timetable Panel |Displays the weekly timetable containing all the shifts stored in PTMan.
+|5 |Employee List Panel |Shows a list of all the part-time employees stored in PTMan.
+|=======================================================================
+// end::guiWalkthrough[]
+
 [[Features]]
 == Features
-In this section, we will be introduce you to the various features of PTMan.
+In this section, we will be introducing you to the various features of PTMan.
 
 === User Authentication
 PTMan has user authentication for both managers and employees to prevent unauthorized execution of <<Commands, commands>>.
