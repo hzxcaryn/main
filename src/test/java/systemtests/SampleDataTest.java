@@ -2,19 +2,15 @@ package systemtests;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.ptman.model.Model.PREDICATE_SHOW_ALL_SHIFTS;
-import static seedu.ptman.model.util.SampleDataUtil.NUM_SHIFTS_CURR_WEEK;
-import static seedu.ptman.model.util.SampleDataUtil.NUM_SHIFTS_NEXT_WEEK;
-import static seedu.ptman.model.util.SampleDataUtil.NUM_SHIFTS_PREV_WEEK;
-import static seedu.ptman.ui.testutil.GuiTestAssert.assertEntryDisplaysShift;
 import static seedu.ptman.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import javafx.collections.ObservableList;
 import org.junit.Test;
 
+import javafx.collections.ObservableList;
 import seedu.ptman.model.Model;
 import seedu.ptman.model.PartTimeManager;
 import seedu.ptman.model.employee.Employee;

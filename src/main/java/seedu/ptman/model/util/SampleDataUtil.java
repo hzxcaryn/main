@@ -111,32 +111,32 @@ public class SampleDataUtil {
         return new Shift[] {
             // Build shifts for previous week
             new Shift(new Date(mondayDateOfPrevWeek.plusDays(1)), new Time("0900"), new Time("1600"),
-                    new Capacity("3")),
+                new Capacity("3")),
             new Shift(new Date(mondayDateOfPrevWeek.plusDays(2)), new Time("1500"), new Time("2200"),
-                    new Capacity("1")),
+                new Capacity("1")),
             new Shift(new Date(mondayDateOfPrevWeek.plusDays(4)), new Time("1000"), new Time("1600"),
-                    new Capacity("5")),
+                new Capacity("5")),
             new Shift(new Date(mondayDateOfPrevWeek.plusDays(5)), new Time("1100"), new Time("1900"),
-                    new Capacity("2")),
+                new Capacity("2")),
 
-             // Build shifts for current week
-             new Shift(new Date(mondayDateOfCurrWeek), new Time("1500"), new Time("2200"), new Capacity("1")),
-             new Shift(new Date(mondayDateOfCurrWeek.plusDays(1)), new Time("0900"), new Time("1600"),
-                     new Capacity("5")),
-             new Shift(new Date(mondayDateOfCurrWeek.plusDays(2)), new Time("1000"), new Time("1700"),
-                     new Capacity("3")),
-             new Shift(new Date(mondayDateOfCurrWeek.plusDays(4)), new Time("0900"), new Time("1700"),
-                     new Capacity("3")),
+            // Build shifts for current week
+            new Shift(new Date(mondayDateOfCurrWeek), new Time("1500"), new Time("2200"), new Capacity("1")),
+            new Shift(new Date(mondayDateOfCurrWeek.plusDays(1)), new Time("0900"), new Time("1600"),
+                new Capacity("5")),
+            new Shift(new Date(mondayDateOfCurrWeek.plusDays(2)), new Time("1000"), new Time("1700"),
+                new Capacity("3")),
+            new Shift(new Date(mondayDateOfCurrWeek.plusDays(4)), new Time("0900"), new Time("1700"),
+                new Capacity("3")),
 
-             // Build shifts for next week
-             new Shift(new Date(mondayDateOfNextWeek.plusDays(2)), new Time("1100"), new Time("1900"),
-                     new Capacity("2")),
-             new Shift(new Date(mondayDateOfNextWeek.plusDays(3)), new Time("0900"), new Time("1600"),
-                     new Capacity("5")),
-             new Shift(new Date(mondayDateOfNextWeek.plusDays(5)), new Time("1500"), new Time("2200"),
-                     new Capacity("3")),
-             new Shift(new Date(mondayDateOfNextWeek.plusDays(6)), new Time("1200"), new Time("1900"),
-                     new Capacity("5"))
+            // Build shifts for next week
+            new Shift(new Date(mondayDateOfNextWeek.plusDays(2)), new Time("1100"), new Time("1900"),
+                new Capacity("2")),
+            new Shift(new Date(mondayDateOfNextWeek.plusDays(3)), new Time("0900"), new Time("1600"),
+                new Capacity("5")),
+            new Shift(new Date(mondayDateOfNextWeek.plusDays(5)), new Time("1500"), new Time("2200"),
+                new Capacity("3")),
+            new Shift(new Date(mondayDateOfNextWeek.plusDays(6)), new Time("1200"), new Time("1900"),
+                new Capacity("5"))
         };
 
     }
