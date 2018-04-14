@@ -304,6 +304,7 @@ Guided Example:
 
 * To change the password from `DEFAULT1` to `hunter2`, type: `changeadminpw pw/DEFAULT1 pw/hunter22 pw/hunter22`.
 The passwords will be masked by asterisks as shown in _<<fig-changingAdminPassword>>_.
++
 [[fig-changingAdminPassword]]
 .Changing Admin Password in PTMan +
 image::changingAdminPassword.png[width="790"]
@@ -322,7 +323,7 @@ You must key in the current and new password in the correct sequence as given in
 ==== Resetting the admin password: `resetadminpw`
 
 Resets the password to enter <<Admin mode, admin mode>> and sends a randomly generated password to the outlet's email address. +
-You may use the new password to login to admin mode to change the password.
+You may use the new password to login and change to your preferred password.
 
 *Format:* `resetadminpw` +
 *Shorthand:* `rap`
@@ -360,55 +361,46 @@ An employee can have any number of tags (including 0)
 
 Guided Example:
 
-. We have an employee *John Doe* with phone number *98765432*, email address *johnd@example.com*, and stays in *311, Clementi Ave 2, #02-25*.
-He has earned *$0* so far, and takes the role of a *Barista* and a *Cashier*. +
-To add John Doe into PTMan, we can do the following as illustrated in _<<fig-Add1>>_.
+* To add an employee into PTMan, key in the following as illustrated in _<<fig-Add1>>_.
 +
 [[fig-Add1]]
-.Example of `add` command usage +
+.Adding an Employee into PTMan +
 image::Ui_add1.png[width="790"]
 
-. Click kbd:[Enter] and you would see a confirmation message below the command bar, and John Doe being added into your Employee list.
+* Upon successful addition of the employee, you will see a confirmation message in the result display, and the employee being added into your Employee list.
 _<<fig-Add2>>_ shows how PTMan should look like after the above command.
-
 +
-
 [[fig-Add2]]
-.Successful addition of employee into PTMan +
+.Successful Addition of Employee into PTMan +
 image::Ui_add2.png[width="790"]
-
-
-More Examples:
-
-* To add an employee named `John Doe` with phone number `98765432`, address `John street, block 123, #01-01`, and salary of $`0`, type: +
-`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/0`  +
-* To add an employee named `Betsy Crowe` with email `betsycrowe@example.com`, address `Newgate Prison`, phone number `1234567`, and salary of $`100`, type: +
-`add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 s/100`
 
 
 // tag::accessControl[]
 
 [[AddSalary]]
 ==== Adding salary to an employee: `addsalary`
-Adds an existing employee's salary by an amount.
 
-*Format:* `addsalary INDEX s/SALARY_INCREASE_BY` +
-*Shorthand:* `adds` `INDEX s/SALARY_INCREASE_BY`
+Adds a specified amount to an employee's salary.
 
-You can increase an employer salary by an amount as shown below in  _<<fig-addingSalary>>_.
+*Format:* `addsalary EMPLOYEE_INDEX s/AMOUNT_TO_ADD` +
+*Shorthand:* `adds EMPLOYEE_INDEX s/AMOUNT_TO_ADD`
 
+Guided Example:
+
+* To increase the first employee's salary by $100, key in the command as shown below in _<<fig-addingSalary>>_.
++
 [[fig-addingSalary]]
-.Adding salary for employee in PTMan +
+.Adding Salary for Employee in PTMan +
 image::addingSalary.png[width="790"]
 
-After you executed the command, you will see the result from the result display and the applied salary as shown in _<<fig-addSalarySuccess>>_.
+* Upon successful execution of the command, you will see a confirmation message in the result display and the applied salary as shown in _<<fig-addSalarySuccess>>_.
 
 [[fig-addSalarySuccess]]
-.Added salary for employee in PTMan +
+.Successful Addition of Salary for Employee in PTMan +
 image::addSalarySuccess.png[width="790"]
 
 [NOTE]
-An employee's salary can not be deducted from using this command.
+Employee's salary cannot be deducted using this command.
 
 // end::accessControl[]
 
@@ -417,22 +409,37 @@ An employee's salary can not be deducted from using this command.
 
 Edits an existing employee in PTMan. +
 
-*Format:* `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [t/TAG]...` +
-*Shorthand:* `e INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [t/TAG]...`
+*Format:* `edit EMPLOYEE_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [t/TAG]...` +
+*Shorthand:* `e EMPLOYEE_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [t/TAG]...`
 
 [NOTE]
 An employee's password can only be edited by the employee. +
 
 ****
-* Edits the employee at the specified `INDEX`. The index refers to the index number shown in the last employee listing. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the employee at the specified `EMPLOYEE_INDEX`. The index refers to the index number shown in the last employee listing. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the employee will be removed i.e adding of tags is not cumulative.
 * You can remove all the employee's tags by typing `t/` without specifying any tags after it.
 ****
 
-// TODO: SCREENSHOT BEFORE + AFTER
-Examples:
+Guided Example:
+
+* To edit the first employee's email and tags, key in the following as illustrated in _<<fig-Ui_edit1>>_.
++
+[[fig-Ui_edit1]]
+.Editing Employee Details in PTMan +
+image::Ui_edit1.png[width="790"]
+
+* Upon successful execution of the command, you will see a confirmation message in the result display, and the edited details of the employee as shown in _<<fig-Ui_edit2>>_.
++
+[[fig-Ui_edit2]]
+.Successful Edit of Employee Details in PTMan +
+image::Ui_edit2.png[width="790"]
+
+
+// TODO: SCREENSHOT BEFORE + AFTER?
+More Examples:
 
 * To edit the phone number and email address of the employee `1` to be `91234567` and `johndoe@example.com` respectively, type: +
 `edit 1 p/91234567 e/johndoe@example.com` +
@@ -448,18 +455,39 @@ Deletes the specified employee from PTMan. +
 *Shorthand:* `d EMPLOYEE_INDEX`
 
 ****
-* The employee will be deleted at the specified INDEX.
-* The INDEX refers to the index number shown in the most recent listing.
-* The INDEX *must be a positive integer* 1, 2, 3, ...
+* The employee will be deleted at the specified EMPLOYEE_INDEX.
+* The EMPLOYEE_INDEX refers to the index number shown in the most recent employee listing.
+* The EMPLOYEE_INDEX *must be a positive integer* 1, 2, 3, ...
 ****
 
-Examples:
+Guided Example:
 
-* To delete employee `2`, type: +
-`delete 2` +
-* To delete employee `1` from the results of the `find` command, type: +
+* To delete the first employee from PTMan, key in the following as illustrated in _<<fig-Ui_delete1>>_.
++
+[[fig-Ui_delete1]]
+.Editing Employee Details in PTMan +
+image::Ui_delete1.png[width="790"]
+
+* _<<fig-Ui_delete2>>_ shows the employee list panel before the `delete` command is carried out.
++
+[[fig-Ui_delete2]]
+.Editing Employee Details in PTMan +
+image::Ui_delete2.png[width="300"]
+
+* Upon successful deletion, you will see a confirmation message in the result display and the employee being deleted from the employee list panel as shown in _<<fig-Ui_delete3>>_.
++
+[[fig-Ui_delete3]]
+.Successful Edit of Employee Details in PTMan +
+image::Ui_delete3.png[width="790"]
+
+More Examples:
+
+* To delete employee `1` from the results of the <<Find, `find`>> command, type: +
 `find Betsy` +
 `delete 1` +
+* To delete employee `2` from the results of the <<Viewshift, `viewshift`>> command type: +
+`viewshift SHIFT_INDEX`
+`delete 2` +
 
 [[Clear]]
 ==== Clearing all entries : `clear`
@@ -533,7 +561,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Edits the outlet information. +
 
 *Format:* `editoutlet n/OUTLET_NAME h/OPERATING_HOURS c/CONTACT_NUMBER e/EMAIL`  +
-*Shorthand:* `eo`
+*Shorthand:* `eo n/OUTLET_NAME h/OPERATING_HOURS c/CONTACT_NUMBER e/EMAIL`
 ****
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -543,35 +571,33 @@ Edits the outlet information. +
 [IMPORTANT]
 Ensure that the outlet email is valid as it will be used to reset the admin password should you forget it.
 
-Examples:
+Guided Example:
 
-. When you first start using PTMan, your outlet information will be default values as shown in _<<fig-DefaultOutlet>>_.
-+
-[[fig-DefaultOutlet]]
-.Default Outlet Information +
-image::DefaultOutlet.jpg[width="790"]
-
-. In the admin mode, you can edit the name, operating hours, contact number, and email of the outlet to be `AwesomeCoffee`, `10am to 11pm`, `98134086`, and `awesomecoffee@gmail.com` respectively, by typing: +
-`editoutlet n/AwesomeCoffee h/1000-2300 c/98134086 e/awesomecoffee@gmail.com`. +
-You can refer to _<<fig-Edit1>>_.
+* To edit the name, operating hours, contact number, and email of the outlet, key in the following as shown in _<<fig-Edit1>>_.
 +
 [[fig-Edit1]]
-.Example of `editoutlet` command usage +
+.Editing Outlet Information in PTMan +
 image::Ui_editoutlet1.png[width="790"]
 
-. Press kbd:[Enter] and you would see a confirmation message below the command bar, and the changes applied to the outlet information.
+* Upon successful execution of the command, you would see a confirmation message below the command bar, and the changes applied to the outlet information.
 _<<fig-Edit2>>_ shows how PTMan should look like after the above command.
 +
 [[fig-Edit2]]
-.Successful editing of outlet information in PTMan +
+.Successful Edit of Outlet Information in PTMan +
 image::Ui_editoutlet2.png[width="600"]
 
-. To only edit the name and contact number to be `Nice Dim Sum` and `901234567` respectively, you can type: `editoutlet n/Nice Dim Sum c/901234567`.
-You will see changes as shown in _<<fig-Edit3>>_.
+* To edit only the name and contact number, key in the following as shown in _<<fig-Edit3>>_
 +
 [[fig-Edit3]]
-.Successful editing of outlet information in PTMan +
-image::Ui_editoutlet3.png[width="600"]
+.Editing Selective Outlet Information in PTMan +
+image::Ui_editoutlet3.png[width="790"]
+
+* Upon successful execution of the command, a confirmation message will be displayed in the result display, and changes will be applied to the outlet information.
+  _<<fig-Edit4>>_ shows how PTMan should look like after the above command.
++
+[[fig-Edit4]]
+.Successful Edit of Selective Outlet Information in PTMan +
+image::Ui_editoutlet4.png[width="600"]
 
 [[Announcement]]
 ==== Creating an announcement: `announcement`
@@ -580,43 +606,46 @@ Sets an announcement for the outlet. +
 *Format:* `announcement ANNOUNCEMENT_MESSAGE` +
 *Shorthand:* `announce`
 
-Examples:
+Guided Example:
 
-. You can leave a note for your employees by making an announcement in PTMan. You can type the following command as illustrated in _<<fig-Announce1>>_.
+* To make an announcement in PTMan, type the following command as illustrated in _<<fig-Announce1>>_.
 +
 [[fig-Announce1]]
-.Example of `announce` command usage +
+.Making an Announcement in PTMan +
 image::Ui_announcement1.png[width="790"]
 
-. Click kbd:[Enter] and you would see a confirmation message below the command bar, and the changes applied to the announcement.
+* When a successful announcement is made, a confirmation message will be displayed in the result display, and the changes will  be applied to the announcement.
 _<<fig-Announce2>>_ shows how PTMan should look like after the above command.
 +
 [[fig-Announce2]]
-.Successful announcement made in PTMan +
+.Successful Announcement Made in PTMan +
 image::Ui_announcement2.png[width="600"]
 
 [[Encrypt]]
 ==== Encrypting the local storage files: `encrypt`
-Encrypts data stored in the files in `data` folder.
+Encrypts data stored in the files of the `data` folder.
 
 *Format:* `encrypt`
 
-After your `encrypt` command is executed successfully, you would see a confirmation message below the command bar as shown in _<<fig-SuccessfulEncryptCommand>>_.
+Guided Example:
 
+* After your `encrypt` command is executed successfully, a confirmation message will be displayed in the result display as shown in _<<fig-SuccessfulEncryptCommand>>_.
++
 [[fig-SuccessfulEncryptCommand]]
-.Successful `encrypt` command made in PTMan +
-image::SuccessfulEncryptCommand.jpg[width="500"]
-
-In addition, you can view your data stored in local files by the following steps:
+.Successful Encryption of Local Files in PTMan +
+image::SuccessfulEncryptCommand.png[width="450"]
++
+You can view your data stored in local files with the following steps:
 
 . Open the folder where your app `PTMan.jar` is at.
 . Open the folder named `data`. You will see two files `outletinformation.xml` and `parttimemanager.xml` there.
-. Open `outletinformation.xml` with Internet Explorer (IE). The third line of the file indicates the encryption status with reference to _<<fig-Encrypt>>_.
+. Open `outletinformation.xml` with Internet Explorer (IE) or your favourite editor. The third line of the file indicates the encryption status with reference to _<<fig-Encrypt>>_.
 
-_<<fig-Encrypt>>_ shows an example of what the `outletinformation.xml` file should look like when the `encrypt` command is successfully executed.
+* _<<fig-Encrypt>>_ shows an example of what the `outletinformation.xml` file should look like when the `encrypt` command is successfully executed.
 
++
 [[fig-Encrypt]]
-.Example of encrypted `outletinformation.xml` file in `data` folder +
+.Example of an Encrypted `outletinformation.xml` File +
 image::OutletInformationEncryptedXMLFile.jpg[width="790"]
 
 [[Decrypt]]
@@ -625,29 +654,34 @@ Decrypts data stored in the files in `data` folder.
 
 *Format:* `decrypt`
 
-After your `decrypt` command is executed successfully, you would see a confirmation message below the command bar as shown in _<<fig-SuccessfulDecryptCommand>>_.
+Guided Example:
 
+* After your `decrypt` command is executed successfully, a confirmation message will be displayed in the result display as shown in _<<fig-SuccessfulDecryptCommand>>_.
++
 [[fig-SuccessfulDecryptCommand]]
-.Successful `decrypt` command made in PTMan +
-image::SuccessfulDecryptCommand.jpg[width="500"]
+.Successful Decryption of Local Files in PTMan +
+image::SuccessfulDecryptCommand.png[width="450"]
 
-Open `outletinformation.xm;` file again, now you can read and understand the data stored as shown in _<<fig-Decrypt>>_.
-
+* Open `outletinformation.xml` file again, now you can read and understand the data stored as shown in _<<fig-Decrypt>>_.
++
 [[fig-Decrypt]]
-.Example of decrypted `outletinformation.xml` file in `data` folder +
+.Example of a Decrypted `outletinformation.xml` File +
 image::OutletInformationDecryptedXMLFile.jpg[width="790"]
 
 ==== Viewing encryption status: `viewencrytion`
+
 Shows encryption status of local storage files.
 
 *Format:* `viewencryption` +
 *Shorthand:* `ve`
 
-After your `viewencryption` command is executed successfully, you would see an encryption status message below the command bar as shown in _<<fig-SuccessfulVECommand>>_.
+Guided Example:
 
+* After your `viewencryption` command is executed successfully, the encryption status will be displayed in the result display as shown in _<<fig-SuccessfulVECommand>>_.
++
 [[fig-SuccessfulVECommand]]
-.Example of `viewencryption` command made in PTMan +
-image::SuccessfulVECommand.jpg[width="400"]
+.Encryption Status Shown in PTMan +
+image::SuccessfulVECommand.png[width="450"]
 // end::outletCommand[]
 
 // tag::shiftmanager[]
@@ -768,7 +802,7 @@ Refer to <<Removing yourself from a shift: `unapply`>> for more information.
 Removes youreself from a shift. +
 
 *Format:* `unapply EMPLOYEE_INDEX SHIFT_INDEX pw/PASSWORD` +
-*Shorthand:* `uap`
+*Shorthand:* `uap EMPLOYEE_INDEX SHIFT_INDEX pw/PASSWORD`
 ****
 * The `EMPLOYEE_INDEX` refers to the index number shown in the most recent employee listing.
 * The `SHIFT_INDEX` refers to the shift number in the timetable.
@@ -787,20 +821,23 @@ Examples:
 
 [[Cp]]
 ==== Changing your employee password: `changepw`
+
 Changes your employee password.
-For security purposes, you are highly encouraged to change your password the moment your account is created. +
+For security purposes, you are highly encouraged to change your password once your manager creates your account. +
 
-*Format:* `changepw INDEX pw/CURRENT_PASSWORD pw/NEW_PASSWORD pw/CONFIRM_NEW_PASSWORD` +
-*Shorthand:* `cp` `INDEX pw/CURRENT_PASSWORD pw/NEW_PASSWORD pw/CONFIRM_NEW_PASSWORD`
+*Format:* `changepw EMPLOYEE_INDEX pw/CURRENT_PASSWORD pw/NEW_PASSWORD pw/CONFIRM_NEW_PASSWORD` +
+*Shorthand:* `cp EMPLOYEE_INDEX pw/CURRENT_PASSWORD pw/NEW_PASSWORD pw/CONFIRM_NEW_PASSWORD`
 
-Your `INDEX` will be displayed at the right side panel of PTMan. For example, if you are Asther toh, you can execute the command as shown in _<<fig-changingpw>>_.
+Guided Example:
 
+* If you are Asther toh, you can execute the command as shown in _<<fig-changingpw>>_.
++
 [[fig-changingpw]]
 .Resetting password in PTMan
 image::changingpw.png[width="790"]
 
-After executing `changepw` successfully, a notification will be displayed below the command box as shown in _<<fig-changepw>>_.
-
+* Upon successful execution of `changepw`, a confirmation message will be displayed in the result display as shown in _<<fig-changepw>>_.
++
 [[fig-changepw]]
 .Resetting password in PTMan
 image::changepw.png[width="790"]
@@ -814,10 +851,10 @@ The sequence of current and new password entered must be of the format.
 //* The `INDEX` *must be a positive integer* 1, 2, 3, ...
 //****
 
-//Examples:
+More Examples:
 
-//* If your index is `5`, your current password is `DEFAULT1`, and you wish to change it to `hunter2`, type: +
-//`cp 5 pw/DEFAULT1 pw/hunter2 pw/hunter2`
+* If your index is `5`, your current password is `DEFAULT1`, and you wish to change it to `hunter2`, type: +
+`cp 5 pw/DEFAULT1 pw/hunter2 pw/hunter2`
 //* If your index is `2`, your current password is `mypassword`, and you wish to change it to `NewPassw0rd`, type: +
 //`cp 2 pw/mypassword pw/NewPassw0rd pw/NewPassw0rd`
 
@@ -825,11 +862,15 @@ The sequence of current and new password entered must be of the format.
 ==== Resetting your employee password: `resetpw`
 
 Resets your employee password. This sends a temporary password to your email address.
+You can use this command if you have forgotten your password.
 
-*Format:* `resetpw INDEX` +
-*Shorthand:* `rp` `INDEX` +
+*Format:* `resetpw EMPLOYEE_INDEX` +
+*Shorthand:* `rp EMPLOYEE_INDEX` +
 
-If you forgot your password, you can simply reset your password with your `INDEX` displayed at the right panel as shown in _<<fig-resetingPw>>_.
+Guided Example:
+
+* To reset your password, execute the command with your `EMPLOYEE_INDEX`, as illustrated in _<<fig-resetingPw>>_.
++
 [[fig-resetingPw]]
 .Resetting password in PTMan
 image::resettingpw.png[width="790"]
@@ -839,8 +880,9 @@ image::resettingpw.png[width="790"]
 //* The `INDEX` *must be a positive integer* 1, 2, 3, ...
 //****
 
-After executing `resetpw`, a temporarily password  will be sent to your email registered with your outlet manager as shown in _<<fig-resetPw>>_.
-
+* After executing `resetpw`, a temporary password will be sent to the email address that your manager has registered you with.
+ _<<fig-resetPw>>_ shows what you should see after executing the command.
++
 [[fig-resetPw]]
 .Reset password in PTMan
 image::resetpw.png[width="790"]
