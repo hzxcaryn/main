@@ -955,10 +955,28 @@ Shows a list of all employees in PTMan. +
 [[Viewshift]]
 ==== Listing all employees: `viewshift`
 
-Shows a list of all employees who have applied for the input shift index in PTMan. +
+Shows a list of all employees who have applied for the specified shift index in PTMan. +
 
 *Format:* `viewshift SHIFT_INDEX` +
 *Shorthand:* `vs SHIFT_INDEX`
+
+[TIP]
+To stop displaying the employees of the specified shift, use the <<List, `list`>> command.
+
+*Guided Example:*
+
+* To view all employees in the second shift, key in the following as illustrated in _<<fig-Ui_viewshift1>>_.
++
+[[fig-Ui_viewshift1]]
+.Viewing Employees in Shift 2 +
+image::Ui_viewshift1.png[width="790"]
+
+* Upon successful execution of the command, you will see a confirmation message in the result display, and the employees listed in the employee list panel as shown in _<<fig-Ui_viewshift2>>_.
++
+[[fig-Ui_viewshift2]]
+.Successful Edit of Employee Details in PTMan +
+image::Ui_viewshift2.png[width="790"]
+
 
 [[Select]]
 ==== Displaying an employee's shift on the timetable: `select`
@@ -969,28 +987,44 @@ Displays the shifts of the selected employee on the timetable view. Shifts appli
 *Format:* `select EMPLOYEE_INDEX` +
 *Shorthand:* `sel EMPLOYEE_INDEX`
 
-// TODO: SCREENSHOT
-Examples:
+[TIP]
+Alternatively, you can select an employee by clicking on the employee's card in the employee list.
 
-* To select employee `2` and displays their shifts in the timetable, type: +
-`select 2` +
+[TIP]
+To stop displaying the employee's shifts on the timetable, use the <<Dsel,`deselect`>> command. +
+
+*Guided Example:*
+
+* To highlight shifts applied by the third employee, key in the following as illustrated in _<<fig-Ui_select1>>_.
++
+[[fig-Ui_select1]]
+.Selecting Employee to Highlight Applied Shifts +
+image::Ui_select1.png[width="790"]
++
+_<<fig-Feature_Timetable1>>_ shows how the timetable looks like prior to the `select` command.
++
+[[fig-Feature_Timetable1]]
+.Initial Timetable Before Selection of Employee +
+image::Feature_Timetable1.png[width="500"]
+
+
+* Upon successful execution of the command, you will see a confirmation message in the result display, and the shifts highlighted in the timetable as shown in _<<fig-Ui_select2>>_.
++
+[[fig-Ui_select2]]
+.Successful Selection of Employee with Shifts Highlighted +
+image::Ui_select2.png[width="790"]
+
+*More Examples:*
+
 * To select the employee `1` in the results of the `find` command and display their shifts in the timetable, type: +
 `find Betsy` +
 `select 1` +
 
-[TIP]
-Alternatively, you can select an employee simply by clicking on the employee's card in the employee list
-
-[TIP]
-To stop displaying the employee's shifts on the timetable, use the `defaultview` command. +
-Refer to <<Displaying the default timetable: `defaultview`>> for more information.
-
-[[Dv]]
+[[Dsel]]
 ==== Deselecting an employee: `deselect`
 
 Displays the timetable without any employee selected.
-Useful for users to navigate back to the default timetable after using the `select` command, or when they have lost track of
-where they have navigated the timetable week to. +
+Useful for users to navigate back to the default timetable after using the `select` command. +
 
 *Format:* `deselect`
 *Shorthand:* `dsel`
@@ -1004,7 +1038,28 @@ Exports the current timetable displayed as an image and either saves it locally 
 *Format:* `export [e/EMAIL]` +
 *Shorthand:* `exp [e/EMAIL]`
 
-Examples:
+*Guided Example:*
+
+* To export the timetable and email it to yourself, key in the following as illustrated in _<<fig-Ui_export1>>_.
++
+[[fig-Ui_export1]]
+.Exporting Timetable to Email +
+image::Ui_export1.png[width="790"]
+
+* Upon successful execution of the command, you will see a confirmation message in the result display as shown in _<<fig-Ui_export2>>_.
++
+[[fig-Ui_export2]]
+.Successful Export of Timetable to Email +
+image::Ui_export2.png[width="450"]
++
+An email will also be sent to you as show in _<<fig-Ui_export3>>_.
++
+[[fig-Ui_export3]]
+.Successful Selection of Employee with Shifts Highlighted +
+image::Ui_export3.png[width="790"]
+
+
+*More Examples:*
 
 * To export the current timetable in PTMan, type: +
 `export` +
@@ -1012,7 +1067,7 @@ Examples:
 `select 1` +
 `export` +
 * To export the timetable with the shifts of employee `1` in PTMan and send the exported timetable as email, type: +
-`select ` +
+`select 1` +
 `export e/email@example.com`
 // end::timetableInteractions[]
 
@@ -1050,7 +1105,7 @@ Exits the app. +
 * <<List, *List*>>: `list`
 * <<Viewshift, *View shift*>>: `viewshift SHIFT_INDEX`
 * <<Select, *Display employee's shifts*>>: `select EMPLOYEE_INDEX`
-* <<Dv, *Display default timetable*>>: `defaultview`
+* <<Dsel, *Stop displaying employee's shifts*>>: `deselect`
 * <<Export, *Export timetable*>>: `export`
 * <<History, *History*>>: `history`
 * <<Exit, *Exit*>>: `exit`
