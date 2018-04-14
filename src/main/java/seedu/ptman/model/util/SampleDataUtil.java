@@ -29,10 +29,6 @@ import seedu.ptman.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final int NUM_SHIFTS_CURR_WEEK = 4;
-    public static final int NUM_SHIFTS_PREV_WEEK = 4;
-    public static final int NUM_SHIFTS_NEXT_WEEK = 4;
-
     public static Employee[] getSampleEmployees() {
         return new Employee[] {
             new Employee(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
