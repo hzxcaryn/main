@@ -833,13 +833,13 @@ For security purposes, you are highly encouraged to change your password once yo
 * If you are Asther toh, you can execute the command as shown in _<<fig-changingpw>>_.
 +
 [[fig-changingpw]]
-.Resetting password in PTMan
+.Changing Employee Password in PTMan
 image::changingpw.png[width="790"]
 
 * Upon successful execution of `changepw`, a confirmation message will be displayed in the result display as shown in _<<fig-changepw>>_.
 +
 [[fig-changepw]]
-.Resetting password in PTMan
+.Successful Change of Employee Password in PTMan
 image::changepw.png[width="790"]
 
 [NOTE]
@@ -872,7 +872,7 @@ You can use this command if you have forgotten your password.
 * To reset your password, execute the command with your `EMPLOYEE_INDEX`, as illustrated in _<<fig-resetingPw>>_.
 +
 [[fig-resetingPw]]
-.Resetting password in PTMan
+.Resetting Employee Password in PTMan
 image::resettingpw.png[width="790"]
 
 //****
@@ -884,7 +884,7 @@ image::resettingpw.png[width="790"]
  _<<fig-resetPw>>_ shows what you should see after executing the command.
 +
 [[fig-resetPw]]
-.Reset password in PTMan
+.Successful Reset of Employee Password in PTMan
 image::resetpw.png[width="790"]
 
 [NOTE]
