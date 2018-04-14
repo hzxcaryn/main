@@ -53,7 +53,7 @@ You may refer to <<Commands>> for more details of the available commands.
 
 [IMPORTANT]
 If you are a manager, you have access to <<Admin Mode, admin mode>>. Admin mode allows you to access all the <<Manager Commands, manager commands>>.
-To prevent unauthorized access, please change your default admin mode password using the `changeadminpw` command.
+To prevent unauthorised access, please change your default admin mode password using the `changeadminpw` command.
 You may refer to <<Cap>> for instructions on how to do so.
 
 // tag::guiWalkthrough[]
@@ -83,10 +83,10 @@ Following the labels in _<<fig-GUIwalkthrough>>_, here are what the different se
 
 [[Features]]
 == Features
-In this section, we will be introducing you to the various features of PTMan.
+In this section, you will be introduced to the various features of PTMan.
 
 === User Authentication
-PTMan has user authentication for both managers and employees to prevent unauthorized execution of <<Commands, commands>>.
+PTMan has user authentication for both managers and employees to prevent unauthorised execution of <<Commands, commands>>.
 
 Managers can refer to <<Admin mode>> for admin authentication, while employees can refer to <<Employee password>> for employee authentication.
 
@@ -98,28 +98,28 @@ To enter admin mode, please refer to <<Logging in to admin mode: `login`>>.
 The default admin password is `DEFAULT1`.
 
 [IMPORTANT]
-It is crucial to change the default admin password to prevent unauthorized access to admin mode.
+It is crucial to change the default admin password to prevent unauthorised access to admin mode.
 You may refer to <<Cap>> for instructions on how to do so.
 
 ==== Employee password
-For employees, your employee password identifies you and authorizes you to execute employee commands.
-It ensures that when executing a command such as <<Applying for a shift: `apply`, `apply`>>, that you are applying yourself, and not someone else, for the shift.
+For employees, your employee password identifies you and authorizes you to execute <<Employee Commands, employee commands>>.
+It ensures that you are unable to, for example, <<Applying for a shift: `apply`, `apply`>> someone else for a shift without knowing their password.
 
 [NOTE]
 The default employee password is `DEFAULT1`.
 
 [IMPORTANT]
-It is crucial to change the default employee password to prevent unauthorized execution of employee commands.
+It is crucial to change the default employee password to prevent unauthorised execution of employee commands.
 You may refer to <<Changing your employee password: `cp`>> for instructions on how to do so.
 
 // tag::outletManagement[]
 === Outlet Management
 If you are a manager, PTMan allows you to manage your outlet. You can edit your outlet name, operating hours, contact number and email.
-The timetable automatically re-sizes according to the operating hours. You can also create any announcement and broadcast to your employees.
+The timetable automatically re-sizes according to the operating hours. You can also create announcements to broadcast to your employees.
 
-If you are an employee, you can view announcement created by your manager and take actions accordingly.
+If you are an employee, you can view announcements created by your manager and take actions accordingly.
 
-_<<fig-Feature_Outlet>>_ shows where you can view your outlet information.
+_<<fig-Feature_Outlet>>_ shows the Outlet Display where you can view your outlet information.
 
 [[fig-Feature_Outlet]]
 .Sample Outlet Information Displayed +
@@ -143,20 +143,20 @@ timetable and you, as a user, so this section aims to familiarise you with the t
 
 The shifts in PTMan are colour-coded, and here is what the different colours mean:
 
-* Green: Shift is available with multiple slots left.
-* Yellow: Shift is available, but slots are running out.
-* Red: Shift is no longer available, slots for the shift have run out.
-* Blue: Shift is taken up by currently selected employee.
-* Brown: Shift is not taken up by currently selected employee.
+* *Green*: Shift is available with multiple slots left.
+* *Yellow*: Shift is available, but slots are running out.
+* *Red*: Shift is no longer available, all slots for the shift have run out.
+* *Blue*: Shift is taken up by currently selected employee.
+* *Brown*: Shift is not taken up by currently selected employee.
 
-_<<fig-Feature_Timetable1>>_ below shows how the default timetable can look like in PTMan. +
+_<<fig-Feature_Timetable1>>_ below shows how the timetable looks like in a sample PTMan app. +
  +
 [[fig-Feature_Timetable1]]
 .A Sample Timetable with Shifts +
 image::Feature_Timetable1.png[width="790"]
 
 PTMan also allows employees to view their own shifts using the <<Displaying an employee’s shifts on the timetable: `select`, `select`>> command.
-_<<fig-Feature_Timetable2>>_ shows how the timetable can look like when an employee is selected.
+_<<fig-Feature_Timetable2>>_ shows how the timetable look like in a sample PTMan app when an employee is selected.
  +
 [[fig-Feature_Timetable2]]
 .A Sample Timetable with Shifts after `select` +
@@ -169,12 +169,12 @@ There are two ways to navigate through the different weeks in the timetable:
 . Using Keyboard Shortcuts
 +
 * For Windows:
-** kbd:[Ctrl] + kbd:[Shift] + kbd:[→] : Navigates timetable to the next week.
-** kbd:[Ctrl] + kbd:[Shift] + kbd:[←] : Navigates timetable to the previous week.
+** kbd:[Ctrl] + kbd:[Shift] + kbd:[->] : Navigates timetable to the next week.
+** kbd:[Ctrl] + kbd:[Shift] + kbd:[<-] : Navigates timetable to the previous week.
 ** kbd:[Ctrl] + kbd:[Shift] + kbd:[↓] : Navigates timetable to the current week.
 * For Mac:
-** kbd:[Command] + kbd:[Shift] + kbd:[→] : Navigates timetable to the next week.
-** kbd:[Command] + kbd:[Shift] + kbd:[←] : Navigates timetable to the previous week.
+** kbd:[Command] + kbd:[Shift] + kbd:[->] : Navigates timetable to the next week.
+** kbd:[Command] + kbd:[Shift] + kbd:[<-] : Navigates timetable to the previous week.
 ** kbd:[Command] + kbd:[Shift] + kbd:[↓] : Navigates timetable to the current week.
 . Using Mouse Clicks
 +
@@ -190,17 +190,17 @@ image::Feature_Timetable3.png[width="790"]
 
 === Saving the Data
 
-All data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+All the data is saved in the hard disk automatically upon execution of any command that changes the data. There is no need to manually save your changes.
 
 // tag::backup[]
 === Backing Up the Data
-Backup files are automatically created and saved in the hard disk upon exit of the app. There is no need to do backup manually. +
-You can replace any local storage files with backup files by the following steps:
+Backup files are automatically created and saved in the hard disk upon exiting the app. There is no need to do backup manually. +
+Following these steps, you can replace your corrupted local storage files with the backup files:
 
-. Copy any backup files named `outletinformation.xml.backup` or `parttimemanager.xml.backup`.
-. Open the folder where your app `PTMan.jar` is at.
-. Open the folder named `data`.
-. Paste your copied backup files there.
+. Copy the backup files named `outletinformation.xml.backup` and `parttimemanager.xml.backup`.
+. Open the folder where you store `PTMan.jar`.
+. Open the `data` folder.
+. Paste your copied backup files in this `data` folder.
 . Rename `outletinformation.xml.backup` to `outletinformation.xml`.
 . Rename `parttimemanager.xml.backup` to `parttimemanager.xml`.
 . Run the app `PTMan.jar` and you will see all the restored data read from backup files.
@@ -208,17 +208,17 @@ You can replace any local storage files with backup files by the following steps
 
 === Keeping Track of Employees' Monthly Salaries [Coming in v2.0]
 
-As employees work, their pay is calculated based on the hours they have worked.
-The manager can use this information to distribute their salaries.
+If you are a manager, PTMan will help you keep track of your employees' monthly salaries.
+PTMan do so by calculating the number of hours each employee has worked based on the shifts that they applied for throughout the month.
 
 === Saving Data to the Cloud [Coming in v2.0]
 
 Currently, PTMan is meant to be used on a single shared device as it is limited by local storage.
-By saving PTMan's data to the cloud, both employees and managers can access PTMan from their own devices since the data can be shared.
+By saving PTMan's data to the cloud, both employees and managers can access PTMan from their own devices since data can now be shared.
 
 == Commands
 The main form of interaction with PTMan is via keyboard commands.
-Our commands are split into 3 sub-sections, <<Manager Commands, Manager Commands>>, <<Employee Commands, Employee Commands>>, and <<General Commands, General Commands>>. +
+Commands are split into 3 sub-sections, <<Manager Commands, Manager Commands>>, <<Employee Commands, Employee Commands>>, and <<General Commands, General Commands>>. +
 
 Take note that for this user guide, our commands will follow the format as stated below.
 
@@ -238,104 +238,112 @@ eg. `list` and `l` will both show a list of all employees in PTMan.
 ====
 
 === Manager Commands
-As a manager, you are able to access these commands in addition to the <<General Commands, general commands>>.
-These manager commands require logging in to <<Admin Mode, admin mode>> as shown in <<Logging in to admin mode: `login`>>.
+As a manager, you are able to access all commands in this section in addition to the <<General Commands, general commands>>.
+These manager commands require prior logging in to <<Admin Mode, admin mode>> as shown in <<Logging in to admin mode: `login`>>.
 
 // tag::accessControl[]
 
 [[Login]]
 ==== Logging in to admin mode: `login`
-Logs in to <<Admin Mode, admin mode>>, allowing you to use all the manager commands.
-
+Logs in to <<Admin mode, admin mode>>, allowing you to use all the manager commands.
 
 *Format:* `login pw/ADMIN_PASSWORD`
 
-You can key in the command with your password as shown in  _<<fig-Login>>_.
+Guided Example:
+
+* To login, key in the command with your password as shown in  _<<fig-Login>>_.
++
 [[fig-Login]]
-.Logging in in PTMan +
+.PTMan Manager Login +
 image::loginPassword.png[width="790"]
 
-Once you are logged in, a admin mode icon will appear to indicate that you are in admin mode as shown in  _<<fig-LoginSuccess>>_.
-
+* Once you are logged in, an `AdminMode` label will appear in the command box.
+This indicates that you are now in admin mode as shown in _<<fig-LoginSuccess>>_.
++
 [[fig-LoginSuccess]]
-.logged in in PTMan +
+.Successful PTMan Manager Login +
 image::loginSuccess.png[width="790"]
 
 [IMPORTANT]
-Please remember to logout when you are done to prevent unauthorized access to manager commands. +
+Please remember to logout after you are done making changes.
+This is to prevent unauthorised access to manager commands. +
 Refer to <<Logging out of admin mode: `logout`>> for more information.
 
 [[Logout]]
 ==== Logging out of admin mode: `logout`
-Logs out of <<Admin Mode, admin mode>>, preventing further usage of manager features.
+Logs out of <<Admin mode, admin mode>>, preventing further usage of manager commands.
 
 *Format:* `logout`
 
-You can key in the command to log out as shown in _<<fig-loggingOut>>_.
+Guided Example:
+
+* To logout, key in the command as shown in _<<fig-loggingOut>>_.
++
 [[fig-loggingOut]]
-.Logging out in PTMan +
+.Logging Out in PTMan +
 image::logout.png[width="790"]
 
-After `logout` is executed, the admin icon will disappear from the command box as shown in _<<fig-logoutSuccess>>_.
-
+* After you have logged out, the `AdminMode` label will disappear from the command box as shown in _<<fig-logoutSuccess>>_.
++
 [[fig-logoutSuccess]]
-.Logged out in PTMan +
+.Logged Out in PTMan +
 image::loginNoAdminIcon.png[width="790"]
 
 [[Cap]]
 ==== Changing the admin password: `changeadminpw`
-Changes the <<Admin Mode, admin mode>> password.
+Changes the password to enter <<Admin mode, admin mode>>.
 
 *Format:* `changeadminpw pw/CURRENT_PASSWORD pw/NEW_PASSWORD pw/CONFIRM_NEW_PASSWORD` +
 *Shorthand:* `cap` `pw/CURRENT_PASSWORD pw/NEW_PASSWORD pw/CONFIRM_NEW_PASSWORD`
 
 [IMPORTANT]
-To prevent unauthorized access to admin mode, managers should execute this command upon running PTMan for the first time.
+To prevent unauthorised access to admin mode, managers should execute this command if you are running PTMan for the first time.
 
+Guided Example:
 
-
-If the current admin password is `DEFAULT1` and you wish to change it to `hunter2`, type:
-`changeadminpw pw/DEFAULT1 pw/hunter22 pw/hunter22` which will be masked by asterisks in the program as shown in _<<fig-changingAdminPassword>>_.
-
+* To change the password from `DEFAULT1` to `hunter2`, type: `changeadminpw pw/DEFAULT1 pw/hunter22 pw/hunter22`.
+The passwords will be masked by asterisks as shown in _<<fig-changingAdminPassword>>_.
++
 [[fig-changingAdminPassword]]
-.Changing admin password in PTMan +
+.Changing Admin Password in PTMan +
 image::changingAdminPassword.png[width="790"]
 
-After password is changed successfully, a notification will be displayed below the command box as shown in _<<fig-changedAdminPassword>>_.
-
+* After the password is successfully changed, a confirmation message will be displayed in the result display as seen in _<<fig-changedAdminPassword>>_.
++
 [[fig-changedAdminPassword]]
-.Admin password changed in PTMan +
+.Admin Password Successfully Changed in PTMan +
 image::changedAdminPassword.png[width="790"]
 
 [NOTE]
 The password should be at least 8 characters long. +
-The sequence of current and new password entered must be of the format.
+You must key in the current and new password in the correct sequence as given in the format.
 
 [[Rap]]
 ==== Resetting the admin password: `resetadminpw`
 
-Resets your <<Admin Mode, admin mode>> password and sends a randomly generated password to the outlet's email address. +
+Resets the password to enter <<Admin mode, admin mode>> and sends a randomly generated password to the outlet's email address. +
 You may use the new password to login to admin mode to change the password.
 
 *Format:* `resetadminpw` +
 *Shorthand:* `rap`
 
-You can key in the command to reset admin password as shown in _<<fig-resetAdminPassword>>_
+Guided Example:
 
+* To reset admin password, key in the command as shown in _<<fig-resetAdminPassword>>_.
++
 [[fig-resetAdminPassword]]
-.Resetting admin password in PTMan +
+.Resetting Admin Password in PTMan +
 image::resetAdminPassword.png[width="790"]
 
-After the command is executed successfully, a notification will be displayed as shown in _<<fig-resetAdminPasswordSuccess>>_.
-
-
+* After the command is executed successfully, a confirmation message will be displayed in the result display as shown in _<<fig-resetAdminPasswordSuccess>>_.
++
 [[fig-resetAdminPasswordSuccess]]
-.Reset admin password in PTMan +
+.Admin Password Successfully Reset in PTMan +
 image::resetAdminPasswordSuccess.png[width="790"]
 
-
 [NOTE]
-The temporary password will be sent to the outlet's email stored in PTMan.
+The randomly generated password will be sent to the outlet's email address stored in PTMan.
+You can view this email address under the outlet display of the GUI.
 
 // end::accessControl[]
 
