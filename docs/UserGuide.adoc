@@ -129,11 +129,12 @@ image::IntroductionToOutlet.jpg[width="790"]
 
 === Shift Management
 If you are a manager, PTMan allows you to manage your employees' work shifts.
-// TODO: Add how PTMan is better than traditional paperwork
+You can add shifts, remove shifts and decide which employees are working at each shift.
+This can significantly reduce your paperwork related to employee scheduling.
 
 If you are an employee, PTMan gives you flexibility in your working hours by allowing you to apply for shifts that you wish to work in.
 
-You are able to view shifts that are in PTMan via the <<Timetable, timetable>>.
+Shifts that are in PTMan can be viewed via the <<Timetable, timetable>>.
 
 // tag::timetableIntro[]
 === Timetable
@@ -170,13 +171,13 @@ There are two ways to navigate through the different weeks in the timetable:
 . Using Keyboard Shortcuts
 +
 * For Windows:
-** kbd:[Ctrl] + kbd:[Shift] + kbd:[->] : Navigates timetable to the next week.
-** kbd:[Ctrl] + kbd:[Shift] + kbd:[<-] : Navigates timetable to the previous week.
-** kbd:[Ctrl] + kbd:[Shift] + kbd:[↓] : Navigates timetable to the current week.
+** kbd:[Ctrl] + kbd:[Shift] + kbd:[&rarr;] : Navigates timetable to the next week.
+** kbd:[Ctrl] + kbd:[Shift] + kbd:[&larr;] : Navigates timetable to the previous week.
+** kbd:[Ctrl] + kbd:[Shift] + kbd:[&darr;] : Navigates timetable to the current week.
 * For Mac:
-** kbd:[Command] + kbd:[Shift] + kbd:[->] : Navigates timetable to the next week.
-** kbd:[Command] + kbd:[Shift] + kbd:[<-] : Navigates timetable to the previous week.
-** kbd:[Command] + kbd:[Shift] + kbd:[↓] : Navigates timetable to the current week.
+** kbd:[Command] + kbd:[Shift] + kbd:[&rarr;] : Navigates timetable to the next week.
+** kbd:[Command] + kbd:[Shift] + kbd:[&larr;] : Navigates timetable to the previous week.
+** kbd:[Command] + kbd:[Shift] + kbd:[&darr;] : Navigates timetable to the current week.
 . Using Mouse Clicks
 +
 * At the top of the timetable, there is a navigation bar with two arrow buttons which you can click on.
@@ -218,7 +219,7 @@ Currently, PTMan is meant to be used on a single shared device as it is limited 
 By saving PTMan's data to the cloud, both employees and managers can access PTMan from their own devices since data can now be shared.
 
 == Commands
-The main form of interaction with PTMan is via keyboard commands.
+The main method of user interaction with PTMan is via keyboard commands.
 Commands are split into 3 sub-sections, <<Manager Commands, Manager Commands>>, <<Employee Commands, Employee Commands>>, and <<General Commands, General Commands>>. +
 
 Take note that for this user guide, our commands will follow the format as stated below.
@@ -306,7 +307,7 @@ You must key in the current and new password in the correct sequence as given in
 
 *Guided Example:*
 
-* To change the password from `DEFAULT1` to `hunter2`, type: `changeadminpw pw/DEFAULT1 pw/hunter22 pw/hunter22`.
+* To change the password from `DEFAULT1` to `hunter22`, type: `changeadminpw pw/DEFAULT1 pw/hunter22 pw/hunter22`.
 The passwords will be masked by asterisks as shown in _<<fig-changingAdminPassword>>_.
 +
 [[fig-changingAdminPassword]]
@@ -359,7 +360,7 @@ Adds an employee to PTMan. +
 [TIP]
 An employee can have any number of tags (including 0)
 
-*Guided Example:*
+*Guided Example*:
 
 * To add an employee into PTMan, key in the following as illustrated in _<<fig-Add1>>_.
 +
@@ -515,7 +516,7 @@ Restores PTMan to the state before the previous _undoable_ command was executed.
 Undoable commands: Commands that modify PTMan's data (`add`, `delete`, `edit`, `clear`, `addshift`, `deleteshift`, `apply`, `unapply`, `editoutlet` and `announcement`).
 ====
 
-Examples:
+*Examples*:
 
 * `delete 1` +
 `undo` (reverses the `delete 1` command) +
@@ -537,7 +538,7 @@ Reverses the most recent `undo` command. +
 *Format:* `redo` +
 *Shorthand:* `r`
 
-Examples:
+*Examples*:
 
 * `delete 1` +
 `undo` (reverses the `delete 1` command) +
@@ -689,7 +690,6 @@ image::SuccessfulVECommand.png[width="450"]
 ==== Adding a shift: `addshift`
 Adds a shift to the timetable to indicate that you require employees at that period. +
 
-// TODO: SCREENSHOT
 *Format:* `addshift d/DATE ts/START_TIME te/END_TIME c/EMPLOYEE_CAPACITY` +
 *Shorthand:* `as d/DATE ts/START_TIME te/END_TIME c/EMPLOYEE_CAPACITY`
 
@@ -699,12 +699,21 @@ Adds a shift to the timetable to indicate that you require employees at that per
 * The `CAPACITY` should be a positive integer.
 ****
 
-Examples:
+*Guided Example*:
 
-* To add a shift on 12 March 2018 from 12pm to 7pm that requires 4 employees, type: +
-`addshift d/12-03-18 ts/1200 te/1900 c/4`
-* To add a shift on 3 May 2018 from 8am to 1pm that requires 2 employees, type: +
-`addshift d/03-05-18 ts/0800 te/1300 c/2`
+. To add a shift on 13th April 2018 from 12pm to 6pm that requires 3 employees, execute the command +
+`addshift d/13-04-18 ts/1200 te/1800 c/3` as shown in _<<fig-addshiftBefore>>_.
++
+[[fig-addshiftBefore]]
+.Adding a Shift +
+image::AddshiftBefore.png[width="800"]
++
+. You should see a confirmation message in the result display along with the shift you've added being displayed in the timetable.
+This is illustrated in _<<fig-addshiftAfter>>_.
++
+[[fig-addshiftAfter]]
+.Successful Adding of a Shift +
+image::AddshiftAfter.png[width="800"]
 
 [[Deleteshift]]
 ==== Deleting a shift: `deleteshift`
@@ -717,12 +726,21 @@ Deletes a shift from the timetable.
 * The `SHIFT_INDEX` *must be a positive integer* 1, 2, 3, ...
 ****
 
-Examples:
+*Guided Example*:
 
-* To delete shift `4`, type: +
-`deleteshift 4`
-* To delete shift `2`, type: +
-`deleteshift 2`
+. If you wish to delete shift 1, execute the command `deleteshift 1` as shown in _<<fig-deleteShiftBefore>>_ below.
++
+[[fig-deleteShiftBefore]]
+.Deleting Shift 1 +
+image::DeleteShiftBefore.png[width="800"]
++
+. Upon successful deletion, you will see a confirmation message in the result display and you can no longer see the shift in the timetable.
+_<<fig-deleteShiftAfter>>_ illustrates the successful deletion of shift 1.
++
+[[fig-deleteShiftAfter]]
+.Successful Deletion of Shift 1 +
+image::DeleteShiftAfter.png[width="800"]
+// end::shiftmanager[]
 
 [[Apply]]
 ==== Applying an employee for a shift: `apply`
@@ -736,13 +754,21 @@ Applies an employee for a shift. +
 * Both indexes *must be positive integers* 1, 2, 3, ...
 ****
 
-// TODO: SCREENSHOT
-Examples:
+*Guided Example*:
 
-* To apply employee `2` for shift `1`, type: +
-`apply 2 1`
-* To apply employee `6` for shift `5`, type: +
-`apply 6 5`
+. To apply Sum Ting Wong for shift 3, execute the command `apply 2 3` as shown in _<<fig-applyAdminBefore>>_ below.
++
+[[fig-applyAdminBefore]]
+.Applying Employee 2 to Shift 3 +
+image::ApplyAdminBefore.png[width="800"]
+
++
+. As highlighted by the red boxes in _<<fig-applyAdminAfter>>_, you should see a confirmation message in the result display
+and the slots left in the shift will decrease by 1 upon successful application.
++
+[[fig-applyAdminAfter]]
+.Successful Application of Employee 2 to Shift 3 +
+image::ApplyAdminAfter.png[width="800"]
 
 [NOTE]
 If you have accidentally applied the employee for the wrong shift, you may use the `unapply` command. +
@@ -760,13 +786,19 @@ Removes an employee from a shift. +
 * Both indexes *must be positive integers* 1, 2, 3, ...
 ****
 
-Examples:
+*Guided Example*:
 
-* To remove employee `6` from shift `3`, type: +
-`unapply 6 3`
-* To remove employee `2` from shift `6`, type: +
-`unapply 2 6`
-// end::shiftmanager[]
+. To remove Sum Ting Wong from shift 3, execute the command `unapply 2 3` as shown in _<<fig-unapplyAdminBefore>>_ below.
++
+[[fig-unapplyAdminBefore]]
+.Removing Employee 2 from Shift 3 +
+image::UnapplyAdminBefore.png[width="800"]
+. As highlighted by the red boxes in _<<fig-unapplyAdminAfter>>_, you should see a confirmation message in the result display
+and the slots left in the shift will increase by 1 upon successful removal.
++
+[[fig-unapplyAdminAfter]]
+.Successful Removal of Employee 2 from Shift 3 +
+image::UnapplyAdminAfter.png[width="800"]
 
 === Employee Commands
 As an employee, you are able to access these commands in addition to the <<General Commands, general commands>>.
@@ -785,13 +817,21 @@ Applies for a shift. +
 * Both indexes *must be positive integers* 1, 2, 3, ...
 ****
 
-// TODO: SCREENSHOT
-Examples:
+*Guided Example*:
 
-* If your index in the employee list is `2` and you want to apply for shift `1`, type: +
-`apply 2 1 pw/YOUR_PASSWORD`
-* If your index in the employee list is `6` and you want to apply for shift `5`, type: +
-`apply 6 5 pw/YOUR_PASSWORD`
+. If you are Sum Ting Wong and you wish to apply for shift 3, execute the command +
+`apply 2 3 pw/YOUR_PASSWORD` as shown in _<<fig-applyBefore>>_ below.
++
+[[fig-applyBefore]]
+.Applying Employee 2 to Shift 3 +
+image::ApplyBefore.png[width="800"]
++
+. As highlighted by the red boxes in _<<fig-applyAfter>>_, you should see a confirmation message in the result display
+and the slots left in the shift will decrease by 1 upon successful application.
++
+[[fig-applyAfter]]
+.Successful Application of Employee 2 to Shift 3 +
+image::ApplyAfter.png[width="800"]
 
 [NOTE]
 If you have accidentally applied for the wrong shift, you may use the `unapply` command. +
@@ -809,12 +849,21 @@ Removes youreself from a shift. +
 * Both indexes *must be positive integers* 1, 2, 3, ...
 ****
 
-Examples:
+*Guided Example*:
 
-* If your index is `4` and you wish to unapply from shift `3`, type: +
-`unapply 4 3 pw/YOUR_PASSWORD`
-* If your index is `2` and you wish to unapply from shift `1`, type: +
-`unapply 2 1 pw/YOUR_PASSWORD`
+. If you are Sum Ting Wong and you wish to remove yourself from shift 3, execute the command +
+`unapply 2 3 pw/YOUR_PASSWORD` as shown in _<<fig-unapplyBefore>>_ below.
++
+[[fig-unapplyBefore]]
+.Removing Employee 2 from Shift 3 +
+image::UnapplyBefore.png[width="800"]
++
+. As highlighted by the red boxes in _<<fig-unapplyAfter>>_, you should see a confirmation message in the result display
+and the slots left in the shift will increase by 1 upon successful removal.
++
+[[fig-unapplyAfter]]
+.Excpected Outcome After Applying Employee 2 to Shift 3 +
+image::UnapplyAfter.png[width="800"]
 // end::shiftemployee[]
 
 
@@ -853,8 +902,8 @@ The sequence of current and new password entered must be of the format.
 
 *More Examples:*
 
-* If your index is `5`, your current password is `DEFAULT1`, and you wish to change it to `hunter2`, type: +
-`cp 5 pw/DEFAULT1 pw/hunter2 pw/hunter2`
+* If your index is `5`, your current password is `DEFAULT1`, and you wish to change it to `hunter22`, type: +
+`cp 5 pw/DEFAULT1 pw/hunter22 pw/hunter22`
 //* If your index is `2`, your current password is `mypassword`, and you wish to change it to `NewPassw0rd`, type: +
 //`cp 2 pw/mypassword pw/NewPassw0rd pw/NewPassw0rd`
 
@@ -935,8 +984,7 @@ Finds employees whose names contain any of the given keywords. +
 * Employees matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
-// TODO: SCREENSHOT BEFORE + AFTER
-Examples:
+*Examples*:
 
 * To find employees `john` and `John Doe`, type: +
  `find John`
@@ -952,6 +1000,7 @@ Shows a list of all employees in PTMan. +
 *Shorthand:* `l`
 
 // tag::timetableInteractions[]
+
 [[Viewshift]]
 ==== Listing all employees: `viewshift`
 

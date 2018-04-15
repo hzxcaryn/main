@@ -77,6 +77,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyPartTimeManager newData) {
         partTimeManager.resetData(newData);
         indicatePartTimeManagerChanged();
+        indicateOutletInformationChanged();
     }
 
     @Override
