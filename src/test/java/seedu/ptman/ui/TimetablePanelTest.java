@@ -108,7 +108,8 @@ public class TimetablePanelTest extends GuiUnitTest {
 
         // Associated shifts of employee highlighted: Displays all shifts in selected employee mode
         postNow(employeePanelSelectionChangedEventAliceStub);
-        List<Entry> entriesAfterSelectionEventAlice = timetablePanelHandle.getTimetableEntriesFromSelectedEmployeeMode();
+        List<Entry> entriesAfterSelectionEventAlice =
+                timetablePanelHandle.getTimetableEntriesFromSelectedEmployeeMode();
         for (int i = 0; i < TYPICAL_SHIFTS.size(); i++) {
             Shift expectedShift = TYPICAL_SHIFTS.get(i);
             Entry actualEntry = entriesAfterSelectionEventAlice.get(i);
