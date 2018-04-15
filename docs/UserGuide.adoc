@@ -260,14 +260,14 @@ Refer to <<Logging out of admin mode: `logout`>> for more information.
 * To login, key in the command with your password as shown in  _<<fig-Login>>_.
 +
 [[fig-Login]]
-.PTMan Manager Login +
+.PTMan Admin Login Command +
 image::loginPassword.png[width="790"]
 
 * Once you are logged in, an `AdminMode` label will appear in the command box.
 This indicates that you are now in admin mode as shown in _<<fig-LoginSuccess>>_.
 +
 [[fig-LoginSuccess]]
-.Successful PTMan Manager Login +
+.Successful PTMan Admin Login +
 image::loginSuccess.png[width="790"]
 
 [[Logout]]
@@ -281,13 +281,13 @@ Logs out of <<Admin mode, admin mode>>, preventing further usage of manager comm
 * To logout, key in the command as shown in _<<fig-loggingOut>>_.
 +
 [[fig-loggingOut]]
-.Logging Out in PTMan +
+.PTMan Admin Logout Command +
 image::logout.png[width="790"]
 
 * After you have logged out, the `AdminMode` label will disappear from the command box as shown in _<<fig-logoutSuccess>>_.
 +
 [[fig-logoutSuccess]]
-.Logged Out in PTMan +
+.Successful PTMan Admin Logout +
 image::loginNoAdminIcon.png[width="790"]
 
 [[Cap]]
@@ -310,13 +310,13 @@ You must key in the current and new password in the correct sequence as given in
 The passwords will be masked by asterisks as shown in _<<fig-changingAdminPassword>>_.
 +
 [[fig-changingAdminPassword]]
-.Changing Admin Password in PTMan +
+.PTMan Admin Password Change Command  +
 image::changingAdminPassword.png[width="790"]
 
 * After the password is successfully changed, a confirmation message will be displayed in the result display as seen in _<<fig-changedAdminPassword>>_.
 +
 [[fig-changedAdminPassword]]
-.Admin Password Successfully Changed in PTMan +
+.Successful PTMan Admin Password Change +
 image::changedAdminPassword.png[width="790"]
 
 [[Rap]]
@@ -337,13 +337,13 @@ You can view this email address under the outlet display of the GUI.
 * To reset admin password, key in the command as shown in _<<fig-resetAdminPassword>>_.
 +
 [[fig-resetAdminPassword]]
-.Resetting Admin Password in PTMan +
+.PTMan Admin Password Reset Command +
 image::resetAdminPassword.png[width="790"]
 
 * After the command is executed successfully, a confirmation message will be displayed in the result display as shown in _<<fig-resetAdminPasswordSuccess>>_.
 +
 [[fig-resetAdminPasswordSuccess]]
-.Admin Password Successfully Reset in PTMan +
+.Successful PTMan Admin Password Reset +
 image::resetAdminPasswordSuccess.png[width="790"]
 
 // end::accessControl[]
@@ -364,7 +364,7 @@ An employee can have any number of tags (including 0)
 * To add an employee into PTMan, key in the following as illustrated in _<<fig-Add1>>_.
 +
 [[fig-Add1]]
-.Adding an Employee into PTMan +
+.PTMan Add Employee Command +
 image::Ui_add1.png[width="790"]
 
 * Upon successful addition of the employee, you will see a confirmation message in the result display, and the employee being added into your Employee list.
@@ -390,7 +390,7 @@ Adds a specified amount to an employee's salary.
 * To increase the first employee's salary by $100, key in the command as shown below in _<<fig-addingSalary>>_.
 +
 [[fig-addingSalary]]
-.Adding Salary for Employee in PTMan +
+.PTMan Add Employee Salary Command +
 image::addingSalary.png[width="790"]
 
 * Upon successful execution of the command, you will see a confirmation message in the result display and the applied salary as shown in _<<fig-addSalarySuccess>>_.
@@ -428,7 +428,7 @@ An employee's password can only be edited by the employee. +
 * To edit the first employee's email and tags, key in the following as illustrated in _<<fig-Ui_edit1>>_.
 +
 [[fig-Ui_edit1]]
-.Editing Employee Details in PTMan +
+.PTMan Edit Employee Details Command  +
 image::Ui_edit1.png[width="790"]
 
 * Upon successful execution of the command, you will see a confirmation message in the result display, and the edited details of the employee as shown in _<<fig-Ui_edit2>>_.
@@ -465,19 +465,19 @@ Deletes the specified employee from PTMan. +
 * To delete the first employee from PTMan, key in the following as illustrated in _<<fig-Ui_delete1>>_.
 +
 [[fig-Ui_delete1]]
-.Editing Employee Details in PTMan +
+.PTMan Delete Employee Command +
 image::Ui_delete1.png[width="790"]
 
 * _<<fig-Ui_delete2>>_ shows the employee list panel before the `delete` command is carried out.
 +
 [[fig-Ui_delete2]]
-.Editing Employee Details in PTMan +
+.Employee List Panel Before Deletion +
 image::Ui_delete2.png[width="300"]
 
 * Upon successful deletion, you will see a confirmation message in the result display and the employee being deleted from the employee list panel as shown in _<<fig-Ui_delete3>>_.
 +
 [[fig-Ui_delete3]]
-.Successful Edit of Employee Details in PTMan +
+.Successful Deletion of Employee in PTMan +
 image::Ui_delete3.png[width="790"]
 
 *More Examples:*
@@ -576,7 +576,7 @@ Ensure that the outlet email is valid as it will be used to reset the admin pass
 * To edit the name, operating hours, contact number, and email of the outlet, key in the following as shown in _<<fig-Edit1>>_.
 +
 [[fig-Edit1]]
-.Editing Outlet Information in PTMan +
+.PTMan Edit Outlet Information Command +
 image::Ui_editoutlet1.png[width="790"]
 
 * Upon successful execution of the command, you would see a confirmation message below the command bar, and the changes applied to the outlet information.
@@ -589,7 +589,7 @@ image::Ui_editoutlet2.png[width="600"]
 * To edit only the name and contact number, key in the following as shown in _<<fig-Edit3>>_
 +
 [[fig-Edit3]]
-.Editing Selective Outlet Information in PTMan +
+.PTMan Edit Selective Outlet Information Command +
 image::Ui_editoutlet3.png[width="790"]
 
 * Upon successful execution of the command, a confirmation message will be displayed in the result display, and changes will be applied to the outlet information.
@@ -611,7 +611,7 @@ Sets an announcement for the outlet. +
 * To make an announcement in PTMan, type the following command as illustrated in _<<fig-Announce1>>_.
 +
 [[fig-Announce1]]
-.Making an Announcement in PTMan +
+.PTMan Announcement Command +
 image::Ui_announcement1.png[width="790"]
 
 * When a successful announcement is made, a confirmation message will be displayed in the result display, and the changes will  be applied to the announcement.
