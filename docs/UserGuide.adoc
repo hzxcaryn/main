@@ -705,14 +705,14 @@ Adds a shift to the timetable to indicate that you require employees at that per
 `addshift d/13-04-18 ts/1200 te/1800 c/3` as shown in _<<fig-addshiftBefore>>_.
 +
 [[fig-addshiftBefore]]
-.Adding a Shift +
+.PTMan Add Shift Command +
 image::AddshiftBefore.png[width="800"]
 +
 . You should see a confirmation message in the result display along with the shift you've added being displayed in the timetable.
 This is illustrated in _<<fig-addshiftAfter>>_.
 +
 [[fig-addshiftAfter]]
-.Successful Adding of a Shift +
+.Successful Adding of a Shift in PTMan +
 image::AddshiftAfter.png[width="800"]
 
 [[Deleteshift]]
@@ -720,7 +720,7 @@ image::AddshiftAfter.png[width="800"]
 Deletes a shift from the timetable.
 
 *Format:* `deleteshift SHIFT_INDEX` +
-*Shorthand:* `ds`
+*Shorthand:* `ds SHIFT_INDEX`
 ****
 * The `SHIFT_INDEX` refers to the shift number in the timetable.
 * The `SHIFT_INDEX` *must be a positive integer* 1, 2, 3, ...
@@ -731,14 +731,14 @@ Deletes a shift from the timetable.
 . If you wish to delete shift 1, execute the command `deleteshift 1` as shown in _<<fig-deleteShiftBefore>>_ below.
 +
 [[fig-deleteShiftBefore]]
-.Deleting Shift 1 +
+.PTMan Delete Shift 1 Command +
 image::DeleteShiftBefore.png[width="800"]
 +
 . Upon successful deletion, you will see a confirmation message in the result display and you can no longer see the shift in the timetable.
 _<<fig-deleteShiftAfter>>_ illustrates the successful deletion of shift 1.
 +
 [[fig-deleteShiftAfter]]
-.Successful Deletion of Shift 1 +
+.Successful Deletion of Shift 1 in PTMan +
 image::DeleteShiftAfter.png[width="800"]
 // end::shiftmanager[]
 
@@ -754,12 +754,16 @@ Applies an employee for a shift. +
 * Both indexes *must be positive integers* 1, 2, 3, ...
 ****
 
+[NOTE]
+If you have accidentally applied the employee for the wrong shift, you may use the `unapply` command. +
+Refer to <<Removing an employee from a shift: `unapply`>> for more information.
+
 *Guided Example*:
 
 . To apply Sum Ting Wong for shift 3, execute the command `apply 2 3` as shown in _<<fig-applyAdminBefore>>_ below.
 +
 [[fig-applyAdminBefore]]
-.Applying Employee 2 to Shift 3 +
+.PTMan Apply Employee 2 to Shift 3 Command +
 image::ApplyAdminBefore.png[width="800"]
 
 +
@@ -767,12 +771,8 @@ image::ApplyAdminBefore.png[width="800"]
 and the slots left in the shift will decrease by 1 upon successful application.
 +
 [[fig-applyAdminAfter]]
-.Successful Application of Employee 2 to Shift 3 +
+.Successful Application of Employee 2 to Shift 3 in PTMan +
 image::ApplyAdminAfter.png[width="800"]
-
-[NOTE]
-If you have accidentally applied the employee for the wrong shift, you may use the `unapply` command. +
-Refer to <<Removing an employee from a shift: `unapply`>> for more information.
 
 [[Unapply]]
 ==== Removing an employee from a shift: `unapply`
@@ -791,13 +791,13 @@ Removes an employee from a shift. +
 . To remove Sum Ting Wong from shift 3, execute the command `unapply 2 3` as shown in _<<fig-unapplyAdminBefore>>_ below.
 +
 [[fig-unapplyAdminBefore]]
-.Removing Employee 2 from Shift 3 +
+.PTMan Remove Employee 2 from Shift 3 Command +
 image::UnapplyAdminBefore.png[width="800"]
 . As highlighted by the red boxes in _<<fig-unapplyAdminAfter>>_, you should see a confirmation message in the result display
 and the slots left in the shift will increase by 1 upon successful removal.
 +
 [[fig-unapplyAdminAfter]]
-.Successful Removal of Employee 2 from Shift 3 +
+.Successful Removal of Employee 2 from Shift 3 in PTMan +
 image::UnapplyAdminAfter.png[width="800"]
 
 === Employee Commands
@@ -810,12 +810,16 @@ These employee commands require the use of your employee password.
 Applies for a shift. +
 
 *Format:* `apply EMPLOYEE_INDEX SHIFT_INDEX pw/PASSWORD` +
-*Shorthand:* `ap`
+*Shorthand:* `ap EMPLOYEE_INDEX SHIFT_INDEX pw/PASSWORD`
 ****
 * The `EMPLOYEE_INDEX` refers to the index number shown in the most recent employee listing.
 * The `SHIFT_INDEX` refers to the shift number in the timetable.
 * Both indexes *must be positive integers* 1, 2, 3, ...
 ****
+
+[NOTE]
+If you have accidentally applied for the wrong shift, you may use the `unapply` command. +
+Refer to <<Removing yourself from a shift: `unapply`>> for more information.
 
 *Guided Example*:
 
@@ -823,19 +827,15 @@ Applies for a shift. +
 `apply 2 3 pw/YOUR_PASSWORD` as shown in _<<fig-applyBefore>>_ below.
 +
 [[fig-applyBefore]]
-.Applying Employee 2 to Shift 3 +
+.PTMan Apply Employee 2 to Shift 3 Command +
 image::ApplyBefore.png[width="800"]
 +
 . As highlighted by the red boxes in _<<fig-applyAfter>>_, you should see a confirmation message in the result display
 and the slots left in the shift will decrease by 1 upon successful application.
 +
 [[fig-applyAfter]]
-.Successful Application of Employee 2 to Shift 3 +
+.Successful Application of Employee 2 to Shift 3 in PTMan +
 image::ApplyAfter.png[width="800"]
-
-[NOTE]
-If you have accidentally applied for the wrong shift, you may use the `unapply` command. +
-Refer to <<Removing yourself from a shift: `unapply`>> for more information.
 
 [[Unapply-2]]
 ==== Removing yourself from a shift: `unapply`
@@ -855,14 +855,14 @@ Removes youreself from a shift. +
 `unapply 2 3 pw/YOUR_PASSWORD` as shown in _<<fig-unapplyBefore>>_ below.
 +
 [[fig-unapplyBefore]]
-.Removing Employee 2 from Shift 3 +
+.PTMan Remove Employee 2 from Shift 3 Command +
 image::UnapplyBefore.png[width="800"]
 +
 . As highlighted by the red boxes in _<<fig-unapplyAfter>>_, you should see a confirmation message in the result display
 and the slots left in the shift will increase by 1 upon successful removal.
 +
 [[fig-unapplyAfter]]
-.Excpected Outcome After Applying Employee 2 to Shift 3 +
+.Successful Removal of Employee 2 from Shift 3 in PTMan +
 image::UnapplyAfter.png[width="800"]
 // end::shiftemployee[]
 
@@ -882,13 +882,13 @@ For security purposes, you are highly encouraged to change your password once yo
 * If you are Asther toh, you can execute the command as shown in _<<fig-changingpw>>_.
 +
 [[fig-changingpw]]
-.Changing Employee Password in PTMan
+.PTMan Change Employee Password Command +
 image::changingpw.png[width="790"]
 
 * Upon successful execution of `changepw`, a confirmation message will be displayed in the result display as shown in _<<fig-changepw>>_.
 +
 [[fig-changepw]]
-.Successful Change of Employee Password in PTMan
+.Successful Change of Employee Password in PTMan +
 image::changepw.png[width="790"]
 
 [NOTE]
@@ -921,7 +921,7 @@ You can use this command if you have forgotten your password.
 * To reset your password, execute the command with your `EMPLOYEE_INDEX`, as illustrated in _<<fig-resetingPw>>_.
 +
 [[fig-resetingPw]]
-.Resetting Employee Password in PTMan
+.PTMan Reset Employee Password
 image::resettingpw.png[width="790"]
 
 //****
