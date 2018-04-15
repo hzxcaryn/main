@@ -250,6 +250,11 @@ Logs in to <<Admin mode, admin mode>>, allowing you to use all the manager comma
 
 *Format:* `login pw/ADMIN_PASSWORD`
 
+[IMPORTANT]
+Please remember to logout after you are done making changes.
+This is to prevent unauthorised access to manager commands. +
+Refer to <<Logging out of admin mode: `logout`>> for more information.
+
 *Guided Example:*
 
 * To login, key in the command with your password as shown in  _<<fig-Login>>_.
@@ -264,11 +269,6 @@ This indicates that you are now in admin mode as shown in _<<fig-LoginSuccess>>_
 [[fig-LoginSuccess]]
 .Successful PTMan Manager Login +
 image::loginSuccess.png[width="790"]
-
-[IMPORTANT]
-Please remember to logout after you are done making changes.
-This is to prevent unauthorised access to manager commands. +
-Refer to <<Logging out of admin mode: `logout`>> for more information.
 
 [[Logout]]
 ==== Logging out of admin mode: `logout`
@@ -298,7 +298,11 @@ Changes the password to enter <<Admin mode, admin mode>>.
 *Shorthand:* `cap` `pw/CURRENT_PASSWORD pw/NEW_PASSWORD pw/CONFIRM_NEW_PASSWORD`
 
 [IMPORTANT]
-To prevent unauthorised access to admin mode, managers should execute this command if you are running PTMan for the first time.
+To prevent unauthorised access to admin mode, managers should change the admin password when running PTMan for the first time.
+
+[NOTE]
+The password should be at least 8 characters long. +
+You must key in the current and new password in the correct sequence as given in the format.
 
 *Guided Example:*
 
@@ -315,10 +319,6 @@ image::changingAdminPassword.png[width="790"]
 .Admin Password Successfully Changed in PTMan +
 image::changedAdminPassword.png[width="790"]
 
-[NOTE]
-The password should be at least 8 characters long. +
-You must key in the current and new password in the correct sequence as given in the format.
-
 [[Rap]]
 ==== Resetting the admin password: `resetadminpw`
 
@@ -327,6 +327,10 @@ You may use the new password to login and change to your preferred password.
 
 *Format:* `resetadminpw` +
 *Shorthand:* `rap`
+
+[NOTE]
+The randomly generated password will be sent to the outlet's email address stored in PTMan.
+You can view this email address under the outlet display of the GUI.
 
 *Guided Example:*
 
@@ -341,10 +345,6 @@ image::resetAdminPassword.png[width="790"]
 [[fig-resetAdminPasswordSuccess]]
 .Admin Password Successfully Reset in PTMan +
 image::resetAdminPasswordSuccess.png[width="790"]
-
-[NOTE]
-The randomly generated password will be sent to the outlet's email address stored in PTMan.
-You can view this email address under the outlet display of the GUI.
 
 // end::accessControl[]
 
@@ -691,7 +691,7 @@ Adds a shift to the timetable to indicate that you require employees at that per
 
 // TODO: SCREENSHOT
 *Format:* `addshift d/DATE ts/START_TIME te/END_TIME c/EMPLOYEE_CAPACITY` +
-*Shorthand:* `as`
+*Shorthand:* `as d/DATE ts/START_TIME te/END_TIME c/EMPLOYEE_CAPACITY`
 
 ****
 * The `DATE` should be in DD-MM-YY format. +
@@ -729,7 +729,7 @@ Examples:
 Applies an employee for a shift. +
 
 *Format:* `apply EMPLOYEE_INDEX SHIFT_INDEX` +
-*Shorthand:* `ap`
+*Shorthand:* `ap EMPLOYEE_INDEX SHIFT_INDEX`
 ****
 * The `EMPLOYEE_INDEX` refers to the index number shown in the most recent employee listing.
 * The `SHIFT_INDEX` refers to the shift number in the timetable.
@@ -753,7 +753,7 @@ Refer to <<Removing an employee from a shift: `unapply`>> for more information.
 Removes an employee from a shift. +
 
 *Format:* `unapply EMPLOYEE_INDEX SHIFT_INDEX` +
-*Shorthand:* `uap`
+*Shorthand:* `uap EMPLOYEE_INDEX SHIFT_INDEX`
 ****
 * The `EMPLOYEE_INDEX` refers to the index number shown in the most recent employee listing.
 * The `SHIFT_INDEX` refers to the shift number in the timetable.
